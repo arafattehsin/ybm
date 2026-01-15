@@ -1,0 +1,523 @@
+{
+  "products": [
+    {
+      "id": "ferrero-rocher-cake",
+      "slug": "ferrero-rocher-cake",
+      "name": "Ferrero Rocher Cake",
+      "description": "Your favorite chocolate hazelnut treat as layer is made of moist and decadent chocolate cake, then layered with rich Nutella and Chocolate frosting and the hazelnut topping add a pleasant crunch that will remind you of the Ferrero Rocher chocolate!",
+      "category": "cakes",
+      "images": ["/images/products/Fererro-Rocher-Cake-Small.png"],
+      "sizes": [
+        { "id": "6inch", "name": "6\"", "price": 5000 },
+        { "id": "9inch", "name": "9\"", "price": 8000 }
+      ],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": [
+        "classic-coffee-cake",
+        "classic-chocolate-cake",
+        "chocolate-malt-cake",
+        "tres-leches-cake"
+      ]
+    },
+    {
+      "id": "tres-leches-cake",
+      "slug": "tres-leches-cake",
+      "name": "Tres Leches Cake",
+      "description": "Tres leches cake aka three milk cake is a Mexican dessert. It is an ultra soft and moist sponge cake topped with cream and fresh fruits.",
+      "category": "cakes",
+      "images": [
+        "/images/products/Tres-Leches-Cake.jpg",
+        "/images/products/Tres-Leches.jpeg",
+        "/images/products/Tres-Leches-2.jpeg"
+      ],
+      "sizes": [
+        { "id": "6inch", "name": "6\"", "price": 4000 },
+        { "id": "9inch", "name": "9\"", "price": 7000 }
+      ],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": [
+        "ferrero-rocher-cake",
+        "classic-chocolate-cake",
+        "classic-coffee-cake"
+      ]
+    },
+    {
+      "id": "classic-chocolate-cake",
+      "slug": "classic-chocolate-cake",
+      "name": "Classic Chocolate Cake",
+      "description": "Rich, moist, and absolutely decadent chocolate cake that melts in your mouth. Perfect for chocolate lovers!",
+      "category": "cakes",
+      "images": ["/images/products/Classic-Chocolate-Cake-Small.jpeg"],
+      "sizes": [
+        { "id": "6inch", "name": "6\"", "price": 4000 },
+        { "id": "9inch", "name": "9\"", "price": 7000 }
+      ],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": [
+        "ferrero-rocher-cake",
+        "chocolate-malt-cake",
+        "classic-coffee-cake"
+      ]
+    },
+    {
+      "id": "classic-coffee-cake",
+      "slug": "classic-coffee-cake",
+      "name": "Classic Coffee Cake",
+      "description": "A delightful coffee-infused cake for all the coffee lovers. Rich aroma and perfect balance of sweetness.",
+      "category": "cakes",
+      "images": ["/images/products/CoffeeCake.jpeg"],
+      "sizes": [{ "id": "regular", "name": "Regular", "price": 4000 }],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": [
+        "ferrero-rocher-cake",
+        "classic-chocolate-cake",
+        "chocolate-malt-cake"
+      ]
+    },
+    {
+      "id": "chocolate-malt-cake",
+      "slug": "chocolate-malt-cake",
+      "name": "Chocolate Malt Cake",
+      "description": "A unique twist on chocolate cake with rich malt flavor. Indulgent and memorable!",
+      "category": "cakes",
+      "images": [
+        "/images/products/Chocolate-Malt-Cake-Small.jpeg",
+        "/images/products/chocolate-malt-cake.jpg"
+      ],
+      "sizes": [
+        { "id": "6inch", "name": "6\"", "price": 4000 },
+        { "id": "9inch", "name": "9\"", "price": 7000 }
+      ],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["classic-chocolate-cake", "ferrero-rocher-cake"]
+    },
+    {
+      "id": "vanilla-cake-chocolate-frosting",
+      "slug": "vanilla-cake-chocolate-frosting",
+      "name": "Vanilla Cake with Chocolate Frosting",
+      "description": "Light and fluffy vanilla cake topped with rich chocolate frosting. A classic combination!",
+      "category": "cakes",
+      "images": ["/images/products/Chocolate-Vanilla-Cake-Small.jpeg"],
+      "sizes": [
+        { "id": "6inch", "name": "6\"", "price": 4000 },
+        { "id": "9inch", "name": "9\"", "price": 7000 }
+      ],
+      "addons": [
+        "bouquet",
+        "premium-bouquet",
+        "gift-wrap",
+        "cake-topper",
+        "candle"
+      ],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["classic-chocolate-cake", "classic-coffee-cake"]
+    },
+    {
+      "id": "nutella-lava-cupcakes",
+      "slug": "nutella-lava-cupcakes",
+      "name": "Nutella Lava Cupcakes",
+      "description": "These super moist Nutella Lava cupcakes finished with Ferrero Rocher have an irresistible filling of Nutella that flows through the middle.",
+      "category": "cupcakes",
+      "images": [
+        "/images/products/Nutella-Lava-Cupcakes-Small.jpeg",
+        "/images/products/Nutella-Cupcakes.jpeg"
+      ],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 2500 },
+        { "id": "box-12", "name": "Box of 12", "price": 4500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": [
+        "lotus-lava-cupcakes",
+        "red-velvet-cupcakes",
+        "tres-leches-cupcakes"
+      ]
+    },
+    {
+      "id": "lotus-lava-cupcakes",
+      "slug": "lotus-lava-cupcakes",
+      "name": "Lotus Lava Cupcakes",
+      "description": "For Biscoff lovers! These cupcakes have a lava center of Lotus Biscoff spread that flows when you bite into them.",
+      "category": "cupcakes",
+      "images": [
+        "/images/products/Lotus-Lava-Cupcakes.jpeg",
+        "/images/products/Lotus-Biscoff-Lava-Cupcakes-Small.jpeg"
+      ],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 3000 },
+        { "id": "box-12", "name": "Box of 12", "price": 5500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": [
+        "nutella-lava-cupcakes",
+        "lotus-cheesecake",
+        "lotus-biscoff-lasagna"
+      ]
+    },
+    {
+      "id": "red-velvet-cupcakes",
+      "slug": "red-velvet-cupcakes",
+      "name": "Red Velvet Cupcakes",
+      "description": "Classic red velvet cupcakes with cream cheese frosting. A timeless favorite!",
+      "category": "cupcakes",
+      "images": ["/images/products/Red-Velvet-Cupcakes.jpeg"],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 3000 },
+        { "id": "box-12", "name": "Box of 12", "price": 5500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["nutella-lava-cupcakes", "tres-leches-cupcakes"]
+    },
+    {
+      "id": "tres-leches-cupcakes",
+      "slug": "tres-leches-cupcakes",
+      "name": "Tres Leches Cupcakes",
+      "description": "Our famous tres leches cake in cupcake form! Soaked in three milks and topped with whipped cream.",
+      "category": "cupcakes",
+      "images": ["/images/products/Tres-Leches-Cupcakes.jpeg"],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 3000 },
+        { "id": "box-12", "name": "Box of 12", "price": 5500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["tres-leches-cake", "nutella-lava-cupcakes"]
+    },
+    {
+      "id": "chocolate-malt-cupcakes",
+      "slug": "chocolate-malt-cupcakes",
+      "name": "Chocolate Malt Cupcakes",
+      "description": "Delicious chocolate malt cupcakes with rich frosting.",
+      "category": "cupcakes",
+      "images": [
+        "/images/products/Chocolate-Malt-Cupcake.png",
+        "/images/products/Chocolate-Malt-Cupcakes-Pack.jpeg"
+      ],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 2500 },
+        { "id": "box-12", "name": "Box of 12", "price": 4500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["chocolate-malt-cake", "nutella-lava-cupcakes"]
+    },
+    {
+      "id": "classic-vanilla-cupcakes",
+      "slug": "classic-vanilla-cupcakes",
+      "name": "Classic Vanilla Cupcakes",
+      "description": "Light and fluffy vanilla cupcakes with buttercream frosting.",
+      "category": "cupcakes",
+      "images": ["/images/products/Classic-Vanilla-Cupcakes-Small.jpeg"],
+      "sizes": [
+        { "id": "box-6", "name": "Box of 6", "price": 2500 },
+        { "id": "box-12", "name": "Box of 12", "price": 4500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["red-velvet-cupcakes", "tres-leches-cupcakes"]
+    },
+    {
+      "id": "chocolate-brownies",
+      "slug": "chocolate-brownies",
+      "name": "Chocolate Brownies",
+      "description": "Rich, fudgy chocolate brownies that are crispy on the outside and gooey on the inside.",
+      "category": "cookies",
+      "images": ["/images/products/Brownies.jpeg"],
+      "sizes": [{ "id": "box-6", "name": "Box of 6", "price": 3200 }],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["blondies", "duo-chocolate-cookies"]
+    },
+    {
+      "id": "blondies",
+      "slug": "blondies",
+      "name": "Blondies",
+      "description": "Chewy, rich, and flavorful blondies are an indulgent dessert that are hard to resist.",
+      "category": "cookies",
+      "images": [
+        "/images/products/blondies.jpg",
+        "/images/products/Blondies-2.jpg"
+      ],
+      "sizes": [
+        { "id": "box-4", "name": "Box of 4", "price": 1200 },
+        { "id": "box-8", "name": "Box of 8", "price": 2400 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": ["chocolate-brownies", "duo-chocolate-cookies"]
+    },
+    {
+      "id": "duo-chocolate-cookies",
+      "slug": "duo-chocolate-cookies",
+      "name": "Duo Chocolate Cookies",
+      "description": "Double the chocolate, double the deliciousness! Soft-baked cookies loaded with chocolate.",
+      "category": "cookies",
+      "images": ["/images/products/Duo-Chocolate-Cookies-Small.jpeg"],
+      "sizes": [{ "id": "box-6", "name": "Box of 6", "price": 2000 }],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["chocolate-brownies", "blondies"]
+    },
+    {
+      "id": "chocolate-eclair",
+      "slug": "chocolate-eclair",
+      "name": "Chocolate Éclair",
+      "description": "This dessert is loaded with chocolate ganache and a hint of coffee takes it to another level 😋. So mark your dinner complete by ordering Chocolate Eclair dessert!",
+      "category": "desserts",
+      "images": [
+        "/images/products/Chocolate-Eclair-Small.jpeg",
+        "/images/products/Choc-Eclair-Small.jpeg"
+      ],
+      "sizes": [
+        { "id": "single", "name": "Single", "price": 800 },
+        { "id": "box-6", "name": "Box of 6", "price": 5000 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": ["lotus-cheesecake", "fruit-trifle"]
+    },
+    {
+      "id": "lotus-cheesecake",
+      "slug": "lotus-cheesecake",
+      "name": "Lotus Cheesecake Cups",
+      "description": "For all the Lotus Biscoff lovers, these cups have creamy cheesecake that screams Lotus in every bite, crushed Lotus biscuit and finished with biscoff spread.",
+      "category": "desserts",
+      "images": [
+        "/images/products/Lotus-Cheesecake-Cups-Small.jpeg",
+        "/images/products/Lotus-Cheesecake-Cups-2.jpg"
+      ],
+      "sizes": [
+        { "id": "single", "name": "Single Cup", "price": 800 },
+        { "id": "box-4", "name": "Box of 4", "price": 3200 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": [
+        "lotus-lava-cupcakes",
+        "lotus-biscoff-lasagna",
+        "strawberry-cheesecake-pie"
+      ]
+    },
+    {
+      "id": "fruit-trifle",
+      "slug": "fruit-trifle",
+      "name": "Fruit Trifle Jars",
+      "description": "Remember Granny's classic fruit trifle? We layer it with custard, vanilla cake, seasonal fruits, jello and of course no dessert is complete without whipped cream.",
+      "category": "desserts",
+      "images": [
+        "/images/products/Fruit-Trifle-Jars-1.jpeg",
+        "/images/products/Fruit-Trifle-Cups.jpg"
+      ],
+      "sizes": [
+        { "id": "single", "name": "Single Jar", "price": 800 },
+        { "id": "box-6", "name": "Box of 6", "price": 5000 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": true,
+      "weight": null,
+      "relatedProducts": [
+        "lotus-cheesecake",
+        "treasure-delight",
+        "mango-delight"
+      ]
+    },
+    {
+      "id": "lotus-biscoff-lasagna",
+      "slug": "lotus-biscoff-lasagna",
+      "name": "Lotus Biscoff Lasagna",
+      "description": "Layers of Biscoff goodness! Creamy filling with crushed Lotus biscuits - a dessert lasagna you'll love.",
+      "category": "desserts",
+      "images": [
+        "/images/products/Lotus-Lasagna-Small.jpeg",
+        "/images/products/Lotus-Biscoff-Lasagne.jpeg"
+      ],
+      "sizes": [
+        { "id": "small", "name": "Small", "price": 2000 },
+        { "id": "large", "name": "Large", "price": 5000 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": false,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["lotus-cheesecake", "lotus-lava-cupcakes"]
+    },
+    {
+      "id": "treasure-delight",
+      "slug": "treasure-delight",
+      "name": "Treasure Delight",
+      "description": "A treasure trove of deliciousness! Layers of cream, fruits, and cake in beautiful cups.",
+      "category": "desserts",
+      "images": [
+        "/images/products/Treasure-Delight-1-Small.jpeg",
+        "/images/products/Treasure-Delight-Cups.jpeg"
+      ],
+      "sizes": [
+        { "id": "small", "name": "Small", "price": 3500 },
+        { "id": "large", "name": "Large", "price": 6500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["mango-delight", "fruit-trifle"]
+    },
+    {
+      "id": "mango-delight",
+      "slug": "mango-delight",
+      "name": "Mango Delight",
+      "description": "Fresh mango layered with cream and cake - a tropical treat for mango lovers!",
+      "category": "desserts",
+      "images": ["/images/products/Mango-Delight-Small.jpeg"],
+      "sizes": [
+        { "id": "small", "name": "Small", "price": 3500 },
+        { "id": "large", "name": "Large", "price": 7500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["treasure-delight", "fruit-trifle"]
+    },
+    {
+      "id": "strawberry-cheesecake-pie",
+      "slug": "strawberry-cheesecake-pie",
+      "name": "Strawberry Cheesecake Pie",
+      "description": "Creamy cheesecake topped with fresh strawberries in a buttery crust.",
+      "category": "desserts",
+      "images": [
+        "/images/products/Strawberry-Cheesecake-Pie-Small.jpeg",
+        "/images/products/Strawberry-Cheesecake-Pie-Cups-Small.jpeg"
+      ],
+      "sizes": [
+        { "id": "small", "name": "Small", "price": 3500 },
+        { "id": "large", "name": "Large", "price": 6500 }
+      ],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["lotus-cheesecake", "fruit-trifle"]
+    },
+    {
+      "id": "gaytime-cups",
+      "slug": "gaytime-cups",
+      "name": "Gaytime Cups",
+      "description": "Inspired by the classic Golden Gaytime ice cream - honeycomb, chocolate, and cream!",
+      "category": "desserts",
+      "images": [
+        "/images/products/Gaytime-Cups.jpg",
+        "/images/products/Gaytime-Small.jpeg"
+      ],
+      "sizes": [{ "id": "box-4", "name": "Box of 4", "price": 3200 }],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["lotus-cheesecake", "treasure-delight"]
+    },
+    {
+      "id": "banoffee-pie",
+      "slug": "banoffee-pie",
+      "name": "Banoffee Pie",
+      "description": "Classic British dessert with layers of banana, toffee, and whipped cream on a biscuit base.",
+      "category": "desserts",
+      "images": ["/images/products/Banoffee-Pie-W.jpeg"],
+      "sizes": [{ "id": "regular", "name": "Regular", "price": 4500 }],
+      "addons": ["gift-wrap"],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["strawberry-cheesecake-pie", "lotus-cheesecake"]
+    },
+    {
+      "id": "gajar-ka-halwa",
+      "slug": "gajar-ka-halwa",
+      "name": "Gajar ka Halwa",
+      "description": "Traditional South Asian carrot dessert cooked with milk, ghee, and garnished with nuts.",
+      "category": "desserts",
+      "images": ["/images/products/Gajar-ka-Halwa-YBM.jpeg"],
+      "sizes": [
+        { "id": "small", "name": "Small (500g)", "price": 2500 },
+        { "id": "large", "name": "Large (1kg)", "price": 4500 }
+      ],
+      "addons": [],
+      "inStock": true,
+      "featured": false,
+      "weight": null,
+      "relatedProducts": ["fruit-trifle"]
+    }
+  ]
+}

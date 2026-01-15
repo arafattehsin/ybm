@@ -1,0 +1,29 @@
+{
+  "addons": [
+    {
+      "id": "bouquet",
+      "name": "Bouquet",
+      "price": 2500
+    },
+    {
+      "id": "premium-bouquet",
+      "name": "Premium Bouquet",
+      "price": 5000
+    },
+    {
+      "id": "gift-wrap",
+      "name": "Gift Wrap",
+      "price": 1000
+    },
+    {
+      "id": "cake-topper",
+      "name": "Cake Topper",
+      "price": 1000
+    },
+    {
+      "id": "candle",
+      "name": "Candle",
+      "price": 1000
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "testimonials": [
+    {
+      "id": "1",
+      "quote": "Maryam was easy to communicate and fast. Kind upon her approach, she delivered tasty delicious Nutella lava cupcakes. Filled with chocolate inside and generous frosting on top. Yum! Unfortunately I wasn't able to get a photo as me and my little ones ate it within 5 mins of delivery 🤦🏼‍♀️ Thanks Maryam 😋 Tasty cupcakes",
+      "author": "Annamaria Genc",
+      "location": "Regents Park, NSW"
+    },
+    {
+      "id": "2",
+      "quote": "Her Nutella Cupcakes are absolutely AMAZING!!! They were super fresh, moist and had so much flavour. Will definitely be ordering more of them. Thank you Maryam 💕",
+      "author": "Amanda Marie",
+      "location": "Sydney, NSW"
+    },
+    {
+      "id": "3",
+      "quote": "Maryam's milk cake is the best ever!!! My husband, son and I are hooked. Her sweet personality and excellent customer service are too good too. Totally recommended 💙💜💚❤️🧡",
+      "author": "Naveen Anwar",
+      "location": "Beaumont Hills, NSW"
+    },
+    {
+      "id": "4",
+      "quote": "Maryam's Lava Cupcakes specially Nutella ones were the best cupcakes I ever had. Dessert cups were also yum. Her service and communication is also perfect. She delivers free locally which is very convenient for customers. I highly recommend her.",
+      "author": "Shejuty Chowdhury",
+      "location": "Carlingford, NSW"
+    }
+  ]
+}

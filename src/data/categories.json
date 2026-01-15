@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "id": "cakes",
+      "name": "Cakes",
+      "slug": "cakes"
+    },
+    {
+      "id": "cupcakes",
+      "name": "Cupcakes",
+      "slug": "cupcakes"
+    },
+    {
+      "id": "cookies",
+      "name": "Cookies",
+      "slug": "cookies"
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "slug": "desserts"
+    }
+  ]
+}
