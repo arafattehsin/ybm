@@ -13,6 +13,13 @@ export function CartSummary() {
   const [postcode, setPostcode] = useState('');
   const [postcodeError, setPostcodeError] = useState('');
   const [deliveryFee, setDeliveryFee] = useState(0);
+  
+  // Delivery address fields
+  const [streetAddress, setStreetAddress] = useState('');
+  const [apartment, setApartment] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
+  const [addressError, setAddressError] = useState('');
 
   const subtotal = getTotalPrice();
   const totalPrice = subtotal + deliveryFee;
@@ -48,14 +55,27 @@ export function CartSummary() {
 
     // Validate delivery details if delivery is selected
     if (deliveryMethod === 'delivery') {
+      if (!streetAddress.trim()) {
+        setAddressError('Please enter your street address');
+        return;
+      }
+      if (!city.trim()) {
+        setAddressError('Please enter your town/city');
+        return;
+      }
       if (!postcode.trim()) {
-        setPostcodeError('Please enter your postcode');
+        setAddressError('Please enter your postcode');
+        return;
+      }
+      if (!phone.trim()) {
+        setAddressError('Please enter your phone number');
         return;
       }
       if (!isDeliveryAvailable(postcode.trim())) {
-        setPostcodeError('Please check if delivery is available to your postcode');
+        setAddressError('Delivery is not available to this postcode');
         return;
       }
+      setAddressError('');
     }
 
     setIsLoading(true);
@@ -76,7 +96,14 @@ export function CartSummary() {
             unitPrice: item.unitPrice,
           })),
           deliveryMethod,
-          deliveryPostcode: deliveryMethod === 'delivery' ? postcode.trim() : undefined,
+          deliveryAddress: deliveryMethod === 'delivery' ? {
+            street: streetAddress.trim(),
+            apartment: apartment.trim(),
+            city: city.trim(),
+            state: 'New South Wales',
+            postcode: postcode.trim(),
+            phone: phone.trim(),
+          } : undefined,
         }),
       });
 
@@ -133,7 +160,7 @@ export function CartSummary() {
             <MapPin size={20} className="text-pink-600" />
             <div className="flex-1">
               <div className="font-heading font-medium text-gray-900">Pickup</div>
-              <div className="text-sm text-gray-500 font-body">Free - 1-2 business days</div>
+              <div className="text-sm text-gray-500 font-body">Free - 3-4 business days</div>
             </div>
             <span className="font-heading font-bold text-green-600 text-sm bg-green-50 px-3 py-1 rounded-full">FREE</span>
           </label>
@@ -153,7 +180,7 @@ export function CartSummary() {
             <Truck size={20} className="text-pink-600" />
             <div className="flex-1">
               <div className="font-heading font-medium text-gray-900">Delivery</div>
-              <div className="text-sm text-gray-500 font-body">Greater Sydney - 1-3 days</div>
+              <div className="text-sm text-gray-500 font-body">Greater Sydney - 4-5 business days</div>
             </div>
             {deliveryFee > 0 && (
               <span className="font-heading font-bold text-pink-600 bg-pink-50 px-3 py-1 rounded-full">{formatPrice(deliveryFee)}</span>
@@ -162,45 +189,137 @@ export function CartSummary() {
         </div>
       </div>
 
-      {/* Postcode Input for Delivery */}
+      {/* Delivery Address Form */}
       {deliveryMethod === 'delivery' && (
-        <div className="bg-pink-50/50 rounded-2xl p-5">
-          <label htmlFor="postcode" className="block text-sm font-heading font-semibold text-gray-700 mb-3">
-            Delivery Postcode
-          </label>
-          <div className="flex gap-3">
-            <input
-              id="postcode"
-              type="text"
-              value={postcode}
-              onChange={(e) => {
-                setPostcode(e.target.value);
-                setPostcodeError('');
-              }}
-              placeholder="e.g. 2000"
-              maxLength={4}
-              className="flex-1 px-5 py-4 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body text-lg"
-            />
-            <button
-              type="button"
-              onClick={handlePostcodeCheck}
-              className="px-6 py-4 bg-white border-2 border-pink-500 text-pink-600 font-heading font-semibold rounded-xl hover:bg-pink-50 transition-colors"
-            >
-              Check
-            </button>
-          </div>
-          {postcodeError && (
-            <div className="flex items-start gap-2 mt-3 text-sm text-red-600 font-body">
+        <div className="bg-pink-50/50 rounded-2xl p-5 space-y-4">
+          <h3 className="text-sm font-heading font-semibold text-gray-700 mb-3">
+            Delivery Address (Greater Sydney, NSW)
+          </h3>
+          
+          {addressError && (
+            <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 font-body">
               <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
-              <span>{postcodeError}</span>
+              <span>{addressError}</span>
             </div>
           )}
-          {!postcodeError && deliveryFee > 0 && (
-            <div className="flex items-start gap-2 mt-3 text-sm text-green-600 font-body">
-              <CheckCircle size={16} className="mt-0.5 flex-shrink-0" />
-              <span>Delivery available! Fee: {formatPrice(deliveryFee)}</span>
+
+          {/* Street Address */}
+          <div className="grid md:grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="street" className="block text-xs font-medium text-gray-600 mb-2">
+                Street address *
+              </label>
+              <input
+                id="street"
+                type="text"
+                value={streetAddress}
+                onChange={(e) => setStreetAddress(e.target.value)}
+                placeholder="123 Main Street"
+                className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+                required
+              />
             </div>
-          )}
+            <div>
+              <label htmlFor="apartment" className="block text-xs font-medium text-gray-600 mb-2">
+                Apartment, suite, unit, etc. (optional)
+              </label>
+              <input
+                id="apartment"
+                type="text"
+                value={apartment}
+                onChange={(e) => setApartment(e.target.value)}
+                placeholder="Apt 4B"
+                className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+              />
+            </div>
+          </div>
+
+          {/* City */}
+          <div>
+            <label htmlFor="city" className="block text-xs font-medium text-gray-600 mb-2">
+              Town / City *
+            </label>
+            <input
+              id="city"
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Sydney"
+              className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+              required
+            />
+          </div>
+
+          {/* State and Postcode */}
+          <div className="grid md:grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="state" className="block text-xs font-medium text-gray-600 mb-2">
+                State *
+              </label>
+              <input
+                id="state"
+                type="text"
+                value="New South Wales"
+                disabled
+                className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl bg-gray-50 text-gray-600 font-body cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label htmlFor="postcode" className="block text-xs font-medium text-gray-600 mb-2">
+                Postcode *
+              </label>
+              <div className="flex gap-2">
+                <input
+                  id="postcode"
+                  type="text"
+                  value={postcode}
+                  onChange={(e) => {
+                    setPostcode(e.target.value);
+                    setPostcodeError('');
+                  }}
+                  placeholder="2150"
+                  maxLength={4}
+                  className="flex-1 px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={handlePostcodeCheck}
+                  className="px-4 py-3 bg-white border-2 border-pink-500 text-pink-600 font-heading font-semibold rounded-xl hover:bg-pink-50 transition-colors text-sm whitespace-nowrap"
+                >
+                  Check
+                </button>
+              </div>
+              {postcodeError && (
+                <div className="flex items-start gap-1 mt-2 text-xs text-red-600 font-body">
+                  <AlertCircle size={14} className="mt-0.5 flex-shrink-0" />
+                  <span>{postcodeError}</span>
+                </div>
+              )}
+              {!postcodeError && deliveryFee > 0 && (
+                <div className="flex items-start gap-1 mt-2 text-xs text-green-600 font-body">
+                  <CheckCircle size={14} className="mt-0.5 flex-shrink-0" />
+                  <span>Delivery available! {formatPrice(deliveryFee)} delivery fee</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label htmlFor="phone" className="block text-xs font-medium text-gray-600 mb-2">
+              Phone *
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="0412 345 678"
+              className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+              required
+            />
+          </div>
         </div>
       )}
 
@@ -219,6 +338,33 @@ export function CartSummary() {
         <div className="flex justify-between text-2xl font-bold pt-4 border-t-2 border-pink-100">
           <span className="font-heading">Total</span>
           <span className="gradient-text font-heading">{formatPrice(totalPrice)}</span>
+        </div>
+      </div>
+
+      {/* Important Note Before Checkout */}
+      <div className="bg-pink-50 border-2 border-pink-200 rounded-2xl p-4 space-y-2">
+        <div className="flex items-start gap-2">
+          <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+          <div className="flex-1 space-y-2">
+            <p className="text-sm font-semibold text-gray-900 font-heading">
+              Important Information
+            </p>
+            <p className="text-sm text-gray-700 font-body">
+              • Delivery orders must be placed before 4 business days. All orders will be delivered within 5 PM to 9 PM window.
+            </p>
+            <p className="text-sm text-gray-700 font-body">
+              • If recipient is not at the delivery address, we will try to contact them for 10 minutes and then leave the order at the door/entrance of the property. If it is an apartment building, we will leave at the main entrance.
+            </p>
+            <p className="text-sm text-gray-700 font-body">
+              • For any delivery timing adjustments, please contact us on <span className="font-semibold text-pink-600">WhatsApp only</span> at +61422918748.
+            </p>
+            <p className="text-sm text-gray-700 font-body">
+              • Pickup orders need to be placed at least 3 business days before pickup.
+            </p>
+            <p className="text-sm text-gray-700 font-body">
+              • If you want orders delivered/picked up earlier, please contact us to check availability. All orders are subject to confirmation.
+            </p>
+          </div>
         </div>
       </div>
 
