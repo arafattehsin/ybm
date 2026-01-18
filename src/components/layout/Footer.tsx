@@ -67,13 +67,13 @@ export function Footer() {
   ];
 
   return (
-    <footer ref={footerRef} className="relative overflow-hidden bg-gradient-merged">
-      {/* Background Decorative Shapes */}
+    <footer ref={footerRef} className="relative overflow-hidden bg-gradient-to-br from-pink-100 via-pink-50 to-white border-t border-pink-200">
+      {/* Background Decorative Bakery Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 w-48 h-48 bg-pink-300/20 rounded-full blur-2xl" />
         <div className="absolute bottom-20 right-20 w-64 h-64 bg-white/40 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/3 w-32 h-32 bg-pink-200/30 rounded-full blur-xl" />
-        {/* Small bakery shapes */}
+        {/* Small bakery shapes - hidden on mobile */}
         <div className="absolute top-24 right-1/4 hidden md:block">
           <svg viewBox="0 0 64 64" className="w-8 h-8 text-pink-400/30" fill="currentColor">
             <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
