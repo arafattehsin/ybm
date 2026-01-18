@@ -14,6 +14,9 @@ export function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const awardRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
+  const glassRef = useRef<HTMLDivElement>(null);
+  const glassBackRef = useRef<HTMLDivElement>(null);
+  const waveRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -29,11 +32,11 @@ export function HeroSection() {
         { opacity: 1, scale: 1, x: 0, duration: 0.8, delay: 0.6, ease: 'back.out(1.7)' }
       );
 
-      // Floating animation for left blob
+      // Floating animation for left blob - ENLARGED
       gsap.to(leftBlobRef.current, {
-        x: 15,
-        y: -20,
-        rotation: 3,
+        x: 20,
+        y: -25,
+        rotation: 5,
         duration: 4,
         repeat: -1,
         yoyo: true,
@@ -41,45 +44,103 @@ export function HeroSection() {
       });
 
       gsap.to(leftBlobBgRef.current, {
-        x: -10,
-        y: 15,
-        rotation: -2,
+        x: -15,
+        y: 20,
+        rotation: -3,
         duration: 5,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
 
-      // Floating animation for right blob
+      // Floating animation for right blob with DIFFERENT pattern
       gsap.to(rightBlobRef.current, {
-        x: -15,
-        y: 15,
-        rotation: -3,
-        duration: 4.5,
+        x: -20,
+        y: 20,
+        rotation: -5,
+        duration: 5,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
 
       gsap.to(rightBlobBgRef.current, {
-        x: 10,
-        y: -10,
-        rotation: 2,
-        duration: 5.5,
+        x: 15,
+        y: -15,
+        rotation: 4,
+        duration: 6,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
+
+      // Glass image floating animation with rotation, left-right, and scale
+      if (glassRef.current) {
+        gsap.to(glassRef.current, {
+          x: 30,
+          y: -15,
+          rotation: 8,
+          scale: 1.05,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
+      // Glass back circle animation
+      if (glassBackRef.current) {
+        gsap.to(glassBackRef.current, {
+          x: -20,
+          y: 10,
+          rotation: -5,
+          scale: 1.08,
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
+      // Wave animation
+      if (waveRef.current) {
+        const wavePath = waveRef.current.querySelector('.wave-path-1');
+        const wavePath2 = waveRef.current.querySelector('.wave-path-2');
+        
+        if (wavePath) {
+          gsap.to(wavePath, {
+            attr: {
+              d: "M0,40 C180,100 360,0 540,50 C720,100 900,10 1080,60 C1260,110 1440,20 1440,60 L1440,120 L0,120 Z"
+            },
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        }
+        
+        if (wavePath2) {
+          gsap.to(wavePath2, {
+            attr: {
+              d: "M0,70 C200,100 400,30 600,70 C800,110 1000,40 1200,80 C1400,120 1440,60 1440,80 L1440,120 L0,120 Z"
+            },
+            duration: 4,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        }
+      }
 
       // Background shapes animation
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
         Array.from(shapes).forEach((shape, index) => {
           gsap.to(shape, {
-            x: `random(-30, 30)`,
-            y: `random(-30, 30)`,
-            rotation: `random(-15, 15)`,
-            duration: 6 + index,
+            x: `random(-40, 40)`,
+            y: `random(-40, 40)`,
+            rotation: `random(-20, 20)`,
+            duration: 7 + index * 0.5,
             repeat: -1,
             yoyo: true,
             ease: 'sine.inOut'
@@ -92,46 +153,36 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-[90vh] overflow-hidden bg-gradient-hero">
+    <section ref={heroRef} className="relative min-h-[95vh] overflow-hidden bg-gradient-hero">
       {/* Background Decorative Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
-        {/* Large pink blob top-left */}
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-200/30 rounded-full blur-3xl" />
-        {/* Medium white blob center */}
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-white/50 rounded-full blur-2xl" />
-        {/* Small pink blob bottom-right */}
-        <div className="absolute bottom-20 right-1/4 w-48 h-48 bg-pink-100/40 rounded-full blur-2xl" />
-        {/* Floating small circles */}
-        <div className="absolute top-1/4 right-1/3 w-8 h-8 bg-pink-300/50 rounded-full" />
-        <div className="absolute bottom-1/3 left-1/3 w-6 h-6 bg-pink-400/40 rounded-full" />
-        <div className="absolute top-2/3 right-1/5 w-4 h-4 bg-pink-200/60 rounded-full" />
-        {/* Curvy shapes */}
-        <svg className="absolute top-0 right-0 w-1/2 h-1/2 opacity-10" viewBox="0 0 200 200">
-          <path fill="#E91E63" d="M40,-62.6C52.5,-54.5,63.5,-44.1,70.1,-31.2C76.7,-18.3,78.9,-2.9,76.2,11.3C73.5,25.5,65.9,38.4,55.2,48.3C44.5,58.2,30.6,65.1,15.5,69.4C0.5,73.7,-15.7,75.4,-30.3,71.1C-44.9,66.8,-57.9,56.6,-66.8,43.4C-75.7,30.2,-80.4,14.1,-79.6,-1.5C-78.8,-17.1,-72.5,-32.2,-62.4,-43.8C-52.3,-55.4,-38.4,-63.5,-24.3,-70.8C-10.1,-78.1,4.2,-84.6,17.7,-82.5C31.1,-80.4,43.7,-69.7,40,-62.6Z" transform="translate(100 100)" />
-        </svg>
-        <svg className="absolute bottom-0 left-0 w-1/3 h-1/3 opacity-10" viewBox="0 0 200 200">
-          <path fill="#FF4081" d="M44.7,-76.4C58.1,-68.5,69.4,-56.6,77.1,-42.6C84.8,-28.6,88.9,-12.5,87.3,2.9C85.8,18.4,78.6,33.2,68.7,45.4C58.8,57.6,46.2,67.3,32.2,73.6C18.1,80,-2.5,83,-21.3,79.1C-40.2,75.2,-57.3,64.4,-69.8,50.1C-82.3,35.8,-90.2,17.9,-89.6,0.3C-89,-17.2,-79.9,-34.4,-67.5,-47.7C-55.1,-61,-39.4,-70.4,-23.6,-76.8C-7.8,-83.2,8.1,-86.6,23.4,-84.2C38.8,-81.8,53.6,-73.6,44.7,-76.4Z" transform="translate(100 100)" />
-        </svg>
+        <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-pink-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-white/50 rounded-full blur-2xl" />
+        <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-pink-100/40 rounded-full blur-2xl" />
+        <div className="absolute top-1/4 right-1/3 w-10 h-10 bg-pink-300/50 rounded-full" />
+        <div className="absolute bottom-1/3 left-1/3 w-8 h-8 bg-pink-400/40 rounded-full" />
+        <div className="absolute top-2/3 right-1/5 w-5 h-5 bg-pink-200/60 rounded-full" />
+        <div className="absolute top-1/2 left-10 w-6 h-6 bg-pink-500/30 rounded-full" />
+        <div className="absolute bottom-1/4 right-10 w-4 h-4 bg-white/80 rounded-full" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[70vh]">
-          
-          {/* Left Video Blob Section */}
-          <div className="lg:col-span-4 relative h-[350px] md:h-[450px] order-2 lg:order-1">
-            {/* Background blob */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        {/* Mobile Layout - Stack with content between videos */}
+        <div className="flex flex-col lg:hidden items-center">
+          {/* First Video Blob on Mobile */}
+          <div className="relative w-full h-[280px] sm:h-[320px] mb-4">
+            {/* Background blob - pink/white gradient */}
             <div 
-              ref={leftBlobBgRef}
-              className="absolute inset-0 bg-gradient-to-br from-pink-200 via-pink-100 to-white blob-1 shadow-xl"
+              className="absolute inset-0 shadow-2xl mx-auto w-[85%] left-1/2 -translate-x-1/2"
               style={{ 
-                borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
-                transform: 'scale(1.1) translate(10px, 10px)'
+                background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
+                borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
+                transform: 'translateX(-50%) scale(1.1)'
               }}
             />
             {/* Video container blob */}
             <div 
-              ref={leftBlobRef}
-              className="absolute inset-4 overflow-hidden shadow-2xl animate-pulse-glow"
+              className="absolute inset-4 mx-auto w-[75%] left-1/2 -translate-x-1/2 overflow-hidden shadow-2xl"
               style={{ 
                 borderRadius: '55% 45% 35% 65% / 55% 35% 65% 45%'
               }}
@@ -142,21 +193,18 @@ export function HeroSection() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
-                poster="/images/products/hero-poster.jpg"
               >
                 <source src="/videos/hero.mp4" type="video/mp4" />
               </video>
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/10 to-transparent" />
             </div>
           </div>
 
-          {/* Center Content */}
-          <div ref={contentRef} className="lg:col-span-4 text-center order-1 lg:order-2 z-10">
+          {/* Content in the Middle on Mobile */}
+          <div ref={contentRef} className="text-center z-10 py-6 px-4">
             {/* Award Badge */}
             <div 
               ref={awardRef}
-              className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg mb-6 border border-pink-100"
+              className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg mb-6 border border-pink-100"
             >
               <Image
                 src="/videos/awardpic.jpeg"
@@ -166,32 +214,29 @@ export function HeroSection() {
                 className="rounded-full object-cover"
               />
               <div className="text-left">
-                <p className="text-xs font-semibold text-pink-600 uppercase tracking-wider">Finalist</p>
-                <p className="text-sm font-medium text-gray-700">Local Business Awards 2021</p>
-                <p className="text-xs text-gray-500">Parramatta</p>
+                <p className="text-xs font-bold text-pink-600 uppercase tracking-wider">Finalist</p>
+                <p className="text-sm font-semibold text-gray-700">Local Business Awards 2021</p>
               </div>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-heading mb-6 leading-tight">
               <span className="gradient-text">YUM</span>
-              <span className="text-gray-800"> by </span>
+              <span className="text-gray-800 block my-1 text-xl sm:text-2xl font-body font-medium">by</span>
               <span className="gradient-text">Maryam</span>
             </h1>
 
             {/* Description */}
-            <p className="text-gray-600 text-lg md:text-xl mb-8 max-w-lg mx-auto leading-relaxed">
-              An artisan dessert boutique crafting heavenly homemade cakes, 
-              cupcakes & sweet treats with love from our kitchen in Sydney. 
-              Every creation is a celebration of flavour and joy.
+            <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-sm mx-auto leading-relaxed font-body">
+              An artisan dessert boutique crafting heavenly homemade cakes & sweet treats with love from Sydney.
             </p>
 
             {/* CTA Button */}
             <Link href="/menu">
-              <button className="btn-gradient px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group">
+              <button className="btn-gradient px-10 py-4 rounded-full font-heading text-base shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group">
                 <span className="flex items-center gap-2">
                   Explore Menu
-                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
@@ -199,23 +244,22 @@ export function HeroSection() {
             </Link>
           </div>
 
-          {/* Right Video Blob Section */}
-          <div className="lg:col-span-4 relative h-[350px] md:h-[450px] order-3">
-            {/* Background blob */}
+          {/* Second Video Blob on Mobile */}
+          <div className="relative w-full h-[280px] sm:h-[320px] mt-4">
+            {/* Background blob - white/pink gradient */}
             <div 
-              ref={rightBlobBgRef}
-              className="absolute inset-0 bg-gradient-to-bl from-pink-100 via-white to-pink-200 blob-2 shadow-xl"
+              className="absolute inset-0 shadow-2xl mx-auto w-[85%] left-1/2 -translate-x-1/2"
               style={{ 
-                borderRadius: '40% 60% 70% 30% / 40% 70% 30% 60%',
-                transform: 'scale(1.1) translate(-10px, 10px)'
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
+                borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
+                transform: 'translateX(-50%) scale(1.1)'
               }}
             />
             {/* Video container blob */}
             <div 
-              ref={rightBlobRef}
-              className="absolute inset-4 overflow-hidden shadow-2xl"
+              className="absolute inset-4 mx-auto w-[75%] left-1/2 -translate-x-1/2 overflow-hidden shadow-2xl"
               style={{ 
-                borderRadius: '45% 55% 65% 35% / 45% 65% 35% 55%'
+                borderRadius: '35% 65% 60% 40% / 40% 55% 45% 60%'
               }}
             >
               <video
@@ -227,21 +271,200 @@ export function HeroSection() {
               >
                 <source src="/videos/1.mp4" type="video/mp4" />
               </video>
-              {/* Overlay gradient */}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout - Original Grid */}
+        <div className="hidden lg:grid grid-cols-12 gap-4 items-center min-h-[65vh]">
+          
+          {/* Left Video Blob Section - ENLARGED */}
+          <div className="lg:col-span-4 relative h-[500px]">
+            {/* Background blob - pink/white gradient */}
+            <div 
+              ref={leftBlobBgRef}
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
+                borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
+                transform: 'scale(1.15) translate(15px, 15px)'
+              }}
+            />
+            {/* Second layer circle - white/pink */}
+            <div 
+              className="absolute inset-0 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)',
+                borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                transform: 'scale(1.08) translate(8px, 8px)'
+              }}
+            />
+            {/* Video container blob */}
+            <div 
+              ref={leftBlobRef}
+              className="absolute inset-2 overflow-hidden shadow-2xl animate-pulse-glow"
+              style={{ 
+                borderRadius: '55% 45% 35% 65% / 55% 35% 65% 45%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/hero.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/10 to-transparent" />
+            </div>
+          </div>
+
+          {/* Center Content - Desktop Only */}
+          <div className="lg:col-span-4 text-center z-10">
+            {/* Award Badge */}
+            <div 
+              className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg mb-8 border border-pink-100"
+            >
+              <Image
+                src="/videos/awardpic.jpeg"
+                alt="Local Business Awards 2021"
+                width={45}
+                height={45}
+                className="rounded-full object-cover"
+              />
+              <div className="text-left">
+                <p className="text-xs font-bold text-pink-600 uppercase tracking-wider">Finalist</p>
+                <p className="text-sm font-semibold text-gray-700">Local Business Awards 2021</p>
+                <p className="text-xs text-gray-500">Parramatta</p>
+              </div>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="text-5xl lg:text-6xl font-heading mb-8 leading-tight">
+              <span className="gradient-text">YUM</span>
+              <span className="text-gray-800 block my-2 text-2xl lg:text-3xl font-body font-medium">by</span>
+              <span className="gradient-text">Maryam</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-600 text-lg lg:text-xl mb-10 max-w-md mx-auto leading-relaxed font-body">
+              An artisan dessert boutique crafting heavenly homemade cakes, 
+              cupcakes & sweet treats with love from Sydney.
+            </p>
+
+            {/* CTA Button */}
+            <Link href="/menu">
+              <button className="btn-gradient px-12 py-5 rounded-full font-heading text-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group">
+                <span className="flex items-center gap-3">
+                  Explore Menu
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </button>
+            </Link>
+          </div>
+
+          {/* Right Video Blob Section - DIFFERENT SHAPE */}
+          <div className="lg:col-span-4 relative h-[500px]">
+            {/* Background blob - white/pink gradient (reversed) */}
+            <div 
+              ref={rightBlobBgRef}
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
+                borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
+                transform: 'scale(1.15) translate(-15px, 15px)'
+              }}
+            />
+            {/* Second layer - pink/white */}
+            <div 
+              className="absolute inset-0 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%)',
+                borderRadius: '40% 60% 70% 30% / 45% 65% 35% 55%',
+                transform: 'scale(1.08) translate(-8px, 8px)'
+              }}
+            />
+            {/* Video container blob - DIFFERENT SHAPE */}
+            <div 
+              ref={rightBlobRef}
+              className="absolute inset-2 overflow-hidden shadow-2xl"
+              style={{ 
+                borderRadius: '35% 65% 60% 40% / 40% 55% 45% 60%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/1.mp4" type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Wave Divider */}
+      {/* Floating Glass Image at Bottom - merging with next section */}
+      <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 z-40 hidden sm:block">
+        {/* Splash shape above glass */}
+        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-56 h-56 opacity-25 pointer-events-none">
+          <svg viewBox="0 0 200 200" className="w-full h-full">
+            <path 
+              fill="#E91E63" 
+              d="M47.5,-57.2C59.1,-48.2,64.8,-31.5,67.4,-14.5C70,2.6,69.5,20,62.3,34.1C55.1,48.2,41.2,59,25.6,65.3C10,71.6,-7.3,73.4,-23.4,68.7C-39.5,64,-54.4,52.8,-63.6,37.8C-72.8,22.8,-76.3,3.9,-72.5,-12.8C-68.7,-29.5,-57.6,-44,-43.9,-52.8C-30.2,-61.6,-14,-64.7,1.9,-67C17.8,-69.3,35.9,-66.2,47.5,-57.2Z" 
+              transform="translate(100 100)"
+            />
+          </svg>
+        </div>
+        {/* Back circle with animation */}
+        <div 
+          ref={glassBackRef}
+          className="absolute w-52 h-52 md:w-72 md:h-72 rounded-full -top-10 -left-10"
+          style={{
+            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
+          }}
+        />
+        <div 
+          className="absolute w-44 h-44 md:w-60 md:h-60 rounded-full top-0 left-0"
+          style={{
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)'
+          }}
+        />
+        {/* Glass image */}
+        <div ref={glassRef} className="relative w-40 h-40 md:w-56 md:h-56">
+          <Image
+            src="/images/products/glassfinal.png"
+            alt="Delicious dessert"
+            fill
+            className="object-contain drop-shadow-2xl"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Animated Wave Divider */}
       <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+        <svg 
+          ref={waveRef}
+          viewBox="0 0 1440 120" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="w-full"
+          preserveAspectRatio="none"
+        >
           <path 
+            className="wave-path-1"
             d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z" 
             fill="white"
           />
           <path 
+            className="wave-path-2"
             d="M0,80 C240,120 480,40 720,80 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" 
             fill="#FCE4EC"
             fillOpacity="0.5"

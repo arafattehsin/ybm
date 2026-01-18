@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
-/* Custom Theme - Pink & White Gradient Palette */
+/* Custom Theme - Pink & White Gradient Palette with Playful Fonts */
 @theme {
-  --font-sans: var(--font-open-sans), system-ui, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* Playful, cute fonts */
+  --font-heading: var(--font-heading), 'Baloo 2', cursive;
+  --font-body: var(--font-body), 'Quicksand', sans-serif;
+  --font-script: var(--font-script), 'Dancing Script', cursive;
   
   /* Pink Gradient Theme Colors */
   --color-primary: #E91E63;
@@ -30,6 +32,7 @@
   --gradient-section: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 50%, #FCE4EC 100%);
   --gradient-button: linear-gradient(135deg, #E91E63 0%, #FF4081 50%, #F8BBD9 100%);
   --gradient-nav: linear-gradient(135deg, #FFF0F5 0%, #FFB6C1 30%, #FFFFFF 70%, #FFC0CB 100%);
+  --gradient-footer: linear-gradient(135deg, #FFFFFF 0%, #FFF0F5 30%, #FFB6C1 70%, #FFC0CB 100%);
   
   /* Blob shape colors */
   --blob-pink: rgba(233, 30, 99, 0.15);
@@ -41,6 +44,27 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   overflow-x: hidden;
+  font-family: var(--font-body);
+}
+
+/* Playful Font Classes */
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Hannah-style heading (like honeybearbakeshop) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 /* Custom scrollbar - Pink theme */
@@ -64,15 +88,6 @@ body {
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
-}
-
-/* Typography */
-.font-serif {
-  font-family: var(--font-playfair), Georgia, serif;
-}
-
-.font-sans {
-  font-family: var(--font-open-sans), system-ui, sans-serif;
 }
 
 /* Gradient Text */
@@ -366,4 +381,188 @@ html {
   height: 100px;
   background: inherit;
   border-radius: 0 0 50% 50%;
+}
+
+/* ===== NEW ANIMATIONS ===== */
+
+/* Wave Animation */
+@keyframes wave-animate {
+  0% {
+    d: path("M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,133.3C672,117,768,107,864,112C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z");
+  }
+  50% {
+    d: path("M0,128L48,122.7C96,117,192,107,288,101.3C384,96,480,96,576,106.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z");
+  }
+  100% {
+    d: path("M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,133.3C672,117,768,107,864,112C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z");
+  }
+}
+
+.animate-wave path {
+  animation: wave-animate 4s ease-in-out infinite;
+}
+
+/* Product Float Animation with rotation and scale */
+@keyframes product-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(15px, -10px) rotate(5deg) scale(1.02);
+  }
+  50% {
+    transform: translate(-10px, 15px) rotate(-3deg) scale(0.98);
+  }
+  75% {
+    transform: translate(-15px, -5px) rotate(3deg) scale(1.01);
+  }
+}
+
+@keyframes product-float-alt {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(-15px, 10px) rotate(-5deg) scale(1.03);
+  }
+  50% {
+    transform: translate(10px, -15px) rotate(3deg) scale(0.97);
+  }
+  75% {
+    transform: translate(15px, 5px) rotate(-3deg) scale(1.02);
+  }
+}
+
+.animate-product-float {
+  animation: product-float 6s ease-in-out infinite;
+}
+
+.animate-product-float-alt {
+  animation: product-float-alt 7s ease-in-out infinite;
+}
+
+/* Background shape animation */
+@keyframes shape-rotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-shape-rotate {
+  animation: shape-rotate 20s linear infinite;
+}
+
+/* Page Transition Animation */
+@keyframes page-transition-in {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes page-transition-content {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.page-transition-overlay.animate {
+  animation: page-transition-in 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-content-animate {
+  animation: page-transition-content 0.6s ease-out 0.3s both;
+}
+
+/* Splash shape for product images */
+.splash-shape {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(255, 182, 193, 0.2) 100%);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  z-index: -1;
+}
+
+/* Floating product container */
+.floating-product {
+  position: absolute;
+  z-index: 30;
+}
+
+.floating-product img {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.floating-product .back-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.floating-product .back-circle.pink-white {
+  background: linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%);
+}
+
+.floating-product .back-circle.white-pink {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%);
+}
+
+/* Gradient backgrounds for merged sections */
+.bg-gradient-merged {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF0F5 20%, #FCE4EC 50%, #FFF0F5 80%, #FFFFFF 100%);
+}
+
+/* Image scale on hover (inside container) */
+.image-scale-container {
+  overflow: hidden;
+}
+
+.image-scale-container img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-scale-container:hover img {
+  transform: scale(1.1);
+}
+
+/* Remove punch effect on category buttons */
+.category-btn {
+  transition: all 0.3s ease;
+}
+
+.category-btn:active {
+  transform: none;
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, #E91E63 0%, #FF4081 100%);
+  color: white;
 }

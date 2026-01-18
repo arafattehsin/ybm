@@ -8,14 +8,14 @@ import { Instagram, Heart, MessageCircle, ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Sample Instagram posts data - in production, fetch from Instagram API
+// Sample Instagram posts data with actual product images
 const instagramPosts = [
-  { id: 1, image: '/images/products/Ferrero-Rocher-Cake.jpg', likes: 245, comments: 18 },
-  { id: 2, image: '/images/products/Nutella-Cupcakes.jpg', likes: 312, comments: 24 },
-  { id: 3, image: '/images/products/Tres-Leches-Cake.jpg', likes: 189, comments: 12 },
-  { id: 4, image: '/images/products/Cookies-and-Cream-Cupcakes.jpg', likes: 276, comments: 21 },
-  { id: 5, image: '/images/products/Biscoff-Cake.jpg', likes: 198, comments: 15 },
-  { id: 6, image: '/images/products/Lotus-Biscoff-Cupcakes.jpg', likes: 234, comments: 19 },
+  { id: 1, image: '/images/products/glassfinal.png', likes: 245, comments: 18 },
+  { id: 2, image: '/images/products/chocofinal.png', likes: 312, comments: 24 },
+  { id: 3, image: '/images/products/curstardfinal.png', likes: 189, comments: 12 },
+  { id: 4, image: '/images/products/chocofinal2.png', likes: 276, comments: 21 },
+  { id: 5, image: '/images/products/custard2final.png', likes: 198, comments: 15 },
+  { id: 6, image: '/images/products/glassfinal.png', likes: 234, comments: 19 },
 ];
 
 export function InstagramSection() {
@@ -24,6 +24,8 @@ export function InstagramSection() {
   const videoRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
+  const choco2Ref = useRef<HTMLDivElement>(null);
+  const choco2BackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,15 +80,43 @@ export function InstagramSection() {
         );
       }
 
+      // Choco2 image floating animation
+      if (choco2Ref.current) {
+        gsap.to(choco2Ref.current, {
+          x: 20,
+          y: -18,
+          rotation: 7,
+          scale: 1.04,
+          duration: 5.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
+      // Choco2 back circle animation
+      if (choco2BackRef.current) {
+        gsap.to(choco2BackRef.current, {
+          x: -12,
+          y: 10,
+          rotation: -5,
+          scale: 1.08,
+          duration: 6.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
       // Background shapes animation
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
         Array.from(shapes).forEach((shape, index) => {
           gsap.to(shape, {
-            y: `random(-30, 30)`,
-            x: `random(-25, 25)`,
-            rotation: `random(-20, 20)`,
-            duration: 5 + index * 0.5,
+            y: `random(-25, 25)`,
+            x: `random(-20, 20)`,
+            rotation: `random(-15, 15)`,
+            duration: 5 + index * 0.6,
             repeat: -1,
             yoyo: true,
             ease: 'sine.inOut'
@@ -99,115 +129,149 @@ export function InstagramSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-white via-pink-50 to-pink-100">
-      {/* Background Shapes */}
+    <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged pb-0">
+      {/* Floating Choco2 Image at Top Left - merging with previous section */}
+      <div className="absolute -top-20 left-8 lg:left-20 z-40">
+        {/* Splash shape */}
+        <div className="absolute -top-6 -left-6 w-36 h-36 opacity-20 pointer-events-none">
+          <svg viewBox="0 0 200 200" className="w-full h-full">
+            <path 
+              fill="#FF4081" 
+              d="M47.5,-57.2C59.1,-48.2,64.8,-31.5,67.4,-14.5C70,2.6,69.5,20,62.3,34.1C55.1,48.2,41.2,59,25.6,65.3C10,71.6,-7.3,73.4,-23.4,68.7C-39.5,64,-54.4,52.8,-63.6,37.8C-72.8,22.8,-76.3,3.9,-72.5,-12.8C-68.7,-29.5,-57.6,-44,-43.9,-52.8C-30.2,-61.6,-14,-64.7,1.9,-67C17.8,-69.3,35.9,-66.2,47.5,-57.2Z" 
+              transform="translate(100 100)"
+            />
+          </svg>
+        </div>
+        {/* Back circle */}
+        <div 
+          ref={choco2BackRef}
+          className="absolute w-40 h-40 md:w-48 md:h-48 rounded-full -top-4 -left-4"
+          style={{
+            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
+          }}
+        />
+        {/* Front circle */}
+        <div 
+          className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full top-0 left-0"
+          style={{
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
+          }}
+        />
+        {/* Choco2 image */}
+        <div ref={choco2Ref} className="relative w-28 h-28 md:w-36 md:h-36">
+          <Image
+            src="/images/products/chocofinal2.png"
+            alt="Chocolate dessert"
+            fill
+            className="object-contain drop-shadow-2xl"
+          />
+        </div>
+      </div>
+
+      {/* Background Decorative Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 right-20 w-64 h-64 bg-pink-200/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-48 h-48 bg-pink-100/40 rounded-full blur-2xl" />
-        <div className="absolute top-1/2 left-1/3 w-32 h-32 bg-white/50 rounded-full blur-xl" />
-        {/* Instagram icons floating */}
-        <Instagram className="absolute top-1/4 right-1/3 w-8 h-8 text-pink-200/40" />
-        <Heart className="absolute bottom-1/3 left-1/4 w-6 h-6 text-pink-300/30" />
+        {/* Shape pairs */}
+        <div className="absolute top-40 right-20">
+          <div className="w-16 h-16 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #E91E63 100%)' }} />
+          <div className="absolute inset-1 w-12 h-12 rounded-full bg-white/70" />
+        </div>
+        <div className="absolute bottom-1/3 right-1/3">
+          <div className="w-12 h-12 rounded-full bg-white/60" />
+          <div className="absolute inset-1 w-8 h-8 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFC0CB 100%)' }} />
+        </div>
+        <div className="absolute top-1/2 left-1/4">
+          <div className="w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #E91E63 100%)' }} />
+          <div className="absolute inset-1 w-6 h-6 rounded-full" style={{ background: 'linear-gradient(135deg, #FFC0CB 0%, #FFFFFF 100%)' }} />
+        </div>
+        {/* Large blur shapes */}
+        <div className="absolute top-10 right-1/4 w-52 h-52 bg-pink-100/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-1/3 w-60 h-60 bg-pink-200/30 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div ref={titleRef} className="text-center mb-14">
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full shadow-lg mb-6">
-            <Instagram className="w-5 h-5" />
-            <span className="font-semibold">@yumbymaryam</span>
+        {/* Section Title */}
+        <div ref={titleRef} className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <Instagram className="w-8 h-8 text-pink-500" />
+            <span className="text-pink-600 font-heading text-lg">@yumbymaryam</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold font-serif mb-4">
-            <span className="gradient-text">Follow Us</span>
-            <span className="text-gray-800"> on Instagram</span>
+          <h2 className="text-3xl lg:text-5xl font-heading mb-4">
+            <span className="gradient-text">Follow Our Sweet Journey</span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Join our sweet community for daily inspiration, behind-the-scenes peeks, and mouth-watering creations
+          <p className="text-gray-600 text-lg font-body max-w-2xl mx-auto">
+            Get inspired by our latest creations and behind-the-scenes moments
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Video Section */}
-          <div ref={videoRef} className="lg:col-span-1">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-full min-h-[400px]">
-              {/* Background glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-pink-600 blur-xl opacity-30 transform scale-105" />
-              
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Video Side */}
+          <div ref={videoRef} className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105" />
+            
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover"
+                className="w-full aspect-square object-cover"
               >
                 <source src="/videos/2.mp4" type="video/mp4" />
               </video>
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-pink-900/60 via-transparent to-transparent" />
-              
-              {/* Content overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <Instagram className="w-6 h-6" />
-                  <span className="font-semibold">@yumbymaryam</span>
-                </div>
-                <p className="text-sm text-white/80">Watch our latest creations come to life ✨</p>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-pink-600/20 to-transparent pointer-events-none" />
             </div>
+
+            {/* Instagram Badge */}
+            <a 
+              href="https://instagram.com/yumbymaryam" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-6 py-3 shadow-xl border border-pink-100 flex items-center gap-2 hover:scale-105 transition-transform"
+            >
+              <Instagram className="w-5 h-5 text-pink-500" />
+              <span className="font-heading text-gray-700">Follow Us</span>
+              <ExternalLink className="w-4 h-4 text-gray-400" />
+            </a>
           </div>
 
           {/* Instagram Grid */}
-          <div ref={gridRef} className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div ref={gridRef} className="grid grid-cols-3 gap-3">
             {instagramPosts.map((post) => (
               <a
                 key={post.id}
-                href="https://www.instagram.com/yumbymaryam/"
+                href="https://instagram.com/yumbymaryam"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                className="relative group aspect-square rounded-2xl overflow-hidden shadow-lg border border-pink-100 image-scale-container bg-pink-50"
               >
                 <Image
                   src={post.image}
                   alt="Instagram post"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover"
                 />
-                
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-600/90 via-pink-600/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="flex items-center justify-center gap-4 mb-2">
-                      <div className="flex items-center gap-1">
-                        <Heart className="w-5 h-5 fill-white" />
-                        <span className="font-semibold">{post.likes}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MessageCircle className="w-5 h-5" />
-                        <span className="font-semibold">{post.comments}</span>
-                      </div>
-                    </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                  <div className="flex items-center gap-4 text-white">
+                    <span className="flex items-center gap-1">
+                      <Heart className="w-4 h-4" />
+                      <span className="text-sm font-medium">{post.likes}</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MessageCircle className="w-4 h-4" />
+                      <span className="text-sm font-medium">{post.comments}</span>
+                    </span>
                   </div>
                 </div>
               </a>
             ))}
           </div>
         </div>
-
-        {/* CTA Button */}
-        <div className="text-center mt-12">
-          <a
-            href="https://www.instagram.com/yumbymaryam/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 btn-gradient px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group"
-          >
-            <Instagram className="w-6 h-6" />
-            Follow @yumbymaryam
-            <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
-        </div>
       </div>
+
+      {/* Extended background to footer - no white gap */}
+      <div className="h-24 bg-gradient-to-b from-transparent to-pink-50 mt-16" />
     </section>
   );
 }

@@ -143,7 +143,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-pink-50 hover:to-white hover:text-pink-600 rounded-xl transition-all duration-300 font-medium"
+                className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-pink-50 hover:to-white hover:text-pink-600 rounded-xl transition-all duration-300 font-heading font-medium text-center"
                 onClick={() => setIsMenuOpen(false)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
