@@ -170,28 +170,28 @@ export function ContactSection() {
       </div>
 
       {/* Hero Section */}
-      <div className="relative z-10 pt-16 pb-8 text-center">
+      <div className="relative z-10 pt-20 pb-10 text-center">
         <span className="inline-block px-5 py-2 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full text-sm font-heading font-semibold uppercase tracking-wider mb-6 shadow-sm">
           Get In Touch
         </span>
-        <h1 className="text-5xl md:text-6xl font-bold font-heading mb-4">
+        <h1 className="text-6xl md:text-7xl font-bold font-heading mb-6">
           <span className="gradient-text">Contact</span>
           <span className="text-gray-800"> Us</span>
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto px-4 font-body">
+        <p className="text-2xl text-gray-600 max-w-2xl mx-auto px-4 font-body">
           Have a question or want to place a custom order? We&apos;d love to hear from you!
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         {/* Video Hero Box - Above Send us a Message */}
-        <div ref={videoBoxRef} className="mb-16">
-          <div className="relative max-w-4xl mx-auto">
+        <div ref={videoBoxRef} className="mb-20">
+          <div className="relative max-w-6xl mx-auto">
             {/* Glowing background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-[2.5rem] blur-2xl opacity-30 transform scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-3xl opacity-35 transform scale-110" />
             
             {/* Video container */}
-            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/60">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/60">
               <video
                 autoPlay
                 loop
@@ -207,14 +207,14 @@ export function ContactSection() {
               
               {/* Content box overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 md:p-12 mx-4 max-w-lg text-center shadow-2xl">
-                  <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-7 h-7 text-white" />
+                <div className="bg-white/95 backdrop-blur-md rounded-3xl p-10 md:p-14 mx-4 max-w-xl text-center shadow-2xl">
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Mail className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-heading text-gray-900 mb-3">
+                  <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
                     Let&apos;s Create Something <span className="gradient-text">Sweet</span> Together
                   </h2>
-                  <p className="text-gray-600 font-body">
+                  <p className="text-lg text-gray-600 font-body">
                     Whether it&apos;s a custom cake for a special occasion or a simple question, we&apos;re here to help make your moments sweeter.
                   </p>
                 </div>
@@ -225,8 +225,8 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div ref={formRef} className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-xl border border-pink-100">
-            <h2 className="text-2xl font-bold font-heading text-gray-900 mb-6 flex items-center gap-3">
+          <div ref={formRef} className="bg-white/95 backdrop-blur-sm rounded-3xl p-10 lg:p-12 shadow-xl border border-pink-100">
+            <h2 className="text-3xl font-bold font-heading text-gray-900 mb-8 flex items-center gap-3">
               <span className="w-2 h-8 bg-gradient-to-b from-pink-500 to-pink-400 rounded-full"></span>
               Send us a Message
             </h2>

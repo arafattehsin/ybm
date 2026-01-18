@@ -15,7 +15,27 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/menu/${product.slug}`}>
-      <div className="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1">
+      <div 
+        className="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1"
+        style={{
+          border: '2px solid transparent',
+          backgroundImage: 'linear-gradient(white, white), linear-gradient(135deg, #ec4899, #f472b6, #ec4899)',
+          backgroundOrigin: 'border-box',
+          backgroundClip: 'padding-box, border-box',
+          backgroundSize: 'auto, 150% 150%',
+          backgroundPosition: 'auto, 0% 0%',
+          transitionProperty: 'all',
+          transitionDuration: '300ms'
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.backgroundPosition = 'auto, 50% 50%';
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.backgroundPosition = 'auto, 0% 0%';
+        }}
+      >
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-pink-50 to-white">
           <Image
