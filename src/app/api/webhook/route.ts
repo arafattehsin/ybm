@@ -6,11 +6,7 @@ import Stripe from 'stripe';
 export const runtime = 'nodejs';
 
 // Webhook secret for signature verification
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
-if (!webhookSecret) {
-  throw new Error('STRIPE_WEBHOOK_SECRET is not set in environment variables');
-}
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 /**
  * Handle successful payment
@@ -115,6 +111,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Missing stripe-signature header' },
         { status: 400 }
+      );
+    }
+
+    if (!webhookSecret) {
+      console.error('STRIPE_WEBHOOK_SECRET not configured');
+      return NextResponse.json(
+        { error: 'Webhook configuration error' },
+        { status: 500 }
       );
     }
 
