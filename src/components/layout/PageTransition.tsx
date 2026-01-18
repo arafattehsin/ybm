@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import gsap from 'gsap';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
@@ -68,7 +69,18 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           transform: 'translateY(-100%)'
         }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+          {/* Logo Image */}
+          <div className="relative w-24 h-24 animate-bounce">
+            <Image
+              src="/images/logo.png"
+              alt="YUM by Maryam Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          {/* Title */}
           <div className="text-4xl font-heading gradient-text animate-pulse">
             YUM by Maryam
           </div>

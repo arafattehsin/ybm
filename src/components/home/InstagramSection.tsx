@@ -4,18 +4,18 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Instagram, Heart, MessageCircle, ExternalLink } from 'lucide-react';
+import { Instagram, ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Sample Instagram posts data with actual product images
+// Real Instagram post IDs from @yumbymaryam - replace with actual post shortcodes
 const instagramPosts = [
-  { id: 1, image: '/images/products/glassfinal.png', likes: 245, comments: 18 },
-  { id: 2, image: '/images/products/chocofinal.png', likes: 312, comments: 24 },
-  { id: 3, image: '/images/products/curstardfinal.png', likes: 189, comments: 12 },
-  { id: 4, image: '/images/products/chocofinal2.png', likes: 276, comments: 21 },
-  { id: 5, image: '/images/products/custard2final.png', likes: 198, comments: 15 },
-  { id: 6, image: '/images/products/glassfinal.png', likes: 234, comments: 19 },
+  { id: 1, shortcode: 'C0nNVc8Nqkv' },
+  { id: 2, shortcode: 'C0nNVc8Nqkv' },
+  { id: 3, shortcode: 'C0nNVc8Nqkv' },
+  { id: 4, shortcode: 'C0nNVc8Nqkv' },
+  { id: 5, shortcode: 'C0nNVc8Nqkv' },
+  { id: 6, shortcode: 'C0nNVc8Nqkv' },
 ];
 
 export function InstagramSection() {
@@ -131,7 +131,7 @@ export function InstagramSection() {
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged pb-0">
       {/* Floating Choco2 Image at Top Left - merging with previous section */}
-      <div className="absolute -top-20 left-8 lg:left-20 z-40">
+      <div className="absolute -top-20 left-8 lg:left-20 z-[9999]">
         {/* Splash shape */}
         <div className="absolute -top-6 -left-6 w-36 h-36 opacity-20 pointer-events-none">
           <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -235,33 +235,29 @@ export function InstagramSection() {
             </a>
           </div>
 
-          {/* Instagram Grid */}
-          <div ref={gridRef} className="grid grid-cols-3 gap-3">
+          {/* Instagram Grid - Using Instagram Embeds */}
+          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {instagramPosts.map((post) => (
               <a
                 key={post.id}
-                href="https://instagram.com/yumbymaryam"
+                href={`https://instagram.com/p/${post.shortcode}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative group aspect-square rounded-2xl overflow-hidden shadow-lg border border-pink-100 image-scale-container bg-pink-50"
+                className="relative group aspect-square rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center hover:scale-105 transition-transform duration-300"
               >
-                <Image
-                  src={post.image}
-                  alt="Instagram post"
-                  fill
-                  className="object-cover"
+                {/* Instagram Post Thumbnail via embed URL */}
+                <iframe
+                  src={`https://www.instagram.com/p/${post.shortcode}/embed`}
+                  className="w-full h-full border-0 pointer-events-none"
+                  allowFullScreen
+                  loading="lazy"
+                  title={`Instagram post ${post.id}`}
                 />
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                  <div className="flex items-center gap-4 text-white">
-                    <span className="flex items-center gap-1">
-                      <Heart className="w-4 h-4" />
-                      <span className="text-sm font-medium">{post.likes}</span>
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MessageCircle className="w-4 h-4" />
-                      <span className="text-sm font-medium">{post.comments}</span>
-                    </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="flex items-center gap-2 text-white">
+                    <Instagram className="w-6 h-6" />
+                    <span className="font-medium">View on Instagram</span>
                   </div>
                 </div>
               </a>

@@ -16,7 +16,6 @@ export function HeroSection() {
   const shapesRef = useRef<HTMLDivElement>(null);
   const glassRef = useRef<HTMLDivElement>(null);
   const glassBackRef = useRef<HTMLDivElement>(null);
-  const waveRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -102,36 +101,6 @@ export function HeroSection() {
         });
       }
 
-      // Wave animation
-      if (waveRef.current) {
-        const wavePath = waveRef.current.querySelector('.wave-path-1');
-        const wavePath2 = waveRef.current.querySelector('.wave-path-2');
-        
-        if (wavePath) {
-          gsap.to(wavePath, {
-            attr: {
-              d: "M0,40 C180,100 360,0 540,50 C720,100 900,10 1080,60 C1260,110 1440,20 1440,60 L1440,120 L0,120 Z"
-            },
-            duration: 3,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut'
-          });
-        }
-        
-        if (wavePath2) {
-          gsap.to(wavePath2, {
-            attr: {
-              d: "M0,70 C200,100 400,30 600,70 C800,110 1000,40 1200,80 C1400,120 1440,60 1440,80 L1440,120 L0,120 Z"
-            },
-            duration: 4,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut'
-          });
-        }
-      }
-
       // Background shapes animation
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
@@ -168,21 +137,30 @@ export function HeroSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Mobile Layout - Stack with content between videos */}
-        <div className="flex flex-col lg:hidden items-center">
-          {/* First Video Blob on Mobile */}
-          <div className="relative w-full h-[280px] sm:h-[320px] mb-4">
-            {/* Background blob - pink/white gradient */}
+        <div className="flex flex-col lg:hidden items-center overflow-hidden">
+          {/* First Video Blob on Mobile - contained within screen */}
+          <div className="relative w-[90%] max-w-[320px] h-[260px] sm:h-[300px] mb-4 mx-auto">
+            {/* Background blob - pink/white gradient - closer to video */}
             <div 
-              className="absolute inset-0 shadow-2xl mx-auto w-[85%] left-1/2 -translate-x-1/2"
+              className="absolute inset-0 shadow-2xl"
               style={{ 
                 background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
                 borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
-                transform: 'translateX(-50%) scale(1.1)'
+                transform: 'scale(1.08)'
+              }}
+            />
+            {/* Second layer - closer */}
+            <div 
+              className="absolute inset-1 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)',
+                borderRadius: '60% 40% 30% 70% / 55% 30% 70% 45%',
+                transform: 'scale(1.04)'
               }}
             />
             {/* Video container blob */}
             <div 
-              className="absolute inset-4 mx-auto w-[75%] left-1/2 -translate-x-1/2 overflow-hidden shadow-2xl"
+              className="absolute inset-3 overflow-hidden shadow-2xl"
               style={{ 
                 borderRadius: '55% 45% 35% 65% / 55% 35% 65% 45%'
               }}
@@ -244,20 +222,29 @@ export function HeroSection() {
             </Link>
           </div>
 
-          {/* Second Video Blob on Mobile */}
-          <div className="relative w-full h-[280px] sm:h-[320px] mt-4">
-            {/* Background blob - white/pink gradient */}
+          {/* Second Video Blob on Mobile - contained within screen */}
+          <div className="relative w-[90%] max-w-[320px] h-[260px] sm:h-[300px] mt-4 mx-auto">
+            {/* Background blob - white/pink gradient - closer to video */}
             <div 
-              className="absolute inset-0 shadow-2xl mx-auto w-[85%] left-1/2 -translate-x-1/2"
+              className="absolute inset-0 shadow-2xl"
               style={{ 
                 background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
                 borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
-                transform: 'translateX(-50%) scale(1.1)'
+                transform: 'scale(1.08)'
+              }}
+            />
+            {/* Second layer - closer */}
+            <div 
+              className="absolute inset-1 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%)',
+                borderRadius: '40% 60% 70% 30% / 40% 65% 35% 60%',
+                transform: 'scale(1.04)'
               }}
             />
             {/* Video container blob */}
             <div 
-              className="absolute inset-4 mx-auto w-[75%] left-1/2 -translate-x-1/2 overflow-hidden shadow-2xl"
+              className="absolute inset-3 overflow-hidden shadow-2xl"
               style={{ 
                 borderRadius: '35% 65% 60% 40% / 40% 55% 45% 60%'
               }}
@@ -275,11 +262,11 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Desktop Layout - Original Grid */}
-        <div className="hidden lg:grid grid-cols-12 gap-4 items-center min-h-[65vh]">
+        {/* Desktop Layout - Larger videos with more spacing */}
+        <div className="hidden lg:grid grid-cols-12 gap-2 items-center min-h-[70vh]">
           
-          {/* Left Video Blob Section - ENLARGED */}
-          <div className="lg:col-span-4 relative h-[500px]">
+          {/* Left Video Blob Section - ENLARGED with more space from center */}
+          <div className="lg:col-span-4 relative h-[550px] -ml-32">
             {/* Background blob - pink/white gradient */}
             <div 
               ref={leftBlobBgRef}
@@ -287,7 +274,7 @@ export function HeroSection() {
               style={{ 
                 background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
                 borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
-                transform: 'scale(1.15) translate(15px, 15px)'
+                transform: 'scale(1.18) translate(10px, 10px)'
               }}
             />
             {/* Second layer circle - white/pink */}
@@ -296,7 +283,7 @@ export function HeroSection() {
               style={{ 
                 background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)',
                 borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
-                transform: 'scale(1.08) translate(8px, 8px)'
+                transform: 'scale(1.10) translate(5px, 5px)'
               }}
             />
             {/* Video container blob */}
@@ -366,8 +353,8 @@ export function HeroSection() {
             </Link>
           </div>
 
-          {/* Right Video Blob Section - DIFFERENT SHAPE */}
-          <div className="lg:col-span-4 relative h-[500px]">
+          {/* Right Video Blob Section - LARGER with more space from center */}
+          <div className="lg:col-span-4 relative h-[550px] -mr-32">
             {/* Background blob - white/pink gradient (reversed) */}
             <div 
               ref={rightBlobBgRef}
@@ -375,7 +362,7 @@ export function HeroSection() {
               style={{ 
                 background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
                 borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
-                transform: 'scale(1.15) translate(-15px, 15px)'
+                transform: 'scale(1.18) translate(-10px, 10px)'
               }}
             />
             {/* Second layer - pink/white */}
@@ -384,7 +371,7 @@ export function HeroSection() {
               style={{ 
                 background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%)',
                 borderRadius: '40% 60% 70% 30% / 45% 65% 35% 55%',
-                transform: 'scale(1.08) translate(-8px, 8px)'
+                transform: 'scale(1.10) translate(-5px, 5px)'
               }}
             />
             {/* Video container blob - DIFFERENT SHAPE */}
@@ -410,18 +397,8 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Floating Glass Image at Bottom - merging with next section */}
-      <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 z-40 hidden sm:block">
-        {/* Splash shape above glass */}
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-56 h-56 opacity-25 pointer-events-none">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <path 
-              fill="#E91E63" 
-              d="M47.5,-57.2C59.1,-48.2,64.8,-31.5,67.4,-14.5C70,2.6,69.5,20,62.3,34.1C55.1,48.2,41.2,59,25.6,65.3C10,71.6,-7.3,73.4,-23.4,68.7C-39.5,64,-54.4,52.8,-63.6,37.8C-72.8,22.8,-76.3,3.9,-72.5,-12.8C-68.7,-29.5,-57.6,-44,-43.9,-52.8C-30.2,-61.6,-14,-64.7,1.9,-67C17.8,-69.3,35.9,-66.2,47.5,-57.2Z" 
-              transform="translate(100 100)"
-            />
-          </svg>
-        </div>
+      {/* Floating Glass Image at Bottom Right - ON TOP of everything */}
+      <div className="absolute right-8 lg:right-24 -bottom-20 z-[9999] hidden sm:block">
         {/* Back circle with animation */}
         <div 
           ref={glassBackRef}
@@ -436,8 +413,8 @@ export function HeroSection() {
             background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)'
           }}
         />
-        {/* Glass image */}
-        <div ref={glassRef} className="relative w-40 h-40 md:w-56 md:h-56">
+        {/* Glass image - ON TOP of circles */}
+        <div ref={glassRef} className="relative w-40 h-40 md:w-56 md:h-56 z-10">
           <Image
             src="/images/products/glassfinal.png"
             alt="Delicious dessert"
@@ -448,10 +425,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Animated Wave Divider */}
+      {/* Static Wave Divider - No Animation */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg 
-          ref={waveRef}
           viewBox="0 0 1440 120" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg" 
@@ -459,15 +435,12 @@ export function HeroSection() {
           preserveAspectRatio="none"
         >
           <path 
-            className="wave-path-1"
-            d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z" 
-            fill="white"
+            d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" 
+            fill="#FCE4EC"
           />
           <path 
-            className="wave-path-2"
-            d="M0,80 C240,120 480,40 720,80 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" 
-            fill="#FCE4EC"
-            fillOpacity="0.5"
+            d="M0,80 C240,110 480,50 720,80 C960,110 1200,50 1440,80 L1440,120 L0,120 Z" 
+            fill="white"
           />
         </svg>
       </div>

@@ -102,7 +102,7 @@ export function SeasonalCTA() {
   return (
     <section ref={sectionRef} className="relative py-28 lg:py-36 overflow-hidden bg-gradient-merged">
       {/* Floating Choco Image at Top Left - merging with previous section */}
-      <div className="absolute -top-24 left-8 lg:left-16 z-40">
+      <div className="absolute -top-24 left-8 lg:left-16 z-[9999]">
         {/* Splash shape */}
         <div className="absolute -top-8 -left-8 w-40 h-40 opacity-20 pointer-events-none">
           <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -171,10 +171,10 @@ export function SeasonalCTA() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Content Side */}
-          <div ref={contentRef} className="relative">
-            <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-xl border border-pink-100">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Content Side - Wider and overlaps video */}
+          <div ref={contentRef} className="relative lg:col-span-7 z-20">
+            <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-xl border border-pink-100 lg:-mr-24">
               {/* Icon */}
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl mb-6 shadow-lg">
                 <Gift className="w-8 h-8 text-white" />
@@ -203,8 +203,8 @@ export function SeasonalCTA() {
             </div>
           </div>
 
-          {/* Video Side */}
-          <div ref={videoRef} className="relative">
+          {/* Video Side - In front */}
+          <div ref={videoRef} className="relative lg:col-span-5 z-30">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105" />
             
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
@@ -218,13 +218,6 @@ export function SeasonalCTA() {
                 <source src="/videos/3.mp4" type="video/mp4" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-pink-600/20 to-transparent pointer-events-none" />
-            </div>
-
-            <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl border border-pink-100">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-pink-500" />
-                <span className="text-sm font-heading text-gray-700">Made with Love</span>
-              </div>
             </div>
           </div>
         </div>
