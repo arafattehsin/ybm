@@ -42,8 +42,8 @@ export default function AdminLoginPage() {
       } else {
         router.push('/admin');
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -68,8 +68,8 @@ export default function AdminLoginPage() {
       }
 
       router.push('/admin');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Verification failed');
     } finally {
       setLoading(false);
     }

@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-primary to-accent rounded-2xl p-6 text-white">
         <h1 className="text-3xl font-bold mb-2">Welcome to Admin Dashboard</h1>
-        <p className="text-white/90">Here's what's happening with your store today.</p>
+        <p className="text-white/90">Here&apos;s what&apos;s happening with your store today.</p>
       </div>
 
       {/* Stats Grid */}

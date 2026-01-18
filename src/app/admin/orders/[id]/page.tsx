@@ -1,22 +1,37 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { use } from 'react';
-import { useRouter } from 'next/navigation';
 import { ArrowLeft, Package, User, MapPin, CreditCard, Clock } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+
+interface OrderItem {
+  productName: string;
+  quantity: number;
+  size?: string;
+  addons?: string[];
+  unitPrice: number;
+  totalPrice: number;
+}
+
+interface DeliveryAddress {
+  line1: string;
+  line2?: string;
+  city: string;
+  state: string;
+  postcode: string;
+}
 
 interface Order {
   id: string;
   order_id: string;
   customer_id: string;
-  items: any[];
+  items: OrderItem[];
   status: string;
   payment_status: string;
   payment_intent_id: string;
   delivery_method: string;
-  delivery_address: any;
+  delivery_address: DeliveryAddress | null;
   delivery_fee: number;
   subtotal: number;
   total: number;
@@ -27,16 +42,11 @@ interface Order {
 
 export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
-  const router = useRouter();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
-  useEffect(() => {
-    fetchOrder();
-  }, [resolvedParams.id]);
-
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const res = await fetch(`/api/admin/orders/${resolvedParams.id}`);
       const data = await res.json();
@@ -46,7 +56,11 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
     } finally {
       setLoading(false);
     }
-  };
+  }, [resolvedParams.id]);
+
+  useEffect(() => {
+    fetchOrder();
+  }, [fetchOrder]);
 
   const updateOrderStatus = async (newStatus: string) => {
     if (!order) return;

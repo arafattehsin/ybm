@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -28,16 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    // Don't check auth for auth pages
-    if (pathname?.startsWith('/admin/auth')) {
-      setLoading(false);
-      return;
-    }
-    checkAuth();
-  }, [pathname]);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const res = await fetch('/api/admin/auth/me');
       if (!res.ok) {
@@ -51,7 +42,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    // Don't check auth for auth pages
+    if (pathname?.startsWith('/admin/auth')) {
+      setLoading(false);
+      return;
+    }
+    checkAuth();
+  }, [pathname, checkAuth]);
 
   const handleLogout = async () => {
     await fetch('/api/admin/auth/logout', { method: 'POST' });

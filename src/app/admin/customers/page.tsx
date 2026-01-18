@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Search, Mail, Phone, MapPin } from 'lucide-react';
+import { Search, Mail, Phone } from 'lucide-react';
 
 interface Customer {
   id: string;

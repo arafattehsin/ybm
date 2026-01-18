@@ -46,7 +46,7 @@ export function generateToken(payload: AdminPayload): string {
 export function verifyToken(token: string): AdminPayload | null {
   try {
     return jwt.verify(token, JWT_SECRET) as AdminPayload;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Eye, Package, Truck, CheckCircle, XCircle } from 'lucide-react';
 
@@ -8,7 +8,7 @@ interface Order {
   id: string;
   order_id: string;
   customer_id: string;
-  items: any[];
+  items: { productName: string; quantity: number; totalPrice: number }[];
   status: string;
   payment_status: string;
   delivery_method: string;
@@ -22,11 +22,7 @@ export default function OrdersPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  useEffect(() => {
-    fetchOrders();
-  }, [statusFilter]);
-
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (statusFilter !== 'all') {
@@ -41,7 +37,11 @@ export default function OrdersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [statusFilter]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const formatCurrency = (cents: number) => {
     return new Intl.NumberFormat('en-AU', {

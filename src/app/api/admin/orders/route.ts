@@ -21,8 +21,8 @@ export async function GET(request: NextRequest) {
     const payment_status = searchParams.get('payment_status') || undefined;
 
     const orders = orderDb.getAll({
-      status: status as any,
-      payment_status: payment_status as any,
+      status: status as string | undefined,
+      payment_status: payment_status as string | undefined,
     });
 
     return NextResponse.json({ orders });
