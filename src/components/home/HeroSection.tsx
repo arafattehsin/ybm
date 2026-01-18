@@ -14,8 +14,6 @@ export function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const awardRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const glassRef = useRef<HTMLDivElement>(null);
-  const glassBackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -72,34 +70,6 @@ export function HeroSection() {
         yoyo: true,
         ease: 'sine.inOut'
       });
-
-      // Glass image floating animation with rotation, left-right, and scale
-      if (glassRef.current) {
-        gsap.to(glassRef.current, {
-          x: 30,
-          y: -15,
-          rotation: 8,
-          scale: 1.05,
-          duration: 5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      // Glass back circle animation
-      if (glassBackRef.current) {
-        gsap.to(glassBackRef.current, {
-          x: -20,
-          y: 10,
-          rotation: -5,
-          scale: 1.08,
-          duration: 6,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
 
       // Background shapes animation
       if (shapesRef.current) {
@@ -394,34 +364,6 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent" />
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Floating Glass Image at Bottom Right - ON TOP of everything */}
-      <div className="absolute right-8 lg:right-24 -bottom-20 z-[9999] hidden sm:block">
-        {/* Back circle with animation */}
-        <div 
-          ref={glassBackRef}
-          className="absolute w-52 h-52 md:w-72 md:h-72 rounded-full -top-10 -left-10"
-          style={{
-            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
-          }}
-        />
-        <div 
-          className="absolute w-44 h-44 md:w-60 md:h-60 rounded-full top-0 left-0"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)'
-          }}
-        />
-        {/* Glass image - ON TOP of circles */}
-        <div ref={glassRef} className="relative w-40 h-40 md:w-56 md:h-56 z-10">
-          <Image
-            src="/images/products/glassfinal.png"
-            alt="Delicious dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-            priority
-          />
         </div>
       </div>
 

@@ -3,3 +3,4 @@ export { FeaturedProducts } from './FeaturedProducts';
 export { SeasonalCTA } from './SeasonalCTA';
 export { Testimonials } from './Testimonials';
 export { InstagramSection } from './InstagramSection';
+export { FloatingImages } from './FloatingImages';
