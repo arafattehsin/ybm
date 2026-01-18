@@ -1,4 +1,4 @@
-import { HeroSection, FeaturedProducts, SeasonalCTA, Testimonials, InstagramSection, FloatingImages } from '@/components/home';
+import { HeroSection, FeaturedProducts, SeasonalCTA, Testimonials, InstagramSection } from '@/components/home';
 import productsData from '@/data/products.json';
 import testimonialsData from '@/data/testimonials.json';
 import type { Product, Testimonial } from '@/types';
@@ -12,7 +12,6 @@ const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
 export default function HomePage() {
   return (
     <>
-      <FloatingImages />
       <HeroSection />
       <FeaturedProducts products={featuredProducts} />
       <SeasonalCTA />
