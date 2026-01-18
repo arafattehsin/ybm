@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Gift, Heart, Sparkles } from 'lucide-react';
@@ -14,8 +13,6 @@ export function SeasonalCTA() {
   const contentRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const chocoRef = useRef<HTMLDivElement>(null);
-  const chocoBackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,34 +48,6 @@ export function SeasonalCTA() {
         }
       );
 
-      // Choco image floating animation
-      if (chocoRef.current) {
-        gsap.to(chocoRef.current, {
-          x: 25,
-          y: -20,
-          rotation: 10,
-          scale: 1.05,
-          duration: 5.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      // Choco back circle animation
-      if (chocoBackRef.current) {
-        gsap.to(chocoBackRef.current, {
-          x: -15,
-          y: 15,
-          rotation: -8,
-          scale: 1.1,
-          duration: 6.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
       // Background shapes - different colors and patterns
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
@@ -101,44 +70,6 @@ export function SeasonalCTA() {
 
   return (
     <section ref={sectionRef} className="relative py-28 lg:py-36 overflow-hidden bg-gradient-merged">
-      {/* Floating Choco Image at Top Left - merging with previous section */}
-      <div className="absolute -top-24 left-8 lg:left-16 z-[9999]">
-        {/* Splash shape */}
-        <div className="absolute -top-8 -left-8 w-40 h-40 opacity-20 pointer-events-none">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <path 
-              fill="#FF4081" 
-              d="M39.5,-65.3C50.9,-58.3,59.4,-46.4,65.4,-33.4C71.4,-20.3,74.9,-6.1,73.1,7.4C71.3,20.9,64.2,33.6,54.5,43.7C44.8,53.8,32.4,61.3,18.7,66.2C5,71.1,-10,73.4,-23.8,70.3C-37.6,67.2,-50.2,58.7,-59.3,47.1C-68.4,35.5,-74,20.8,-74.9,5.8C-75.8,-9.2,-72,-24.5,-63.8,-36.5C-55.6,-48.5,-43,-57.2,-29.8,-63.2C-16.6,-69.2,-2.8,-72.5,10.4,-71.3C23.6,-70.1,28.1,-72.3,39.5,-65.3Z" 
-              transform="translate(100 100)"
-            />
-          </svg>
-        </div>
-        {/* Back circle - white with pink gradient */}
-        <div 
-          ref={chocoBackRef}
-          className="absolute w-44 h-44 md:w-56 md:h-56 rounded-full -top-6 -left-6"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
-          }}
-        />
-        {/* Front circle - pink with white */}
-        <div 
-          className="absolute w-36 h-36 md:w-48 md:h-48 rounded-full top-0 left-0"
-          style={{
-            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
-          }}
-        />
-        {/* Choco image */}
-        <div ref={chocoRef} className="relative w-32 h-32 md:w-44 md:h-44">
-          <Image
-            src="/images/products/chocofinal.png"
-            alt="Chocolate dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-      </div>
-
       {/* Background Decorative Shapes with Different Colors */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         {/* Shape 1 - pink/white gradient front, white back */}

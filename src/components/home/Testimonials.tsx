@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import type { Testimonial } from '@/types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCards } from 'swiper/modules';
@@ -25,8 +24,6 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   const titleRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const custardRef = useRef<HTMLDivElement>(null);
-  const custardBackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,34 +58,6 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
         }
       );
 
-      // Custard image floating animation
-      if (custardRef.current) {
-        gsap.to(custardRef.current, {
-          x: -20,
-          y: -25,
-          rotation: -8,
-          scale: 1.06,
-          duration: 6,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      // Custard back circle animation
-      if (custardBackRef.current) {
-        gsap.to(custardBackRef.current, {
-          x: 18,
-          y: 12,
-          rotation: 6,
-          scale: 1.1,
-          duration: 7,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
       // Background shapes animation
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
@@ -111,44 +80,6 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged">
-      {/* Floating Custard Image at Top Right - merging with previous section */}
-      <div className="absolute -top-20 right-8 lg:right-16 z-[9999]">
-        {/* Splash shape */}
-        <div className="absolute -top-6 -right-6 w-36 h-36 opacity-20 pointer-events-none">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <path 
-              fill="#E91E63" 
-              d="M44.7,-76.4C58.1,-68.5,69.4,-56.6,77.1,-42.6C84.8,-28.6,88.9,-12.5,87.3,2.9C85.8,18.4,78.6,33.2,68.7,45.4C58.8,57.6,46.2,67.3,32.2,73.6C18.1,80,-2.5,83,-21.3,79.1C-40.2,75.2,-57.3,64.4,-69.8,50.1C-82.3,35.8,-90.2,17.9,-89.6,0.3C-89,-17.2,-79.9,-34.4,-67.5,-47.7C-55.1,-61,-39.4,-70.4,-23.6,-76.8C-7.8,-83.2,8.1,-86.6,23.4,-84.2C38.8,-81.8,53.6,-73.6,44.7,-76.4Z" 
-              transform="translate(100 100)"
-            />
-          </svg>
-        </div>
-        {/* Back circle - pink/white */}
-        <div 
-          ref={custardBackRef}
-          className="absolute w-40 h-40 md:w-52 md:h-52 rounded-full -top-4 -right-4"
-          style={{
-            background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #E91E63 100%)'
-          }}
-        />
-        {/* Front circle - white/pink */}
-        <div 
-          className="absolute w-32 h-32 md:w-44 md:h-44 rounded-full top-0 right-0"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)'
-          }}
-        />
-        {/* Custard image */}
-        <div ref={custardRef} className="relative w-28 h-28 md:w-40 md:h-40">
-          <Image
-            src="/images/products/curstardfinal.png"
-            alt="Custard dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-      </div>
-
       {/* Background Decorative Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         {/* Shape pairs with different color combinations */}

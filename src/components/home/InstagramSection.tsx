@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Instagram, ExternalLink } from 'lucide-react';
@@ -24,8 +23,6 @@ export function InstagramSection() {
   const videoRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const choco2Ref = useRef<HTMLDivElement>(null);
-  const choco2BackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -80,34 +77,6 @@ export function InstagramSection() {
         );
       }
 
-      // Choco2 image floating animation
-      if (choco2Ref.current) {
-        gsap.to(choco2Ref.current, {
-          x: 20,
-          y: -18,
-          rotation: 7,
-          scale: 1.04,
-          duration: 5.8,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      // Choco2 back circle animation
-      if (choco2BackRef.current) {
-        gsap.to(choco2BackRef.current, {
-          x: -12,
-          y: 10,
-          rotation: -5,
-          scale: 1.08,
-          duration: 6.8,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
       // Background shapes animation
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
@@ -130,44 +99,6 @@ export function InstagramSection() {
 
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged pb-0">
-      {/* Floating Choco2 Image at Top Left - merging with previous section */}
-      <div className="absolute -top-20 left-8 lg:left-20 z-[9999]">
-        {/* Splash shape */}
-        <div className="absolute -top-6 -left-6 w-36 h-36 opacity-20 pointer-events-none">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <path 
-              fill="#FF4081" 
-              d="M47.5,-57.2C59.1,-48.2,64.8,-31.5,67.4,-14.5C70,2.6,69.5,20,62.3,34.1C55.1,48.2,41.2,59,25.6,65.3C10,71.6,-7.3,73.4,-23.4,68.7C-39.5,64,-54.4,52.8,-63.6,37.8C-72.8,22.8,-76.3,3.9,-72.5,-12.8C-68.7,-29.5,-57.6,-44,-43.9,-52.8C-30.2,-61.6,-14,-64.7,1.9,-67C17.8,-69.3,35.9,-66.2,47.5,-57.2Z" 
-              transform="translate(100 100)"
-            />
-          </svg>
-        </div>
-        {/* Back circle */}
-        <div 
-          ref={choco2BackRef}
-          className="absolute w-40 h-40 md:w-48 md:h-48 rounded-full -top-4 -left-4"
-          style={{
-            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
-          }}
-        />
-        {/* Front circle */}
-        <div 
-          className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full top-0 left-0"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
-          }}
-        />
-        {/* Choco2 image */}
-        <div ref={choco2Ref} className="relative w-28 h-28 md:w-36 md:h-36">
-          <Image
-            src="/images/products/chocofinal2.png"
-            alt="Chocolate dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-      </div>
-
       {/* Background Decorative Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         {/* Shape pairs */}
