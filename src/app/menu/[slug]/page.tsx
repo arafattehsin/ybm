@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ProductDetail, RelatedProducts } from '@/components/products';
+import { ProductDetailWrapper } from '@/components/products/ProductDetailWrapper';
 import productsData from '@/data/products.json';
 import addonsData from '@/data/addons.json';
 import type { Product, Addon } from '@/types';
@@ -61,14 +61,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   );
 
   return (
-    <div className="py-8 md:py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <ProductDetail product={product} addons={productAddons} />
-
-        {relatedProducts.length > 0 && (
-          <RelatedProducts products={relatedProducts} />
-        )}
-      </div>
-    </div>
+    <ProductDetailWrapper 
+      product={product} 
+      addons={productAddons} 
+      relatedProducts={relatedProducts}
+    />
   );
 }
