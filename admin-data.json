@@ -7,10 +7,10 @@
       "name": "Admin User",
       "role": "super_admin",
       "two_factor_enabled": 0,
-      "last_login": "2026-01-18T22:38:20.846Z",
+      "last_login": "2026-01-18T22:44:54.939Z",
       "active": 1,
       "created_at": "2026-01-18T22:38:20.776Z",
-      "updated_at": "2026-01-18T22:38:20.846Z"
+      "updated_at": "2026-01-18T22:44:54.939Z"
     }
   ],
   "customers": [
@@ -37,6 +37,32 @@
   ],
   "orders": [
     {
+      "id": "order-2",
+      "order_id": "#ORD-002",
+      "customer_id": "cust-1",
+      "items": [
+        {
+          "productId": "choco-cake",
+          "productName": "Chocolate Cake",
+          "size": "Large",
+          "addons": [],
+          "quantity": 1,
+          "unitPrice": 6500,
+          "totalPrice": 6500
+        }
+      ],
+      "status": "confirmed",
+      "payment_status": "authorized",
+      "payment_intent_id": "pi_test_002",
+      "delivery_method": "pickup",
+      "delivery_fee": 0,
+      "subtotal": 6500,
+      "total": 6500,
+      "created_at": "2026-01-17T22:38:20.777Z",
+      "updated_at": "2026-01-18T22:41:00.454Z",
+      "assigned_to": "admin-1"
+    },
+    {
       "id": "order-1",
       "order_id": "#ORD-001",
       "customer_id": "cust-1",
@@ -62,32 +88,6 @@
       "total": 5400,
       "created_at": "2026-01-13T22:38:20.777Z",
       "updated_at": "2026-01-15T22:38:20.777Z",
-      "assigned_to": "admin-1"
-    },
-    {
-      "id": "order-2",
-      "order_id": "#ORD-002",
-      "customer_id": "cust-1",
-      "items": [
-        {
-          "productId": "choco-cake",
-          "productName": "Chocolate Cake",
-          "size": "Large",
-          "addons": [],
-          "quantity": 1,
-          "unitPrice": 6500,
-          "totalPrice": 6500
-        }
-      ],
-      "status": "confirmed",
-      "payment_status": "authorized",
-      "payment_intent_id": "pi_test_002",
-      "delivery_method": "pickup",
-      "delivery_fee": 0,
-      "subtotal": 6500,
-      "total": 6500,
-      "created_at": "2026-01-17T22:38:20.777Z",
-      "updated_at": "2026-01-17T22:38:20.777Z",
       "assigned_to": "admin-1"
     }
   ],
