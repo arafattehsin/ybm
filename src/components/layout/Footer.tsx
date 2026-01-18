@@ -67,28 +67,27 @@ export function Footer() {
   ];
 
   return (
-    <footer ref={footerRef} className="relative overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #FFFFFF 0%, #FFF0F5 25%, #FFB6C1 50%, #FFC0CB 75%, #FFFFFF 100%)'
-    }}>
-      {/* Top Wave */}
-      <div className="absolute top-0 left-0 right-0 -mt-1">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0,30 Q360,60 720,30 T1440,30 L1440,0 L0,0 Z" fill="#FCE4EC" />
-        </svg>
-      </div>
-
+    <footer ref={footerRef} className="relative overflow-hidden bg-gradient-merged">
       {/* Background Decorative Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 w-48 h-48 bg-pink-300/20 rounded-full blur-2xl" />
         <div className="absolute bottom-20 right-20 w-64 h-64 bg-white/40 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/3 w-32 h-32 bg-pink-200/30 rounded-full blur-xl" />
-        {/* Small circles with gradients */}
-        <div className="absolute top-24 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-white opacity-40" />
-        <div className="absolute bottom-32 left-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-white to-pink-300 opacity-50" />
-        <div className="absolute top-1/3 right-10 w-5 h-5 rounded-full bg-pink-400/40" />
+        {/* Small bakery shapes */}
+        <div className="absolute top-24 right-1/4 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-8 h-8 text-pink-400/30" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+          </svg>
+        </div>
+        <div className="absolute bottom-32 left-1/4 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-6 h-6 text-pink-300/40" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
+        </div>
       </div>
 
-      <div ref={contentRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 relative z-10">
+      <div ref={contentRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">

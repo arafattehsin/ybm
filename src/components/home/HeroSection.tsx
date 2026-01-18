@@ -93,16 +93,28 @@ export function HeroSection() {
 
   return (
     <section ref={heroRef} className="relative min-h-[95vh] overflow-hidden bg-gradient-hero">
-      {/* Background Decorative Shapes */}
+      {/* Background Decorative Bakery Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-pink-200/30 rounded-full blur-3xl" />
         <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-white/50 rounded-full blur-2xl" />
         <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-pink-100/40 rounded-full blur-2xl" />
-        <div className="absolute top-1/4 right-1/3 w-10 h-10 bg-pink-300/50 rounded-full" />
-        <div className="absolute bottom-1/3 left-1/3 w-8 h-8 bg-pink-400/40 rounded-full" />
-        <div className="absolute top-2/3 right-1/5 w-5 h-5 bg-pink-200/60 rounded-full" />
-        <div className="absolute top-1/2 left-10 w-6 h-6 bg-pink-500/30 rounded-full" />
-        <div className="absolute bottom-1/4 right-10 w-4 h-4 bg-white/80 rounded-full" />
+        {/* Bakery shapes - hidden on mobile */}
+        <div className="absolute top-1/4 right-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-300/40" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+          </svg>
+        </div>
+        <div className="absolute bottom-1/3 left-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-400/30" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
+        </div>
+        <div className="absolute top-2/3 right-1/5 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-8 h-8 text-pink-200/50" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+          </svg>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
