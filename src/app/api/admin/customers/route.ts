@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const customers = await customerDb.getAll();
+    const customers = customerDb.getAll();
 
     return NextResponse.json({ customers });
   } catch (error) {

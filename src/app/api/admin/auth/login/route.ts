@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find admin by email
-    const admin = await adminDb.getByEmail(email);
+    const admin = adminDb.getByEmail(email);
 
     if (!admin || !admin.active) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       if (method === 'email') {
         // Generate and send OTP code
         const code = generateOTPCode();
-        await twoFactorDb.create(admin.id, method, code);
+        twoFactorDb.create(admin.id, method, code);
         await sendOTPEmail(admin.email, code);
 
         return NextResponse.json({
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update last login
-    await adminDb.update(admin.id, { last_login: new Date().toISOString() });
+    adminDb.update(admin.id, { last_login: new Date().toISOString() });
 
     const response = NextResponse.json({
       success: true,

@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status') || undefined;
     const payment_status = searchParams.get('payment_status') || undefined;
 
-    const orders = await orderDb.getAll({
+    const orders = orderDb.getAll({
       status: status as any,
       payment_status: payment_status as any,
     });
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await request.json();
-    const order = await orderDb.create(data);
+    const order = orderDb.create(data);
 
     return NextResponse.json({ order }, { status: 201 });
   } catch (error) {

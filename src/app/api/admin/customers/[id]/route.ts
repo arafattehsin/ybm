@@ -19,14 +19,14 @@ export async function GET(
     }
 
     const { id } = await params;
-    const customer = await customerDb.getById(id);
+    const customer = customerDb.getById(id);
 
     if (!customer) {
       return NextResponse.json({ error: 'Customer not found' }, { status: 404 });
     }
 
     // Get customer's orders
-    const orders = await orderDb.getByCustomerId(id);
+    const orders = orderDb.getByCustomerId(id);
 
     return NextResponse.json({ customer, orders });
   } catch (error) {

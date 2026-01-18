@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Admin ID and code are required' }, { status: 400 });
     }
 
-    const admin = await adminDb.getById(adminId);
+    const admin = adminDb.getById(adminId);
 
     if (!admin) {
       return NextResponse.json({ error: 'Admin not found' }, { status: 404 });
@@ -25,14 +25,14 @@ export async function POST(request: NextRequest) {
 
     if (method === 'email' || method === 'sms') {
       // Verify OTP code from database
-      const session = await twoFactorDb.getByAdminId(adminId);
+      const session = twoFactorDb.getByAdminId(adminId);
 
       if (!session || session.code !== code) {
         return NextResponse.json({ error: 'Invalid verification code' }, { status: 401 });
       }
 
       // Mark as verified
-      await twoFactorDb.verify(session.id);
+      twoFactorDb.verify(session.id);
       isValid = true;
     } else if (method === 'authenticator') {
       // Verify TOTP token
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update last login
-    await adminDb.update(admin.id, { last_login: new Date().toISOString() });
+    adminDb.update(admin.id, { last_login: new Date().toISOString() });
 
     const response = NextResponse.json({
       success: true,

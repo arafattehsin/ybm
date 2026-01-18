@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    const admin = await adminDb.getById(payload.id);
+    const admin = adminDb.getById(payload.id);
 
     if (!admin || !admin.active) {
       return NextResponse.json({ error: 'Admin not found' }, { status: 404 });

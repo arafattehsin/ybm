@@ -20,7 +20,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const order = await orderDb.getById(id);
+    const order = orderDb.getById(id);
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
@@ -47,8 +47,8 @@ export async function PATCH(
     const { id } = await params;
     const data = await request.json();
 
-    await orderDb.update(id, data);
-    const order = await orderDb.getById(id);
+    orderDb.update(id, data);
+    const order = orderDb.getById(id);
 
     return NextResponse.json({ order });
   } catch (error) {

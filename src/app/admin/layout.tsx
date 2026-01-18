@@ -14,16 +14,28 @@ import {
   X,
 } from 'lucide-react';
 
+interface Admin {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [admin, setAdmin] = useState<any>(null);
+  const [admin, setAdmin] = useState<Admin | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
+    // Don't check auth for auth pages
+    if (pathname?.startsWith('/admin/auth')) {
+      setLoading(false);
+      return;
+    }
     checkAuth();
-  }, []);
+  }, [pathname]);
 
   const checkAuth = async () => {
     try {
@@ -34,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       }
       const data = await res.json();
       setAdmin(data.admin);
-    } catch (error) {
+    } catch {
       router.push('/admin/auth/login');
     } finally {
       setLoading(false);
@@ -45,6 +57,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     await fetch('/api/admin/auth/logout', { method: 'POST' });
     router.push('/admin/auth/login');
   };
+
+  // If on auth pages, render without sidebar layout
+  if (pathname?.startsWith('/admin/auth')) {
+    return <>{children}</>;
+  }
 
   if (loading) {
     return (

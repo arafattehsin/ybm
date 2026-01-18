@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const stats = await analyticsDb.getStats();
+    const stats = analyticsDb.getStats();
 
     return NextResponse.json(stats);
   } catch (error) {
