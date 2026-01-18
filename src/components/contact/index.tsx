@@ -111,17 +111,60 @@ export function ContactSection() {
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-pink-100/40 rounded-full blur-3xl" />
         <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-white/50 rounded-full blur-2xl" />
         <div className="absolute bottom-1/3 left-1/4 w-32 h-32 bg-pink-300/20 rounded-full blur-xl" />
-        {/* Additional decorative shapes */}
-        <div className="absolute top-40 right-1/3 w-6 h-6 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full opacity-40" />
-        <div className="absolute bottom-60 left-20 w-8 h-8 bg-gradient-to-br from-pink-300 to-pink-400 rounded-full opacity-50" />
+        
+        {/* Bakery Shapes - Hidden on mobile */}
+        {/* Cupcake */}
+        <div className="absolute top-32 right-20 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-300/40" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+          </svg>
+        </div>
+        {/* Croissant */}
+        <div className="absolute bottom-40 left-16 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-14 h-14 text-pink-400/35" fill="currentColor">
+            <path d="M8 40c4-20 16-28 24-28 4 0 10 2 16 8 6 6 8 12 8 16 0 8-8 12-16 8-4-2-8-1-12 2-8 6-22 4-20-6z" />
+          </svg>
+        </div>
+        {/* Donut */}
+        <div className="absolute top-1/2 left-10 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-300/45" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
+        </div>
+        {/* Cake slice */}
+        <div className="absolute top-60 right-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-400/30" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+          </svg>
+        </div>
+        {/* Cookie */}
+        <div className="absolute bottom-60 right-16 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-8 h-8 text-pink-300/50" fill="currentColor">
+            <circle cx="32" cy="32" r="26" />
+            <circle cx="24" cy="24" r="4" fill="white" fillOpacity="0.3" />
+            <circle cx="40" cy="28" r="3" fill="white" fillOpacity="0.3" />
+            <circle cx="28" cy="40" r="3" fill="white" fillOpacity="0.3" />
+            <circle cx="42" cy="42" r="2" fill="white" fillOpacity="0.3" />
+          </svg>
+        </div>
+        {/* Birthday cake */}
+        <div className="absolute bottom-1/4 left-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-11 h-11 text-pink-200/50" fill="currentColor">
+            <rect x="12" y="30" width="40" height="28" rx="4" />
+            <rect x="16" y="20" width="32" height="12" rx="3" />
+            <rect x="28" y="8" width="8" height="14" rx="2" />
+            <ellipse cx="32" cy="6" rx="4" ry="3" fill="currentColor" opacity="0.7" />
+          </svg>
+        </div>
       </div>
 
       {/* Floating Decorations */}
-      <div ref={floatingRef} className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-32 right-20 text-pink-300 opacity-40">
+      <div ref={floatingRef} className="absolute inset-0 pointer-events-none hidden md:block">
+        <div className="absolute top-32 right-40 text-pink-300 opacity-40">
           <Heart size={28} fill="currentColor" />
         </div>
-        <div className="absolute bottom-40 left-16 text-pink-200 opacity-50">
+        <div className="absolute bottom-40 left-32 text-pink-200 opacity-50">
           <Sparkles size={32} />
         </div>
       </div>

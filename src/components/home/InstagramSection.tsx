@@ -7,14 +7,14 @@ import { Instagram, ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Real Instagram post IDs from @yumbymaryam - replace with actual post shortcodes
+// Real Instagram post IDs from @yumbymaryam
 const instagramPosts = [
-  { id: 1, shortcode: 'C0nNVc8Nqkv' },
-  { id: 2, shortcode: 'C0nNVc8Nqkv' },
-  { id: 3, shortcode: 'C0nNVc8Nqkv' },
-  { id: 4, shortcode: 'C0nNVc8Nqkv' },
-  { id: 5, shortcode: 'C0nNVc8Nqkv' },
-  { id: 6, shortcode: 'C0nNVc8Nqkv' },
+  { id: 1, shortcode: 'DDsHKQryYrB' },
+  { id: 2, shortcode: 'DDoLMD4yz-I' },
+  { id: 3, shortcode: 'DDjLh1qSANi' },
+  { id: 4, shortcode: 'DC-QfKiyuF_' },
+  { id: 5, shortcode: 'DC5DdTVSVqz' },
+  { id: 6, shortcode: 'DCzC5KxScbY' },
 ];
 
 export function InstagramSection() {

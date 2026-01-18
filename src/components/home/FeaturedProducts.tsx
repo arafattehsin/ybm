@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Product } from '@/types';
@@ -202,40 +202,57 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
 // Product Card Component for Slider
 function ProductSlideCard({ product }: { product: Product }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    gsap.to(cardRef.current, {
-      y: -10,
-      boxShadow: '0 20px 40px rgba(233, 30, 99, 0.2)',
-      duration: 0.3,
-      ease: 'power2.out'
-    });
+    setIsHovered(true);
+    // Scale image slowly
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        scale: 1.1,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    }
   };
 
   const handleMouseLeave = () => {
-    gsap.to(cardRef.current, {
-      y: 0,
-      boxShadow: '0 4px 20px rgba(233, 30, 99, 0.1)',
-      duration: 0.3,
-      ease: 'power2.out'
-    });
+    setIsHovered(false);
+    // Reset image scale
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        scale: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    }
   };
 
   return (
     <Link
       ref={cardRef}
       href={`/menu/${product.slug}`}
-      className="block bg-white rounded-2xl overflow-hidden shadow-lg card-shadow transition-all duration-300"
+      className={`block bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ${isHovered ? 'shadow-xl' : ''}`}
+      style={{
+        border: isHovered ? '2px solid transparent' : '2px solid transparent',
+        backgroundImage: isHovered 
+          ? 'linear-gradient(white, white), linear-gradient(135deg, #ec4899, #f472b6, #ec4899)'
+          : 'linear-gradient(white, white), linear-gradient(135deg, #fce7f3, #fce7f3)',
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'padding-box, border-box'
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-pink-50 to-white">
         <Image
+          ref={imageRef}
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-110"
+          className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         
