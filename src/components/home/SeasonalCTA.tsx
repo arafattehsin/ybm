@@ -106,11 +106,8 @@ export function SeasonalCTA() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Content Side - Wider and overlaps video */}
-          <div ref={contentRef} className="relative lg:col-span-7 z-20 -m-8 lg:-m-12">
-            <div 
-              className="relative bg-white/95 backdrop-blur-sm p-12 lg:p-20 shadow-2xl border-2 border-pink-100 lg:-mr-40"
-              style={{ borderRadius: '70% 30% 35% 65% / 50% 50% 50% 50%' }}
-            >
+          <div ref={contentRef} className="relative lg:col-span-7 z-20">
+            <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-xl border border-pink-100 lg:-mr-24">
               {/* Icon */}
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl mb-6 shadow-lg">
                 <Gift className="w-8 h-8 text-white" />
@@ -141,15 +138,9 @@ export function SeasonalCTA() {
 
           {/* Video Side - In front */}
           <div ref={videoRef} className="relative lg:col-span-5 z-30">
-            <div 
-              className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 blur-xl opacity-30 transform scale-105"
-              style={{ borderRadius: '60% 40% 45% 55% / 50% 45% 55% 50%' }}
-            />
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105" />
             
-            <div 
-              className="relative overflow-hidden shadow-2xl border-4 border-white/50"
-              style={{ borderRadius: '60% 40% 45% 55% / 50% 45% 55% 50%' }}
-            >
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
               <video
                 autoPlay
                 loop
