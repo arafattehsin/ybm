@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useCartStore } from '@/stores/cartStore';
 import { formatPrice } from '@/lib/constants';
-import { Button } from '@/components/ui';
-import { Loader2, Truck, MapPin, AlertCircle } from 'lucide-react';
+import { Loader2, Truck, MapPin, AlertCircle, CheckCircle } from 'lucide-react';
 import { getDeliveryFeeByPostcode, isDeliveryAvailable } from '@/lib/postcodes';
 
 export function CartSummary() {
@@ -103,14 +102,20 @@ export function CartSummary() {
   };
 
   return (
-    <div className="bg-gray-50 rounded-lg p-6 space-y-4">
+    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-pink-100 space-y-5">
+      <h2 className="text-xl font-bold text-gray-900">Order Summary</h2>
+      
       {/* Delivery Method Selection */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">
+        <label className="block text-sm font-semibold text-gray-700 mb-3">
           Delivery Method
         </label>
         <div className="space-y-2">
-          <label className="flex items-center gap-3 p-3 border-2 rounded-lg cursor-pointer transition-colors hover:border-gray-300 bg-white">
+          <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all border-2 ${
+            deliveryMethod === 'pickup' 
+              ? 'border-pink-500 bg-pink-50' 
+              : 'border-pink-100 bg-white hover:border-pink-300'
+          }`}>
             <input
               type="radio"
               value="pickup"
@@ -120,31 +125,35 @@ export function CartSummary() {
                 setDeliveryFee(0);
                 setPostcodeError('');
               }}
-              className="w-4 h-4 text-amber-600"
+              className="w-4 h-4 text-pink-600 focus:ring-pink-500"
             />
-            <MapPin size={20} className="text-gray-600" />
+            <MapPin size={20} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-medium">Pickup</div>
+              <div className="font-medium text-gray-900">Pickup</div>
               <div className="text-sm text-gray-500">Free - 1-2 business days</div>
             </div>
-            <span className="font-semibold text-green-600">FREE</span>
+            <span className="font-bold text-green-600 text-sm">FREE</span>
           </label>
 
-          <label className="flex items-center gap-3 p-3 border-2 rounded-lg cursor-pointer transition-colors hover:border-gray-300 bg-white">
+          <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all border-2 ${
+            deliveryMethod === 'delivery' 
+              ? 'border-pink-500 bg-pink-50' 
+              : 'border-pink-100 bg-white hover:border-pink-300'
+          }`}>
             <input
               type="radio"
               value="delivery"
               checked={deliveryMethod === 'delivery'}
               onChange={(e) => setDeliveryMethod(e.target.value as 'delivery')}
-              className="w-4 h-4 text-amber-600"
+              className="w-4 h-4 text-pink-600 focus:ring-pink-500"
             />
-            <Truck size={20} className="text-gray-600" />
+            <Truck size={20} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-medium">Delivery</div>
-              <div className="text-sm text-gray-500">Greater Sydney - 1-3 business days</div>
+              <div className="font-medium text-gray-900">Delivery</div>
+              <div className="text-sm text-gray-500">Greater Sydney - 1-3 days</div>
             </div>
             {deliveryFee > 0 && (
-              <span className="font-semibold">{formatPrice(deliveryFee)}</span>
+              <span className="font-bold text-pink-600">{formatPrice(deliveryFee)}</span>
             )}
           </label>
         </div>
@@ -153,7 +162,7 @@ export function CartSummary() {
       {/* Postcode Input for Delivery */}
       {deliveryMethod === 'delivery' && (
         <div>
-          <label htmlFor="postcode" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="postcode" className="block text-sm font-semibold text-gray-700 mb-2">
             Delivery Postcode
           </label>
           <div className="flex gap-2">
@@ -167,16 +176,15 @@ export function CartSummary() {
               }}
               placeholder="e.g. 2000"
               maxLength={4}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="flex-1 px-4 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none"
             />
-            <Button
+            <button
               type="button"
               onClick={handlePostcodeCheck}
-              variant="outline"
-              className="whitespace-nowrap"
+              className="px-5 py-3 bg-white border-2 border-pink-500 text-pink-600 font-semibold rounded-xl hover:bg-pink-50 transition-colors"
             >
               Check
-            </Button>
+            </button>
           </div>
           {postcodeError && (
             <div className="flex items-start gap-2 mt-2 text-sm text-red-600">
@@ -186,7 +194,7 @@ export function CartSummary() {
           )}
           {!postcodeError && deliveryFee > 0 && (
             <div className="flex items-start gap-2 mt-2 text-sm text-green-600">
-              <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+              <CheckCircle size={16} className="mt-0.5 flex-shrink-0" />
               <span>Delivery available! Fee: {formatPrice(deliveryFee)}</span>
             </div>
           )}
@@ -194,7 +202,7 @@ export function CartSummary() {
       )}
 
       {/* Subtotal */}
-      <div className="border-t pt-4">
+      <div className="border-t border-pink-200 pt-4">
         <div className="flex justify-between text-gray-700 mb-2">
           <span>Subtotal</span>
           <span>{formatPrice(subtotal)}</span>
@@ -205,28 +213,29 @@ export function CartSummary() {
             <span>{formatPrice(deliveryFee)}</span>
           </div>
         )}
-        <div className="flex justify-between text-lg font-semibold pt-2 border-t">
+        <div className="flex justify-between text-xl font-bold pt-3 border-t border-pink-200">
           <span>Total</span>
-          <span>{formatPrice(totalPrice)}</span>
+          <span className="text-pink-600">{formatPrice(totalPrice)}</span>
         </div>
       </div>
 
       {/* Checkout Button */}
-      <Button
+      <button
         onClick={handleCheckout}
         disabled={items.length === 0 || isLoading}
-        size="lg"
-        className="w-full"
+        className={`w-full btn-gradient py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+          items.length === 0 || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-0.5'
+        }`}
       >
         {isLoading ? (
           <>
-            <Loader2 size={20} className="mr-2 animate-spin" />
+            <Loader2 size={20} className="animate-spin" />
             Processing...
           </>
         ) : (
-          'PROCEED TO CHECKOUT'
+          'Proceed to Checkout'
         )}
-      </Button>
+      </button>
 
       {/* Note */}
       <p className="text-sm text-gray-500 text-center">

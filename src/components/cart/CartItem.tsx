@@ -14,18 +14,9 @@ export function CartItem({ item }: CartItemProps) {
   const { updateQuantity, removeItem } = useCartStore();
 
   return (
-    <div className="flex gap-4 py-4 border-b border-gray-200">
-      {/* Remove Button */}
-      <button
-        onClick={() => removeItem(item.id)}
-        className="text-gray-400 hover:text-red-500 transition-colors self-start"
-        aria-label="Remove item"
-      >
-        <X size={20} />
-      </button>
-
+    <div className="flex gap-4">
       {/* Image */}
-      <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+      <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-pink-50 to-white shadow-md">
         <Image
           src={item.image}
           alt={item.productName}
@@ -36,43 +27,51 @@ export function CartItem({ item }: CartItemProps) {
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <h3 className="font-semibold text-gray-900 truncate">
-          {item.productName}
-        </h3>
-        <p className="text-sm text-gray-500">Size: {item.size.name}</p>
+        <div className="flex items-start justify-between">
+          <h3 className="font-bold text-gray-900 line-clamp-1">
+            {item.productName}
+          </h3>
+          <button
+            onClick={() => removeItem(item.id)}
+            className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all"
+            aria-label="Remove item"
+          >
+            <X size={18} />
+          </button>
+        </div>
+        
+        <p className="text-sm text-gray-500 mt-1">Size: {item.size.name}</p>
         {item.addons.length > 0 && (
           <p className="text-sm text-gray-500">
             Add-ons: {item.addons.map((a) => a.name).join(', ')}
           </p>
         )}
 
-        {/* Quantity Controls */}
-        <div className="flex items-center gap-2 mt-2">
-          <div className="flex items-center border border-gray-300 rounded">
+        <div className="flex items-center justify-between mt-3">
+          {/* Quantity Controls */}
+          <div className="flex items-center bg-white border border-pink-200 rounded-lg overflow-hidden">
             <button
               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-              className="p-1 hover:bg-gray-100 transition-colors"
+              className="p-2 hover:bg-pink-50 transition-colors"
               aria-label="Decrease quantity"
             >
-              <Minus size={14} />
+              <Minus size={14} className="text-gray-600" />
             </button>
-            <span className="px-3 py-1 text-sm font-medium">{item.quantity}</span>
+            <span className="px-4 py-2 text-sm font-bold">{item.quantity}</span>
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-              className="p-1 hover:bg-gray-100 transition-colors"
+              className="p-2 hover:bg-pink-50 transition-colors"
               aria-label="Increase quantity"
             >
-              <Plus size={14} />
+              <Plus size={14} className="text-gray-600" />
             </button>
           </div>
-        </div>
-      </div>
 
-      {/* Price */}
-      <div className="text-right">
-        <p className="font-semibold text-gray-900">
-          {formatPrice(item.totalPrice)}
-        </p>
+          {/* Price */}
+          <p className="font-bold text-pink-600 text-lg">
+            {formatPrice(item.totalPrice)}
+          </p>
+        </div>
       </div>
     </div>
   );
