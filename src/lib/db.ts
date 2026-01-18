@@ -112,7 +112,7 @@ function initializeSchema(): DatabaseSchema {
       {
         id: 'admin-1',
         email: 'admin@yumbymaryam.com',
-        password: '$2a$10$CwTycUXWue0Thq9StjUM0uJ8Z8W.iPp/9TsLZ4p5VpOt4A7P5eU.y', // admin123
+        password: '$2a$10$wbFe5N73.JxNoZtt5U0BHu5cNHl/dEiKMIhGNUI6zIJhchHb0rphi', // admin123
         name: 'Admin User',
         role: 'super_admin',
         two_factor_enabled: 0,
