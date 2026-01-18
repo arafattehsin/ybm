@@ -138,14 +138,14 @@ export function CartSummary() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold font-heading text-gray-900 flex items-center gap-2">
+      <h2 className="text-3xl font-bold font-heading text-gray-900 flex items-center gap-2">
         <span className="w-2 h-8 bg-gradient-to-b from-pink-500 to-pink-400 rounded-full"></span>
         Order Summary
       </h2>
       
       {/* Delivery Method Selection */}
       <div>
-        <label className="block text-sm font-heading font-semibold text-gray-700 mb-3">
+        <label className="block text-base font-heading font-semibold text-gray-700 mb-3">
           Delivery Method
         </label>
         <div className="grid md:grid-cols-2 gap-4">
@@ -165,12 +165,12 @@ export function CartSummary() {
               }}
               className="w-4 h-4 text-pink-600 focus:ring-pink-500"
             />
-            <MapPin size={20} className="text-pink-600" />
+            <MapPin size={22} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-heading font-medium text-gray-900">Pickup</div>
-              <div className="text-sm text-gray-500 font-body">Free - 3-4 business days</div>
+              <div className="font-heading font-medium text-gray-900 text-base">Pickup</div>
+              <div className="text-base text-gray-500 font-body">Free - 3-4 business days</div>
             </div>
-            <span className="font-heading font-bold text-green-600 text-sm bg-green-50 px-3 py-1 rounded-full">FREE</span>
+            <span className="font-heading font-bold text-green-600 text-base bg-green-50 px-3 py-1 rounded-full">FREE</span>
           </label>
 
           <label className={`flex items-center gap-3 p-5 rounded-2xl cursor-pointer transition-all border-2 ${
@@ -185,13 +185,13 @@ export function CartSummary() {
               onChange={(e) => setDeliveryMethod(e.target.value as 'delivery')}
               className="w-4 h-4 text-pink-600 focus:ring-pink-500"
             />
-            <Truck size={20} className="text-pink-600" />
+            <Truck size={22} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-heading font-medium text-gray-900">Delivery</div>
-              <div className="text-sm text-gray-500 font-body">Greater Sydney - 4-5 business days</div>
+              <div className="font-heading font-medium text-gray-900 text-base">Delivery</div>
+              <div className="text-base text-gray-500 font-body">Greater Sydney - 4-5 business days</div>
             </div>
             {deliveryFee > 0 && (
-              <span className="font-heading font-bold text-pink-600 bg-pink-50 px-3 py-1 rounded-full">{formatPrice(deliveryFee)}</span>
+              <span className="font-heading font-bold text-pink-600 bg-pink-50 px-3 py-1 rounded-full text-base">{formatPrice(deliveryFee)}</span>
             )}
           </label>
         </div>
@@ -200,7 +200,7 @@ export function CartSummary() {
       {/* Delivery Address Form */}
       {deliveryMethod === 'delivery' && (
         <div className="bg-pink-50/50 rounded-2xl p-5 space-y-4">
-          <h3 className="text-sm font-heading font-semibold text-gray-700 mb-3">
+          <h3 className="text-base font-heading font-semibold text-gray-700 mb-3">
             Delivery Address (Greater Sydney, NSW)
           </h3>
           
@@ -333,43 +333,43 @@ export function CartSummary() {
 
       {/* Subtotal */}
       <div className="border-t-2 border-pink-100 pt-6 space-y-3">
-        <div className="flex justify-between text-gray-700 font-body text-lg">
+        <div className="flex justify-between text-gray-700 font-body text-xl">
           <span>Subtotal</span>
           <span className="font-semibold">{formatPrice(subtotal)}</span>
         </div>
         {deliveryFee > 0 && (
-          <div className="flex justify-between text-gray-700 font-body text-lg">
+          <div className="flex justify-between text-gray-700 font-body text-xl">
             <span>Delivery</span>
             <span className="font-semibold">{formatPrice(deliveryFee)}</span>
           </div>
         )}
-        <div className="flex justify-between text-2xl font-bold pt-4 border-t-2 border-pink-100">
+        <div className="flex justify-between text-3xl font-bold pt-4 border-t-2 border-pink-100">
           <span className="font-heading">Total</span>
           <span className="gradient-text font-heading">{formatPrice(totalPrice)}</span>
         </div>
       </div>
 
       {/* Important Note Before Checkout */}
-      <div className="bg-pink-50 border-2 border-pink-200 rounded-2xl p-4 space-y-2">
+      <div className="bg-pink-50 border-2 border-pink-200 rounded-2xl p-5 space-y-3">
         <div className="flex items-start gap-2">
-          <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-6 h-6 text-pink-600 flex-shrink-0 mt-0.5" />
           <div className="flex-1 space-y-2">
-            <p className="text-sm font-semibold text-gray-900 font-heading">
+            <p className="text-lg font-bold text-gray-900 font-heading">
               Important Information
             </p>
-            <p className="text-sm text-gray-700 font-body">
+            <p className="text-base text-gray-700 font-body">
               • Delivery orders must be placed before 4 business days. All orders will be delivered within 5 PM to 9 PM window.
             </p>
-            <p className="text-sm text-gray-700 font-body">
+            <p className="text-base text-gray-700 font-body">
               • If recipient is not at the delivery address, we will try to contact them for 10 minutes and then leave the order at the door/entrance of the property. If it is an apartment building, we will leave at the main entrance.
             </p>
-            <p className="text-sm text-gray-700 font-body">
+            <p className="text-base text-gray-700 font-body">
               • For any delivery timing adjustments, please contact us on <span className="font-semibold text-pink-600">WhatsApp only</span> at +61422918748.
             </p>
-            <p className="text-sm text-gray-700 font-body">
+            <p className="text-base text-gray-700 font-body">
               • Pickup orders need to be placed at least 3 business days before pickup.
             </p>
-            <p className="text-sm text-gray-700 font-body">
+            <p className="text-base text-gray-700 font-body">
               • If you want orders delivered/picked up earlier, please contact us to check availability. All orders are subject to confirmation.
             </p>
           </div>

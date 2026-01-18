@@ -138,7 +138,7 @@ export function InstagramSection({ posts = [] }: InstagramSectionProps) {
 
         {/* Video Box - Centered */}
         <div className="flex justify-center mb-12">
-          <div ref={videoRef} className="relative max-w-md w-full">
+          <div ref={videoRef} className="relative max-w-xl w-full">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105" />
             
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">

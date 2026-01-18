@@ -28,7 +28,7 @@ export function CartItem({ item }: CartItemProps) {
       {/* Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between">
-          <h3 className="font-bold text-gray-900 line-clamp-1">
+          <h3 className="font-bold text-gray-900 line-clamp-1 text-lg">
             {item.productName}
           </h3>
           <button
@@ -40,9 +40,9 @@ export function CartItem({ item }: CartItemProps) {
           </button>
         </div>
         
-        <p className="text-sm text-gray-500 mt-1">Size: {item.size.name}</p>
+        <p className="text-base text-gray-500 mt-1">Size: {item.size.name}</p>
         {item.addons.length > 0 && (
-          <p className="text-sm text-gray-500">
+          <p className="text-base text-gray-500">
             Add-ons: {item.addons.map((a) => a.name).join(', ')}
           </p>
         )}
@@ -57,7 +57,7 @@ export function CartItem({ item }: CartItemProps) {
             >
               <Minus size={14} className="text-gray-600" />
             </button>
-            <span className="px-4 py-2 text-sm font-bold">{item.quantity}</span>
+            <span className="px-4 py-2 text-base font-bold">{item.quantity}</span>
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}
               className="p-2 hover:bg-pink-50 transition-colors"
@@ -68,7 +68,7 @@ export function CartItem({ item }: CartItemProps) {
           </div>
 
           {/* Price */}
-          <p className="font-bold text-pink-600 text-lg">
+          <p className="font-bold text-pink-600 text-xl">
             {formatPrice(item.totalPrice)}
           </p>
         </div>

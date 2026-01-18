@@ -101,10 +101,10 @@ export function AboutStory() {
       </div>
 
       {/* Content Box at Front - Larger */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 flex justify-center">
         <div 
           ref={contentRef}
-          className="max-w-2xl bg-white/95 backdrop-blur-md rounded-3xl p-12 lg:p-14 shadow-2xl border border-pink-100"
+          className="max-w-2xl bg-white/95 backdrop-blur-md rounded-3xl p-12 lg:p-14 shadow-2xl border border-pink-100 text-center"
         >
           <span className="inline-block px-4 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-heading uppercase tracking-wider mb-4">
             Our Story
