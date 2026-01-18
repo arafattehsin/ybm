@@ -6,6 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, X } from 'lucide-react';
+import { PageTransition } from '@/components/layout';
 import productsData from '@/data/products.json';
 import categoriesData from '@/data/categories.json';
 import type { Product, Category } from '@/types';
@@ -75,7 +76,8 @@ export default function MenuPage() {
   }, [filteredProducts, selectedCategory, searchQuery]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-pink-50 to-white">
+    <PageTransition>
+      <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-pink-50 to-white">
       {/* Background Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-pink-100/40 rounded-full blur-3xl" />
@@ -167,6 +169,7 @@ export default function MenuPage() {
         )}
       </div>
     </section>
+    </PageTransition>
   );
 }
 
