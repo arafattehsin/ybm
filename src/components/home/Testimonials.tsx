@@ -79,21 +79,29 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged">
-      {/* Background Decorative Shapes */}
-      <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
-        {/* Shape pairs with different color combinations */}
+    <section ref={sectionRef} className="relative py-32 lg:py-40 overflow-hidden bg-gradient-merged">
+      {/* Background Decorative Bakery Shapes - Hidden on mobile */}
+      <div ref={shapesRef} className="absolute inset-0 pointer-events-none hidden md:block">
+        {/* Cupcake shape */}
         <div className="absolute top-32 left-20">
-          <div className="w-18 h-18 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #E91E63 100%)' }} />
-          <div className="absolute inset-2 w-12 h-12 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 100%)' }} />
+          <svg viewBox="0 0 64 64" className="w-16 h-16 text-pink-300/40" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+            <circle cx="32" cy="18" r="4" />
+          </svg>
         </div>
+        {/* Donut shape */}
         <div className="absolute bottom-1/4 left-1/4">
-          <div className="w-14 h-14 rounded-full bg-white/70" />
-          <div className="absolute inset-1 w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFC0CB 100%)' }} />
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-400/30" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
         </div>
-        <div className="absolute top-1/3 right-1/3">
-          <div className="w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #FFC0CB 0%, #E91E63 100%)' }} />
-          <div className="absolute inset-1 w-6 h-6 rounded-full bg-white/80" />
+        {/* Cake slice shape */}
+        <div className="absolute top-1/3 right-1/4">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-200/50" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+            <path d="M16 38h32v6H16z" opacity="0.7" />
+          </svg>
         </div>
         {/* Large blur shapes */}
         <div className="absolute top-20 left-1/4 w-56 h-56 bg-pink-100/30 rounded-full blur-3xl" />
@@ -152,7 +160,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100 h-full flex flex-col min-h-[320px]">
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100 h-full flex flex-col min-h-[380px]">
       {/* Quote Icon */}
       <div className="mb-4">
         <Quote className="w-10 h-10 text-pink-300" />

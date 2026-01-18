@@ -4,40 +4,17 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, Heart, Star } from 'lucide-react';
+import { Sparkles, Star } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// AboutHero - Just "Yum By Maryam" with animated wave
+// AboutHero - Just "Yum By Maryam" without animations and wave
 export function AboutHero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const waveRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(titleRef.current,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-      );
-
-      // Animate wave
-      if (waveRef.current) {
-        const wavePath = waveRef.current.querySelector('.wave-path');
-        if (wavePath) {
-          gsap.to(wavePath, {
-            attr: {
-              d: "M0,50 Q360,90 720,40 T1440,50 L1440,80 L0,80 Z"
-            },
-            duration: 3,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut'
-          });
-        }
-      }
-
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
         Array.from(shapes).forEach((shape, index) => {
@@ -67,7 +44,7 @@ export function AboutHero() {
         <Sparkles className="absolute top-1/4 right-1/4 w-8 h-8 text-pink-300/40" />
       </div>
 
-      <div ref={titleRef} className="relative z-10 text-center px-4">
+      <div className="relative z-10 text-center px-4">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading mb-6">
           <span className="gradient-text">Yum By Maryam</span>
         </h1>
@@ -75,29 +52,11 @@ export function AboutHero() {
           Where every dessert tells a story of love, passion, and the sweetest moments in life
         </p>
       </div>
-
-      {/* Animated Wave Bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg 
-          ref={waveRef}
-          viewBox="0 0 1440 80" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="w-full"
-          preserveAspectRatio="none"
-        >
-          <path 
-            className="wave-path"
-            d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" 
-            fill="white" 
-          />
-        </svg>
-      </div>
     </section>
   );
 }
 
-// AboutStory - From Kitchen to Your Heart with video background behind title
+// AboutStory - From Kitchen to Your Heart with video background behind title - larger content box
 export function AboutStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -124,7 +83,7 @@ export function AboutStory() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[70vh] flex items-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-[80vh] flex items-center overflow-hidden">
       {/* Video Background - Behind everything */}
       <div className="absolute inset-0 z-0">
         <video
@@ -141,20 +100,20 @@ export function AboutStory() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30" />
       </div>
 
-      {/* Content Box at Front */}
+      {/* Content Box at Front - Larger */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
         <div 
           ref={contentRef}
-          className="max-w-xl bg-white/95 backdrop-blur-md rounded-3xl p-10 shadow-2xl border border-pink-100"
+          className="max-w-2xl bg-white/95 backdrop-blur-md rounded-3xl p-12 lg:p-14 shadow-2xl border border-pink-100"
         >
           <span className="inline-block px-4 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-heading uppercase tracking-wider mb-4">
             Our Story
           </span>
-          <h2 className="text-3xl lg:text-4xl font-heading mb-6">
+          <h2 className="text-3xl lg:text-5xl font-heading mb-6">
             <span className="gradient-text">From Kitchen</span>
             <span className="text-gray-800"> to Your Heart</span>
           </h2>
-          <div className="space-y-4 text-gray-600 text-lg leading-relaxed font-body">
+          <div className="space-y-5 text-gray-600 text-lg lg:text-xl leading-relaxed font-body">
             <p>
               YUM by Maryam was born from a simple dream — to share the joy of homemade 
               desserts with the world. What started as baking for family and friends in 
@@ -164,10 +123,10 @@ export function AboutStory() {
               Every cake we create carries a piece of our heart. We believe that the 
               best desserts are made with love, patience, and the finest ingredients.
             </p>
-          </div>
-          <div className="mt-6 flex items-center gap-2 text-pink-600">
-            <Heart className="w-5 h-5 fill-pink-600" />
-            <span className="font-heading">Finalist - Local Business Awards 2021</span>
+            <p>
+              From birthdays to weddings, from small gatherings to grand celebrations, 
+              we&apos;re honored to be part of your most cherished moments.
+            </p>
           </div>
         </div>
       </div>
@@ -175,77 +134,17 @@ export function AboutStory() {
   );
 }
 
-// Floating Product Image Section - Transition section between Story and Founder
+// AboutFloatingProduct - REMOVED - now empty component
 export function AboutFloatingProduct() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const shapesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Background shapes
-      if (shapesRef.current) {
-        const shapes = shapesRef.current.children;
-        Array.from(shapes).forEach((shape, index) => {
-          gsap.to(shape, {
-            y: `random(-30, 30)`,
-            x: `random(-25, 25)`,
-            rotation: `random(-20, 20)`,
-            duration: 6 + index * 0.7,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut'
-          });
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="relative py-16 overflow-hidden bg-gradient-merged">
-      {/* Background Shapes with different color combinations */}
-      <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
-        {/* Shape 1 */}
-        <div className="absolute top-10 left-1/4">
-          <div className="w-16 h-16 rounded-full bg-white/70" />
-          <div className="absolute inset-2 w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 100%)' }} />
-        </div>
-        {/* Shape 2 */}
-        <div className="absolute bottom-8 right-20">
-          <div className="w-14 h-14 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 100%)' }} />
-          <div className="absolute inset-2 w-8 h-8 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #E91E63 100%)' }} />
-        </div>
-        {/* Shape 3 */}
-        <div className="absolute top-1/2 right-1/3">
-          <div className="w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFC0CB 100%)' }} />
-          <div className="absolute inset-1 w-6 h-6 rounded-full bg-white/80" />
-        </div>
-        {/* Large blurs */}
-        <div className="absolute top-0 right-1/4 w-40 h-40 bg-pink-100/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-pink-200/30 rounded-full blur-3xl" />
-      </div>
-
-      {/* Decorative divider */}
-      <div className="flex justify-center items-center relative z-10">
-        <div className="flex items-center gap-4">
-          <div className="h-0.5 w-16 bg-gradient-to-r from-transparent to-pink-400" />
-          <Heart className="w-6 h-6 text-pink-400 fill-pink-400" />
-          <div className="h-0.5 w-16 bg-gradient-to-l from-transparent to-pink-400" />
-        </div>
-      </div>
-    </section>
-  );
+  return null;
 }
 
-// AboutFounder - Meet Maryam Arafat with photo and floating product
+// AboutFounder - Meet Maryam Arafat with photo and bakery shapes
 export function AboutFounder() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
-  const floatingRef = useRef<HTMLDivElement>(null);
-  const floatingBackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -277,39 +176,13 @@ export function AboutFounder() {
         }
       );
 
-      // Floating product animation
-      if (floatingRef.current) {
-        gsap.to(floatingRef.current, {
-          x: 20,
-          y: -15,
-          rotation: 8,
-          scale: 1.04,
-          duration: 5.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      if (floatingBackRef.current) {
-        gsap.to(floatingBackRef.current, {
-          x: -15,
-          y: 10,
-          rotation: -6,
-          scale: 1.08,
-          duration: 6.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
         Array.from(shapes).forEach((shape, index) => {
           gsap.to(shape, {
             y: `random(-20, 20)`,
             x: `random(-15, 15)`,
+            rotation: `random(-10, 10)`,
             duration: 4 + index,
             repeat: -1,
             yoyo: true,
@@ -323,37 +196,36 @@ export function AboutFounder() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-pink-50 via-white to-pink-100">
-      {/* Floating Product Image - Top Right Corner */}
-      <div className="absolute -top-16 right-8 lg:right-16 z-[9999]">
-        {/* Back circle */}
-        <div 
-          ref={floatingBackRef}
-          className="absolute w-40 h-40 md:w-52 md:h-52 rounded-full -top-4 -right-4"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
-          }}
-        />
-        {/* Front circle */}
-        <div 
-          className="absolute w-32 h-32 md:w-44 md:h-44 rounded-full top-0 right-0"
-          style={{
-            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
-          }}
-        />
-        {/* Product image */}
-        <div ref={floatingRef} className="relative w-28 h-28 md:w-40 md:h-40 z-10">
-          <Image
-            src="/images/products/custard2final.png"
-            alt="Custard dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-          />
+    <section ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden bg-gradient-merged">
+      {/* Background Bakery Shapes - Hidden on mobile */}
+      <div ref={shapesRef} className="absolute inset-0 pointer-events-none hidden md:block">
+        {/* Cupcake */}
+        <div className="absolute top-20 right-20">
+          <svg viewBox="0 0 64 64" className="w-16 h-16 text-pink-300/30" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+            <circle cx="32" cy="18" r="4" />
+          </svg>
         </div>
-      </div>
-
-      {/* Background Shapes */}
-      <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
+        {/* Donut */}
+        <div className="absolute bottom-20 left-10">
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-400/25" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
+        </div>
+        {/* Cake slice */}
+        <div className="absolute top-1/3 left-16">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-200/40" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+          </svg>
+        </div>
+        {/* Croissant */}
+        <div className="absolute bottom-1/3 right-16">
+          <svg viewBox="0 0 64 64" className="w-14 h-14 text-pink-300/35" fill="currentColor">
+            <path d="M8 40c4-20 16-28 24-28 4 0 10 2 16 8 6 6 8 12 8 16 0 8-8 12-16 8-4-2-8-1-12 2-8 6-22 4-20-6z" />
+          </svg>
+        </div>
+        {/* Large blurs */}
         <div className="absolute top-20 right-20 w-64 h-64 bg-pink-200/30 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-pink-100/40 rounded-full blur-2xl" />
       </div>
@@ -473,10 +345,10 @@ export function AboutValues() {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
+    <section ref={sectionRef} className="py-20 lg:py-28 bg-gradient-merged">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-block px-4 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-heading uppercase tracking-wider mb-4">
+          <span className="inline-block px-4 py-1 bg-white/80 text-pink-600 rounded-full text-sm font-heading uppercase tracking-wider mb-4">
             Our Values
           </span>
           <h2 className="text-4xl lg:text-5xl font-heading">
@@ -489,7 +361,7 @@ export function AboutValues() {
           {values.map((value, index) => (
             <div 
               key={index}
-              className="bg-gradient-to-br from-pink-50 to-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-pink-100"
+              className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-pink-100"
             >
               <div className="text-5xl mb-4">{value.icon}</div>
               <h3 className="text-xl font-heading text-gray-900 mb-3">{value.title}</h3>

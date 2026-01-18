@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Gift, Heart, Sparkles } from 'lucide-react';
+import { Gift, Heart } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,35 +70,37 @@ export function SeasonalCTA() {
 
   return (
     <section ref={sectionRef} className="relative py-28 lg:py-36 overflow-hidden bg-gradient-merged">
-      {/* Background Decorative Shapes with Different Colors */}
-      <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
-        {/* Shape 1 - pink/white gradient front, white back */}
+      {/* Background Decorative Bakery Shapes - Hidden on mobile */}
+      <div ref={shapesRef} className="absolute inset-0 pointer-events-none hidden md:block">
+        {/* Cupcake shape */}
         <div className="absolute top-20 left-1/4">
-          <div className="w-20 h-20 rounded-full bg-white/60 blur-sm" />
-          <div className="absolute inset-1 w-16 h-16 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)' }} />
+          <svg viewBox="0 0 64 64" className="w-16 h-16 text-pink-300/40" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+            <circle cx="32" cy="18" r="4" />
+          </svg>
         </div>
-        {/* Shape 2 - white front, pink back */}
+        {/* Donut shape */}
         <div className="absolute bottom-1/3 right-1/4">
-          <div className="w-16 h-16 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #E91E63 100%)' }} />
-          <div className="absolute inset-1 w-12 h-12 rounded-full bg-white/80" />
+          <svg viewBox="0 0 64 64" className="w-14 h-14 text-pink-400/30" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
         </div>
-        {/* Shape 3 - reversed gradient */}
+        {/* Cake slice */}
         <div className="absolute top-1/2 left-10">
-          <div className="w-12 h-12 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 100%)' }} />
-          <div className="absolute inset-1 w-8 h-8 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFFFFF 100%)' }} />
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-200/50" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+          </svg>
         </div>
-        {/* Shape 4 */}
+        {/* Croissant */}
         <div className="absolute bottom-20 left-1/3">
-          <div className="w-14 h-14 rounded-full bg-pink-200/50" />
-          <div className="absolute inset-1 w-10 h-10 rounded-full bg-white/70" />
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-300/35" fill="currentColor">
+            <path d="M8 40c4-20 16-28 24-28 4 0 10 2 16 8 6 6 8 12 8 16 0 8-8 12-16 8-4-2-8-1-12 2-8 6-22 4-20-6z" />
+          </svg>
         </div>
         {/* Large blur shapes */}
         <div className="absolute top-10 right-20 w-48 h-48 bg-pink-200/30 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-pink-100/40 rounded-full blur-3xl" />
-        {/* Small floating elements */}
-        <Heart className="absolute top-1/4 right-1/3 w-6 h-6 text-pink-300/50" />
-        <Sparkles className="absolute bottom-1/3 left-1/5 w-5 h-5 text-pink-400/40" />
-        <Gift className="absolute top-2/3 right-1/5 w-8 h-8 text-pink-200/60" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
