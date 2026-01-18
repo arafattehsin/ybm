@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AboutHero, AboutStory, AboutFloatingProduct, AboutFounder, AboutValues } from '@/components/about';
+import { PageTransition } from '@/components/layout';
 
 export const metadata: Metadata = {
   title: 'About Us | YUM by Maryam',
@@ -8,12 +9,12 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
+    <PageTransition>
       <AboutHero />
       <AboutStory />
       <AboutFloatingProduct />
       <AboutFounder />
       <AboutValues />
-    </>
+    </PageTransition>
   );
 }

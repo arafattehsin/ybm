@@ -18,17 +18,15 @@ export function Footer() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Simple fade in animation - no ScrollTrigger dependency for faster loading
       gsap.fromTo(contentRef.current,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-          }
+          duration: 0.5,
+          delay: 0.1,
+          ease: 'power2.out'
         }
       );
 

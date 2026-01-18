@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactSection } from '@/components/contact';
+import { PageTransition } from '@/components/layout';
 
 export const metadata: Metadata = {
   title: 'Contact Us | YUM by Maryam',
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactSection />;
+  return (
+    <PageTransition>
+      <ContactSection />
+    </PageTransition>
+  );
 }

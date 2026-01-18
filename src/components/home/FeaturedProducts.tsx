@@ -138,24 +138,19 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
             modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
             spaceBetween={30}
             slidesPerView={1}
+            centeredSlides={true}
             navigation={{
               prevEl: '.swiper-button-prev-custom',
               nextEl: '.swiper-button-next-custom',
             }}
             pagination={{ clickable: true }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
-            effect="coverflow"
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: false,
-            }}
+            loop={true}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-              1280: { slidesPerView: 4 },
+              640: { slidesPerView: 1.5, spaceBetween: 20 },
+              768: { slidesPerView: 2, spaceBetween: 25 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+              1280: { slidesPerView: 3, spaceBetween: 40 },
             }}
             className="pb-14"
           >
