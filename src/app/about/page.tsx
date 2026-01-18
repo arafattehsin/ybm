@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { AboutHero, AboutStory, AboutFounder, AboutValues } from '@/components/about';
+import { AboutHero, AboutStory, AboutFloatingProduct, AboutFounder, AboutValues } from '@/components/about';
 
 export const metadata: Metadata = {
   title: 'About Us | YUM by Maryam',
@@ -11,6 +11,7 @@ export default function AboutPage() {
     <>
       <AboutHero />
       <AboutStory />
+      <AboutFloatingProduct />
       <AboutFounder />
       <AboutValues />
     </>

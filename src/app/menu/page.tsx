@@ -126,10 +126,10 @@ export default function MenuPage() {
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`category-btn px-6 py-2 rounded-full font-heading transition-all duration-300 ${
                 !selectedCategory
-                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
-                  : 'bg-white/80 text-gray-700 hover:bg-pink-100 border border-pink-200'
+                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg scale-100'
+                  : 'bg-white/80 text-gray-700 hover:bg-pink-100 border border-pink-200 scale-100'
               }`}
             >
               All
@@ -138,10 +138,10 @@ export default function MenuPage() {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 capitalize ${
+                className={`category-btn px-6 py-2 rounded-full font-heading transition-all duration-300 capitalize ${
                   selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-700 hover:bg-pink-100 border border-pink-200'
+                    ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg scale-100'
+                    : 'bg-white/80 text-gray-700 hover:bg-pink-100 border border-pink-200 scale-100'
                 }`}
               >
                 {category.name}
@@ -172,6 +172,7 @@ export default function MenuPage() {
 
 function MenuProductCard({ product }: { product: Product }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   const handleMouseEnter = () => {
     gsap.to(cardRef.current, {
@@ -180,6 +181,14 @@ function MenuProductCard({ product }: { product: Product }) {
       duration: 0.3,
       ease: 'power2.out'
     });
+    // Scale image inside container
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        scale: 1.1,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    }
   };
 
   const handleMouseLeave = () => {
@@ -189,23 +198,33 @@ function MenuProductCard({ product }: { product: Product }) {
       duration: 0.3,
       ease: 'power2.out'
     });
+    // Reset image scale
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        scale: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    }
   };
 
   return (
     <Link
       ref={cardRef}
       href={`/menu/${product.slug}`}
-      className="block bg-white rounded-2xl overflow-hidden shadow-md border border-pink-50 transition-all duration-300"
+      className="block bg-white rounded-2xl overflow-hidden shadow-md border border-pink-50"
+      style={{ boxShadow: '0 4px 20px rgba(233, 30, 99, 0.08)' }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-pink-50 to-white">
         <Image
+          ref={imageRef}
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-110"
+          className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         

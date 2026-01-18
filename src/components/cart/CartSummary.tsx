@@ -102,19 +102,22 @@ export function CartSummary() {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-pink-100 space-y-5">
-      <h2 className="text-xl font-bold text-gray-900">Order Summary</h2>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold font-heading text-gray-900 flex items-center gap-2">
+        <span className="w-2 h-8 bg-gradient-to-b from-pink-500 to-pink-400 rounded-full"></span>
+        Order Summary
+      </h2>
       
       {/* Delivery Method Selection */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-3">
+        <label className="block text-sm font-heading font-semibold text-gray-700 mb-3">
           Delivery Method
         </label>
-        <div className="space-y-2">
-          <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all border-2 ${
+        <div className="grid md:grid-cols-2 gap-4">
+          <label className={`flex items-center gap-3 p-5 rounded-2xl cursor-pointer transition-all border-2 ${
             deliveryMethod === 'pickup' 
-              ? 'border-pink-500 bg-pink-50' 
-              : 'border-pink-100 bg-white hover:border-pink-300'
+              ? 'border-pink-500 bg-pink-50 shadow-md' 
+              : 'border-pink-100 bg-white hover:border-pink-300 hover:shadow-sm'
           }`}>
             <input
               type="radio"
@@ -129,16 +132,16 @@ export function CartSummary() {
             />
             <MapPin size={20} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-medium text-gray-900">Pickup</div>
-              <div className="text-sm text-gray-500">Free - 1-2 business days</div>
+              <div className="font-heading font-medium text-gray-900">Pickup</div>
+              <div className="text-sm text-gray-500 font-body">Free - 1-2 business days</div>
             </div>
-            <span className="font-bold text-green-600 text-sm">FREE</span>
+            <span className="font-heading font-bold text-green-600 text-sm bg-green-50 px-3 py-1 rounded-full">FREE</span>
           </label>
 
-          <label className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all border-2 ${
+          <label className={`flex items-center gap-3 p-5 rounded-2xl cursor-pointer transition-all border-2 ${
             deliveryMethod === 'delivery' 
-              ? 'border-pink-500 bg-pink-50' 
-              : 'border-pink-100 bg-white hover:border-pink-300'
+              ? 'border-pink-500 bg-pink-50 shadow-md' 
+              : 'border-pink-100 bg-white hover:border-pink-300 hover:shadow-sm'
           }`}>
             <input
               type="radio"
@@ -149,11 +152,11 @@ export function CartSummary() {
             />
             <Truck size={20} className="text-pink-600" />
             <div className="flex-1">
-              <div className="font-medium text-gray-900">Delivery</div>
-              <div className="text-sm text-gray-500">Greater Sydney - 1-3 days</div>
+              <div className="font-heading font-medium text-gray-900">Delivery</div>
+              <div className="text-sm text-gray-500 font-body">Greater Sydney - 1-3 days</div>
             </div>
             {deliveryFee > 0 && (
-              <span className="font-bold text-pink-600">{formatPrice(deliveryFee)}</span>
+              <span className="font-heading font-bold text-pink-600 bg-pink-50 px-3 py-1 rounded-full">{formatPrice(deliveryFee)}</span>
             )}
           </label>
         </div>
@@ -161,11 +164,11 @@ export function CartSummary() {
 
       {/* Postcode Input for Delivery */}
       {deliveryMethod === 'delivery' && (
-        <div>
-          <label htmlFor="postcode" className="block text-sm font-semibold text-gray-700 mb-2">
+        <div className="bg-pink-50/50 rounded-2xl p-5">
+          <label htmlFor="postcode" className="block text-sm font-heading font-semibold text-gray-700 mb-3">
             Delivery Postcode
           </label>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <input
               id="postcode"
               type="text"
@@ -176,24 +179,24 @@ export function CartSummary() {
               }}
               placeholder="e.g. 2000"
               maxLength={4}
-              className="flex-1 px-4 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none"
+              className="flex-1 px-5 py-4 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body text-lg"
             />
             <button
               type="button"
               onClick={handlePostcodeCheck}
-              className="px-5 py-3 bg-white border-2 border-pink-500 text-pink-600 font-semibold rounded-xl hover:bg-pink-50 transition-colors"
+              className="px-6 py-4 bg-white border-2 border-pink-500 text-pink-600 font-heading font-semibold rounded-xl hover:bg-pink-50 transition-colors"
             >
               Check
             </button>
           </div>
           {postcodeError && (
-            <div className="flex items-start gap-2 mt-2 text-sm text-red-600">
+            <div className="flex items-start gap-2 mt-3 text-sm text-red-600 font-body">
               <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
               <span>{postcodeError}</span>
             </div>
           )}
           {!postcodeError && deliveryFee > 0 && (
-            <div className="flex items-start gap-2 mt-2 text-sm text-green-600">
+            <div className="flex items-start gap-2 mt-3 text-sm text-green-600 font-body">
               <CheckCircle size={16} className="mt-0.5 flex-shrink-0" />
               <span>Delivery available! Fee: {formatPrice(deliveryFee)}</span>
             </div>
@@ -202,20 +205,20 @@ export function CartSummary() {
       )}
 
       {/* Subtotal */}
-      <div className="border-t border-pink-200 pt-4">
-        <div className="flex justify-between text-gray-700 mb-2">
+      <div className="border-t-2 border-pink-100 pt-6 space-y-3">
+        <div className="flex justify-between text-gray-700 font-body text-lg">
           <span>Subtotal</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span className="font-semibold">{formatPrice(subtotal)}</span>
         </div>
         {deliveryFee > 0 && (
-          <div className="flex justify-between text-gray-700 mb-2">
+          <div className="flex justify-between text-gray-700 font-body text-lg">
             <span>Delivery</span>
-            <span>{formatPrice(deliveryFee)}</span>
+            <span className="font-semibold">{formatPrice(deliveryFee)}</span>
           </div>
         )}
-        <div className="flex justify-between text-xl font-bold pt-3 border-t border-pink-200">
-          <span>Total</span>
-          <span className="text-pink-600">{formatPrice(totalPrice)}</span>
+        <div className="flex justify-between text-2xl font-bold pt-4 border-t-2 border-pink-100">
+          <span className="font-heading">Total</span>
+          <span className="gradient-text font-heading">{formatPrice(totalPrice)}</span>
         </div>
       </div>
 
@@ -223,13 +226,13 @@ export function CartSummary() {
       <button
         onClick={handleCheckout}
         disabled={items.length === 0 || isLoading}
-        className={`w-full btn-gradient py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+        className={`w-full btn-gradient py-5 rounded-2xl font-heading font-semibold text-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${
           items.length === 0 || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-0.5'
         }`}
       >
         {isLoading ? (
           <>
-            <Loader2 size={20} className="animate-spin" />
+            <Loader2 size={24} className="animate-spin" />
             Processing...
           </>
         ) : (
@@ -238,7 +241,7 @@ export function CartSummary() {
       </button>
 
       {/* Note */}
-      <p className="text-sm text-gray-500 text-center">
+      <p className="text-sm text-gray-500 text-center font-body">
         Payment will be authorized but not charged until order is confirmed
       </p>
     </div>
