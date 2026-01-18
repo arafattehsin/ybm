@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, MapPin, Phone, Heart } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Heart } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -52,15 +52,14 @@ export function Footer() {
 
   const quickLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About Us' },
     { href: '/menu', label: 'Menu' },
+    { href: '/about', label: 'About Us' },
     { href: '/contact', label: 'Contact' },
   ];
 
   const socialLinks = [
     { href: BUSINESS.social.facebook, icon: Facebook, label: 'Facebook' },
     { href: BUSINESS.social.instagram, icon: Instagram, label: 'Instagram' },
-    { href: BUSINESS.social.twitter, icon: Twitter, label: 'Twitter' },
     { href: BUSINESS.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
   ];
 
@@ -154,9 +153,12 @@ export function Footer() {
                   {BUSINESS.email}
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-gray-700 font-body">
-                <Phone className="w-5 h-5 text-pink-500 flex-shrink-0" />
-                <span>Order via Instagram DM</span>
+              <li className="flex flex-col gap-2 text-gray-700 font-body">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-pink-500 flex-shrink-0" />
+                  <span className="font-semibold">Order via Website</span>
+                </div>
+                <span className="text-sm text-gray-600 ml-8">or Instagram DM</span>
               </li>
             </ul>
           </div>

@@ -1,23 +1,19 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Instagram, ExternalLink } from 'lucide-react';
+import type { InstagramMediaItem } from '@/lib/instagram';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Real Instagram post IDs from @yumbymaryam
-const instagramPosts = [
-  { id: 1, shortcode: 'DDsHKQryYrB' },
-  { id: 2, shortcode: 'DDoLMD4yz-I' },
-  { id: 3, shortcode: 'DDjLh1qSANi' },
-  { id: 4, shortcode: 'DC-QfKiyuF_' },
-  { id: 5, shortcode: 'DC5DdTVSVqz' },
-  { id: 6, shortcode: 'DCzC5KxScbY' },
-];
+interface InstagramSectionProps {
+  posts: InstagramMediaItem[];
+}
 
-export function InstagramSection() {
+export function InstagramSection({ posts = [] }: InstagramSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
@@ -174,31 +170,36 @@ export function InstagramSection() {
 
           {/* Instagram Grid - Using Instagram Embeds */}
           <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {instagramPosts.map((post) => (
-              <a
-                key={post.id}
-                href={`https://instagram.com/p/${post.shortcode}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative group aspect-square rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center hover:scale-105 transition-transform duration-300"
-              >
-                {/* Instagram Post Thumbnail via embed URL */}
-                <iframe
-                  src={`https://www.instagram.com/p/${post.shortcode}/embed`}
-                  className="w-full h-full border-0 pointer-events-none"
-                  allowFullScreen
-                  loading="lazy"
-                  title={`Instagram post ${post.id}`}
-                />
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="flex items-center gap-2 text-white">
-                    <Instagram className="w-6 h-6" />
-                    <span className="font-medium">View on Instagram</span>
+            {posts.slice(0, 6).map((post) => {
+              const imageSrc = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
+              
+              if (!imageSrc) return null;
+
+              return (
+                <a
+                  key={post.id}
+                  href={post.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group aspect-square rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-gradient-to-br from-pink-100 to-pink-50 hover:scale-105 transition-transform duration-300"
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={post.caption || 'Instagram post'}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-pink-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="flex items-center gap-2 text-white">
+                      <Instagram className="w-6 h-6" />
+                      <span className="font-medium">View on Instagram</span>
+                    </div>
                   </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
