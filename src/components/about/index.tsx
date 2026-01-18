@@ -97,7 +97,7 @@ export function AboutHero() {
   );
 }
 
-// AboutStory - From Kitchen to Your Heart with video background and box at front
+// AboutStory - From Kitchen to Your Heart with video background behind title
 export function AboutStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -125,8 +125,8 @@ export function AboutStory() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[70vh] flex items-center overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0">
+      {/* Video Background - Behind everything */}
+      <div className="absolute inset-0 z-0">
         <video
           autoPlay
           loop
@@ -136,8 +136,9 @@ export function AboutStory() {
         >
           <source src="/videos/3.mp4" type="video/mp4" />
         </video>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-900/70 via-pink-800/50 to-transparent" />
+        {/* Gradient Overlay for video behind title */}
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-900/80 via-pink-800/60 to-pink-700/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30" />
       </div>
 
       {/* Content Box at Front */}
@@ -174,42 +175,13 @@ export function AboutStory() {
   );
 }
 
-// Floating Product Image Section between From Kitchen and Maryam Arafat
+// Floating Product Image Section - Transition section between Story and Founder
 export function AboutFloatingProduct() {
   const sectionRef = useRef<HTMLElement>(null);
-  const custardRef = useRef<HTMLDivElement>(null);
-  const custardBackRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Custard image floating animation
-      if (custardRef.current) {
-        gsap.to(custardRef.current, {
-          x: 25,
-          y: -20,
-          rotation: 10,
-          scale: 1.05,
-          duration: 5.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
-      if (custardBackRef.current) {
-        gsap.to(custardBackRef.current, {
-          x: -18,
-          y: 12,
-          rotation: -8,
-          scale: 1.1,
-          duration: 6.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-
       // Background shapes
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
@@ -231,76 +203,49 @@ export function AboutFloatingProduct() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-32 overflow-hidden bg-gradient-merged">
+    <section ref={sectionRef} className="relative py-16 overflow-hidden bg-gradient-merged">
       {/* Background Shapes with different color combinations */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         {/* Shape 1 */}
-        <div className="absolute top-20 left-1/4">
-          <div className="w-20 h-20 rounded-full bg-white/70" />
-          <div className="absolute inset-2 w-14 h-14 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 100%)' }} />
+        <div className="absolute top-10 left-1/4">
+          <div className="w-16 h-16 rounded-full bg-white/70" />
+          <div className="absolute inset-2 w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 100%)' }} />
         </div>
         {/* Shape 2 */}
-        <div className="absolute bottom-1/3 right-20">
-          <div className="w-16 h-16 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 100%)' }} />
-          <div className="absolute inset-2 w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #E91E63 100%)' }} />
+        <div className="absolute bottom-8 right-20">
+          <div className="w-14 h-14 rounded-full" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 100%)' }} />
+          <div className="absolute inset-2 w-8 h-8 rounded-full" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #E91E63 100%)' }} />
         </div>
         {/* Shape 3 */}
-        <div className="absolute top-1/2 left-10">
-          <div className="w-12 h-12 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFC0CB 100%)' }} />
-          <div className="absolute inset-1 w-8 h-8 rounded-full bg-white/80" />
+        <div className="absolute top-1/2 right-1/3">
+          <div className="w-10 h-10 rounded-full" style={{ background: 'linear-gradient(135deg, #E91E63 0%, #FFC0CB 100%)' }} />
+          <div className="absolute inset-1 w-6 h-6 rounded-full bg-white/80" />
         </div>
         {/* Large blurs */}
-        <div className="absolute top-10 right-1/4 w-52 h-52 bg-pink-100/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-1/3 w-60 h-60 bg-pink-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-40 h-40 bg-pink-100/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-pink-200/30 rounded-full blur-3xl" />
       </div>
 
-      {/* Center floating product image */}
+      {/* Decorative divider */}
       <div className="flex justify-center items-center relative z-10">
-        {/* Splash shape */}
-        <div className="absolute w-56 h-56 opacity-20 pointer-events-none">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <path 
-              fill="#E91E63" 
-              d="M44.7,-76.4C58.1,-68.5,69.4,-56.6,77.1,-42.6C84.8,-28.6,88.9,-12.5,87.3,2.9C85.8,18.4,78.6,33.2,68.7,45.4C58.8,57.6,46.2,67.3,32.2,73.6C18.1,80,-2.5,83,-21.3,79.1C-40.2,75.2,-57.3,64.4,-69.8,50.1C-82.3,35.8,-90.2,17.9,-89.6,0.3C-89,-17.2,-79.9,-34.4,-67.5,-47.7C-55.1,-61,-39.4,-70.4,-23.6,-76.8C-7.8,-83.2,8.1,-86.6,23.4,-84.2C38.8,-81.8,53.6,-73.6,44.7,-76.4Z" 
-              transform="translate(100 100)"
-            />
-          </svg>
-        </div>
-        {/* Back circle */}
-        <div 
-          ref={custardBackRef}
-          className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full"
-          style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
-          }}
-        />
-        {/* Front circle */}
-        <div 
-          className="absolute w-48 h-48 md:w-64 md:h-64 rounded-full"
-          style={{
-            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
-          }}
-        />
-        {/* Custard image */}
-        <div ref={custardRef} className="relative w-44 h-44 md:w-60 md:h-60">
-          <Image
-            src="/images/products/custard2final.png"
-            alt="Custard dessert"
-            fill
-            className="object-contain drop-shadow-2xl"
-          />
+        <div className="flex items-center gap-4">
+          <div className="h-0.5 w-16 bg-gradient-to-r from-transparent to-pink-400" />
+          <Heart className="w-6 h-6 text-pink-400 fill-pink-400" />
+          <div className="h-0.5 w-16 bg-gradient-to-l from-transparent to-pink-400" />
         </div>
       </div>
     </section>
   );
 }
 
-// AboutFounder - Meet Maryam Arafat with photo
+// AboutFounder - Meet Maryam Arafat with photo and floating product
 export function AboutFounder() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
+  const floatingRef = useRef<HTMLDivElement>(null);
+  const floatingBackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -332,6 +277,33 @@ export function AboutFounder() {
         }
       );
 
+      // Floating product animation
+      if (floatingRef.current) {
+        gsap.to(floatingRef.current, {
+          x: 20,
+          y: -15,
+          rotation: 8,
+          scale: 1.04,
+          duration: 5.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
+      if (floatingBackRef.current) {
+        gsap.to(floatingBackRef.current, {
+          x: -15,
+          y: 10,
+          rotation: -6,
+          scale: 1.08,
+          duration: 6.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
       if (shapesRef.current) {
         const shapes = shapesRef.current.children;
         Array.from(shapes).forEach((shape, index) => {
@@ -352,6 +324,34 @@ export function AboutFounder() {
 
   return (
     <section ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-pink-50 via-white to-pink-100">
+      {/* Floating Product Image - Top Right Corner */}
+      <div className="absolute -top-16 right-8 lg:right-16 z-[9999]">
+        {/* Back circle */}
+        <div 
+          ref={floatingBackRef}
+          className="absolute w-40 h-40 md:w-52 md:h-52 rounded-full -top-4 -right-4"
+          style={{
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)'
+          }}
+        />
+        {/* Front circle */}
+        <div 
+          className="absolute w-32 h-32 md:w-44 md:h-44 rounded-full top-0 right-0"
+          style={{
+            background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)'
+          }}
+        />
+        {/* Product image */}
+        <div ref={floatingRef} className="relative w-28 h-28 md:w-40 md:h-40 z-10">
+          <Image
+            src="/images/products/custard2final.png"
+            alt="Custard dessert"
+            fill
+            className="object-contain drop-shadow-2xl"
+          />
+        </div>
+      </div>
+
       {/* Background Shapes */}
       <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 right-20 w-64 h-64 bg-pink-200/30 rounded-full blur-3xl" />
@@ -360,23 +360,21 @@ export function AboutFounder() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image - Founder Photo */}
+          {/* Image - Maryam's Photo */}
           <div ref={imageRef} className="relative order-2 lg:order-1">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105 rotate-3" />
             <div 
               className="relative overflow-hidden shadow-2xl bg-gradient-to-br from-pink-100 to-white"
               style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
             >
-              {/* Placeholder for founder photo - using video for now */}
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
+              {/* Maryam's actual photo */}
+              <Image
+                src="/images/maryam.jpeg"
+                alt="Maryam Arafat - Founder of YUM by Maryam"
+                width={600}
+                height={600}
                 className="w-full aspect-square object-cover"
-              >
-                <source src="/videos/hero.mp4" type="video/mp4" />
-              </video>
+              />
             </div>
           </div>
 

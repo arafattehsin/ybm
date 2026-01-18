@@ -112,7 +112,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-gradient-merged">
       {/* Floating Custard Image at Top Right - merging with previous section */}
-      <div className="absolute -top-20 right-8 lg:right-16 z-40">
+      <div className="absolute -top-20 right-8 lg:right-16 z-[9999]">
         {/* Splash shape */}
         <div className="absolute -top-6 -right-6 w-36 h-36 opacity-20 pointer-events-none">
           <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -199,18 +199,18 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
             }}
             className="pb-14"
           >
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id}>
-                <TestimonialCard testimonial={testimonial} index={index} />
+                <TestimonialCard testimonial={testimonial} />
               </SwiperSlide>
             ))}
           </Swiper>
 
-          {/* Navigation Buttons */}
-          <button className="testimonial-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-pink-600 hover:bg-pink-50 hover:scale-110 transition-all duration-300 border border-pink-100">
+          {/* Navigation Buttons - Increased spacing from content */}
+          <button className="testimonial-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 lg:-translate-x-16 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-pink-600 hover:bg-pink-50 hover:scale-110 transition-all duration-300 border border-pink-100">
             <ChevronLeft className="w-6 h-6" />
           </button>
-          <button className="testimonial-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-pink-600 hover:bg-pink-50 hover:scale-110 transition-all duration-300 border border-pink-100">
+          <button className="testimonial-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 lg:translate-x-16 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-pink-600 hover:bg-pink-50 hover:scale-110 transition-all duration-300 border border-pink-100">
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
@@ -219,15 +219,9 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   );
 }
 
-function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
-  const cardColors = [
-    'from-pink-50 to-white',
-    'from-white to-pink-50',
-    'from-pink-100/50 to-white',
-  ];
-
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className={`bg-gradient-to-br ${cardColors[index % 3]} rounded-3xl p-8 shadow-lg border border-pink-100 h-full flex flex-col`}>
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100 h-full flex flex-col min-h-[320px]">
       {/* Quote Icon */}
       <div className="mb-4">
         <Quote className="w-10 h-10 text-pink-300" />
