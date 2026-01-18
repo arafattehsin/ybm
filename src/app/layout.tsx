@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Baloo_2, Quicksand, Dancing_Script } from 'next/font/google';
-import { Header, Footer, AnnouncementBar, CookieBanner, PageTransition } from '@/components/layout';
+import { Header, Footer, AnnouncementBar, CookieBanner } from '@/components/layout';
 import './globals.css';
 
 // Playful, cute font for headings (like Hannah heading style)
@@ -74,9 +74,7 @@ export default function RootLayout({
       <body className="font-body antialiased bg-white text-gray-900">
         <AnnouncementBar />
         <Header />
-        <PageTransition>
-          <main className="min-h-screen">{children}</main>
-        </PageTransition>
+        <main className="min-h-screen">{children}</main>
         <Footer />
         <CookieBanner />
       </body>
