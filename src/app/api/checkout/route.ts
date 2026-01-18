@@ -101,8 +101,8 @@ export async function POST(request: NextRequest) {
           delivery_fee: deliveryFee.toString(),
         },
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cart`,
       shipping_address_collection: deliveryMethod === 'delivery' ? {
         allowed_countries: ['AU'],
       } : undefined,

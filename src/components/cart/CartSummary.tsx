@@ -50,32 +50,39 @@ export function CartSummary() {
     }
   };
 
+  const validateDeliveryDetails = (): boolean => {
+    if (deliveryMethod === 'delivery') {
+      if (!streetAddress.trim()) {
+        setAddressError('Please enter your street address');
+        return false;
+      }
+      if (!city.trim()) {
+        setAddressError('Please enter your town/city');
+        return false;
+      }
+      if (!postcode.trim()) {
+        setAddressError('Please enter your postcode');
+        return false;
+      }
+      if (!phone.trim()) {
+        setAddressError('Please enter your phone number');
+        return false;
+      }
+      if (!isDeliveryAvailable(postcode.trim())) {
+        setAddressError('Delivery is not available to this postcode');
+        return false;
+      }
+      setAddressError('');
+    }
+    return true;
+  };
+
   const handleCheckout = async () => {
     if (items.length === 0) return;
 
     // Validate delivery details if delivery is selected
-    if (deliveryMethod === 'delivery') {
-      if (!streetAddress.trim()) {
-        setAddressError('Please enter your street address');
-        return;
-      }
-      if (!city.trim()) {
-        setAddressError('Please enter your town/city');
-        return;
-      }
-      if (!postcode.trim()) {
-        setAddressError('Please enter your postcode');
-        return;
-      }
-      if (!phone.trim()) {
-        setAddressError('Please enter your phone number');
-        return;
-      }
-      if (!isDeliveryAvailable(postcode.trim())) {
-        setAddressError('Delivery is not available to this postcode');
-        return;
-      }
-      setAddressError('');
+    if (!validateDeliveryDetails()) {
+      return;
     }
 
     setIsLoading(true);
@@ -96,6 +103,7 @@ export function CartSummary() {
             unitPrice: item.unitPrice,
           })),
           deliveryMethod,
+          deliveryPostcode: deliveryMethod === 'delivery' ? postcode.trim() : undefined,
           deliveryAddress: deliveryMethod === 'delivery' ? {
             street: streetAddress.trim(),
             apartment: apartment.trim(),

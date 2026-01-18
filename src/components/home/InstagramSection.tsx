@@ -136,10 +136,9 @@ export function InstagramSection({ posts = [] }: InstagramSectionProps) {
           </p>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Video Side */}
-          <div ref={videoRef} className="relative">
+        {/* Video Box - Centered */}
+        <div className="flex justify-center mb-12">
+          <div ref={videoRef} className="relative max-w-md w-full">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-500 rounded-3xl blur-xl opacity-30 transform scale-105" />
             
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
@@ -167,8 +166,10 @@ export function InstagramSection({ posts = [] }: InstagramSectionProps) {
               <ExternalLink className="w-4 h-4 text-gray-400" />
             </a>
           </div>
+        </div>
 
-          {/* Instagram Grid - Using Instagram Embeds */}
+        {/* Instagram Grid - Using Instagram Embeds */}
+        <div className="max-w-4xl mx-auto">
           <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {posts.slice(0, 6).map((post) => {
               const imageSrc = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
