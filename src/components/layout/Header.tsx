@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Menu, X, User } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useCartStore } from '@/stores/cartStore';
 import { BUSINESS } from '@/lib/constants';
@@ -100,15 +100,6 @@ export function Header() {
 
           {/* Icons */}
           <div className="flex items-center space-x-2">
-            {/* User Account */}
-            <Link
-              href="/account"
-              className="relative p-3 text-gray-600 hover:text-pink-600 transition-all duration-300 hover:bg-pink-50 rounded-full group"
-              aria-label="User account"
-            >
-              <User size={22} className="transition-transform duration-300 group-hover:scale-110" />
-            </Link>
-
             {/* Cart */}
             <Link
               href="/cart"
