@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { adminDb } from '@/lib/db';
+import { adminsRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    const admin = adminDb.getById(payload.id);
+    const admin = await adminsRepository.getById(payload.id);
 
     if (!admin || !admin.active) {
       return NextResponse.json({ error: 'Admin not found' }, { status: 404 });

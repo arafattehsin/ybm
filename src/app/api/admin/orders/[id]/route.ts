@@ -5,7 +5,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { orderDb } from '@/lib/db';
+import { ordersRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(
@@ -20,7 +20,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const order = orderDb.getById(id);
+    const order = await ordersRepository.getById(id);
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
@@ -47,7 +47,7 @@ export async function PATCH(
     const { id } = await params;
     const data = await request.json();
 
-    orderDb.update(id, data);
+    const updatedOrder = await ordersRepository.update(id, data);
     const order = orderDb.getById(id);
 
     return NextResponse.json({ order });

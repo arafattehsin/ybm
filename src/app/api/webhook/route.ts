@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import Stripe from 'stripe';
+import { ordersRepository, customersRepository } from '@/lib/cosmosdb';
 
 // Disable body parser for webhooks (Next.js needs raw body)
 export const runtime = 'nodejs';
@@ -25,21 +26,61 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
     metadata: paymentIntent.metadata,
   });
 
-  // TODO: Implement your business logic here
-  // Example: Save order to database
-  /*
-  await db.orders.create({
-    paymentIntentId: paymentIntent.id,
-    amount: paymentIntent.amount,
-    currency: paymentIntent.currency,
-    status: 'paid',
-    items: JSON.parse(paymentIntent.metadata.items || '[]'),
-    customerEmail: paymentIntent.metadata.customer_email,
-    deliveryMethod: paymentIntent.metadata.delivery_method,
-    deliveryPostcode: paymentIntent.metadata.delivery_postcode,
-    createdAt: new Date(paymentIntent.created * 1000),
-  });
-  */
+  // Save order to Cosmos DB
+  try {
+    const metadata = paymentIntent.metadata;
+    const items = JSON.parse(metadata.items || '[]');
+    const customerEmail = metadata.customer_email || paymentIntent.receipt_email || '';
+    const customerName = metadata.customer_name || 'Guest';
+    const customerPhone = metadata.customer_phone || '';
+    
+    // Create or update customer
+    let customer = await customersRepository.getByEmail(customerEmail);
+    if (!customer) {
+      customer = await customersRepository.create({
+        name: customerName,
+        email: customerEmail,
+        phone: customerPhone,
+        addresses: metadata.delivery_address ? [JSON.parse(metadata.delivery_address)] : [],
+        total_spent: paymentIntent.amount,
+        total_orders: 1,
+        created_at: new Date().toISOString(),
+      });
+    } else {
+      // Update customer stats
+      await customersRepository.update(customer.id, {
+        total_spent: customer.total_spent + paymentIntent.amount,
+        total_orders: customer.total_orders + 1,
+        last_order_date: new Date().toISOString(),
+      });
+    }
+
+    // Generate order ID
+    const orderCount = (await ordersRepository.getAll()).length;
+    const orderNumber = `YBM-${String(1000 + orderCount + 1).padStart(4, '0')}`;
+
+    // Create order
+    const order = await ordersRepository.create({
+      order_id: orderNumber,
+      customer_id: customer.id,
+      items: items,
+      status: 'pending',
+      payment_status: 'authorized',
+      payment_intent_id: paymentIntent.id,
+      delivery_method: metadata.delivery_method || 'delivery',
+      delivery_address: metadata.delivery_address ? JSON.parse(metadata.delivery_address) : undefined,
+      delivery_fee: parseInt(metadata.delivery_fee || '0'),
+      subtotal: parseInt(metadata.subtotal || '0'),
+      total: paymentIntent.amount,
+      notes: metadata.notes || '',
+      created_at: new Date(paymentIntent.created * 1000).toISOString(),
+      updated_at: new Date().toISOString(),
+    });
+
+    console.log('✅ Order created in Cosmos DB:', order.order_id);
+  } catch (error) {
+    console.error('❌ Failed to save order to Cosmos DB:', error);
+  }
 
   // TODO: Send confirmation email
   /*

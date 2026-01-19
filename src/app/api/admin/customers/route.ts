@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { customerDb } from '@/lib/db';
+import { customersRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const customers = customerDb.getAll();
+    const customers = await customersRepository.getAll();
 
     return NextResponse.json({ customers });
   } catch (error) {

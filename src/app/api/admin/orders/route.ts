@@ -5,7 +5,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { orderDb } from '@/lib/db';
+import { ordersRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -17,13 +17,19 @@ export async function GET(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status') || undefined;
-    const payment_status = searchParams.get('payment_status') || undefined;
+    const status = searchParams.get('status');
+    const payment_status = searchParams.get('payment_status');
 
-    const orders = orderDb.getAll({
-      status: status as string | undefined,
-      payment_status: payment_status as string | undefined,
-    });
+    // Get all orders (Cosmos DB query filtering will be added later)
+    let orders = await ordersRepository.getAll();
+    
+    // Filter by status if provided
+    if (status) {
+      orders = orders.filter(order => order.status === status);
+    }
+    if (payment_status) {
+      orders = orders.filter(order => order.payment_status === payment_status);
+    }
 
     return NextResponse.json({ orders });
   } catch (error) {
@@ -41,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await request.json();
-    const order = orderDb.create(data);
+    const order = await ordersRepository.create(data);
 
     return NextResponse.json({ order }, { status: 201 });
   } catch (error) {

@@ -20,34 +20,66 @@ export function CartSummary() {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [addressError, setAddressError] = useState('');
+  const [postcodeValidated, setPostcodeValidated] = useState(false);
 
   const subtotal = getTotalPrice();
   const totalPrice = subtotal + deliveryFee;
 
-  const handlePostcodeCheck = () => {
-    const trimmedPostcode = postcode.trim();
+  // Auto-validate postcode as user types
+  const handlePostcodeChange = (value: string) => {
+    setPostcode(value);
+    const trimmedPostcode = value.trim();
     
+    // Clear errors if empty
     if (!trimmedPostcode) {
-      setPostcodeError('Please enter a postcode');
+      setPostcodeError('');
       setDeliveryFee(0);
+      setPostcodeValidated(false);
       return;
     }
 
+    // Check if it's a valid 4-digit postcode
     if (!/^\d{4}$/.test(trimmedPostcode)) {
-      setPostcodeError('Please enter a valid 4-digit postcode');
+      if (trimmedPostcode.length === 4) {
+        setPostcodeError('Please enter a valid 4-digit postcode');
+      } else {
+        setPostcodeError('');
+      }
       setDeliveryFee(0);
+      setPostcodeValidated(false);
       return;
     }
 
+    // Check if delivery is available for this postcode
     const fee = getDeliveryFeeByPostcode(trimmedPostcode);
     
     if (fee === null) {
       setPostcodeError('Sorry, delivery is not available to this postcode');
       setDeliveryFee(0);
+      setPostcodeValidated(false);
     } else {
       setPostcodeError('');
       setDeliveryFee(fee);
+      setPostcodeValidated(true);
     }
+  };
+
+  // Check if checkout should be enabled
+  const isCheckoutDisabled = () => {
+    if (items.length === 0 || isLoading) return true;
+    
+    if (deliveryMethod === 'delivery') {
+      // All required fields must be filled
+      if (!streetAddress.trim() || !city.trim() || !postcode.trim() || !phone.trim()) {
+        return true;
+      }
+      // Postcode must be validated and have no errors
+      if (postcodeError || !postcodeValidated) {
+        return true;
+      }
+    }
+    
+    return false;
   };
 
   const validateDeliveryDetails = (): boolean => {
@@ -276,38 +308,31 @@ export function CartSummary() {
               <label htmlFor="postcode" className="block text-xs font-medium text-gray-600 mb-2">
                 Postcode *
               </label>
-              <div className="flex gap-2">
-                <input
-                  id="postcode"
-                  type="text"
-                  value={postcode}
-                  onChange={(e) => {
-                    setPostcode(e.target.value);
-                    setPostcodeError('');
-                  }}
-                  placeholder="2150"
-                  maxLength={4}
-                  className="flex-1 px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={handlePostcodeCheck}
-                  className="px-4 py-3 bg-white border-2 border-pink-500 text-pink-600 font-heading font-semibold rounded-xl hover:bg-pink-50 transition-colors text-sm whitespace-nowrap"
-                >
-                  Check
-                </button>
-              </div>
+              <input
+                id="postcode"
+                type="text"
+                value={postcode}
+                onChange={(e) => handlePostcodeChange(e.target.value)}
+                placeholder="2118"
+                maxLength={4}
+                className="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-500 transition-all outline-none font-body"
+                required
+              />
               {postcodeError && (
                 <div className="flex items-start gap-1 mt-2 text-xs text-red-600 font-body">
                   <AlertCircle size={14} className="mt-0.5 flex-shrink-0" />
                   <span>{postcodeError}</span>
                 </div>
               )}
-              {!postcodeError && deliveryFee > 0 && (
+              {!postcodeError && postcodeValidated && (
                 <div className="flex items-start gap-1 mt-2 text-xs text-green-600 font-body">
                   <CheckCircle size={14} className="mt-0.5 flex-shrink-0" />
-                  <span>Delivery available! {formatPrice(deliveryFee)} delivery fee</span>
+                  <span>
+                    {deliveryFee === 0 
+                      ? 'Delivery available! FREE delivery' 
+                      : `Delivery available! ${formatPrice(deliveryFee)} delivery fee`
+                    }
+                  </span>
                 </div>
               )}
             </div>
@@ -379,9 +404,9 @@ export function CartSummary() {
       {/* Checkout Button */}
       <button
         onClick={handleCheckout}
-        disabled={items.length === 0 || isLoading}
+        disabled={isCheckoutDisabled()}
         className={`w-full btn-gradient py-5 rounded-2xl font-heading font-semibold text-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${
-          items.length === 0 || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-0.5'
+          isCheckoutDisabled() ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-0.5'
         }`}
       >
         {isLoading ? (

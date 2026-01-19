@@ -137,13 +137,6 @@ export default function AdminLoginPage() {
                   {loading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </form>
-
-              {/* Demo credentials hint */}
-              <div className="mt-6 p-4 bg-pink-50 rounded-lg">
-                <p className="text-xs text-gray-600 font-medium mb-1">Demo Credentials:</p>
-                <p className="text-xs text-gray-600">Email: admin@yumbymaryam.com</p>
-                <p className="text-xs text-gray-600">Password: admin123</p>
-              </div>
             </>
           ) : (
             <>

@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { customerDb, orderDb } from '@/lib/db';
+import { customersRepository, ordersRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(
@@ -19,14 +19,15 @@ export async function GET(
     }
 
     const { id } = await params;
-    const customer = customerDb.getById(id);
+    const customer = await customersRepository.getById(id);
 
     if (!customer) {
       return NextResponse.json({ error: 'Customer not found' }, { status: 404 });
     }
 
     // Get customer's orders
-    const orders = orderDb.getByCustomerId(id);
+    const allOrders = await ordersRepository.getAll();
+    const orders = allOrders.filter(order => order.customer_id === id);
 
     return NextResponse.json({ customer, orders });
   } catch (error) {

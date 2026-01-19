@@ -13,6 +13,7 @@
     "test:report": "playwright show-report"
   },
   "dependencies": {
+    "@azure/cosmos": "^4.9.0",
     "@gsap/react": "^2.1.2",
     "@stripe/react-stripe-js": "^5.4.1",
     "@stripe/stripe-js": "^8.6.1",
@@ -51,6 +52,7 @@
     "eslint-config-next": "16.1.1",
     "playwright": "^1.57.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { adminDb, twoFactorDb } from '@/lib/db';
+import { adminsRepository } from '@/lib/cosmosdb';
 import { comparePassword, generateToken, generateOTPCode, sendOTPEmail } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find admin by email
-    const admin = adminDb.getByEmail(email);
+    const admin = await adminsRepository.getByEmail(email);
 
     if (!admin || !admin.active) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
       if (method === 'email') {
         // Generate and send OTP code
         const code = generateOTPCode();
-        twoFactorDb.create(admin.id, method, code);
+        // TODO: Implement 2FA sessions in Cosmos DB
+        // twoFactorDb.create(admin.id, method, code);
         await sendOTPEmail(admin.email, code);
 
         return NextResponse.json({
@@ -45,10 +46,10 @@ export async function POST(request: NextRequest) {
           adminId: admin.id,
           message: 'Verification code sent to your email',
         });
-      } else if (method === 'authenticator') {
+      } else if (method === 'totp' || method === 'authenticator') {
         return NextResponse.json({
           requires2FA: true,
-          method: 'authenticator',
+          method: 'totp',
           adminId: admin.id,
           message: 'Enter code from your authenticator app',
         });
@@ -63,7 +64,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update last login
-    adminDb.update(admin.id, { last_login: new Date().toISOString() });
+    await adminsRepository.update(admin.id, { last_login: new Date().toISOString() });
 
     const response = NextResponse.json({
       success: true,

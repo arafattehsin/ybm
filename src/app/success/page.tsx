@@ -1,18 +1,45 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useCartStore } from '@/stores/cartStore';
 import { Button } from '@/components/ui';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle, ArrowRight, Loader2 } from 'lucide-react';
 
 export default function SuccessPage() {
   const { clearCart } = useCartStore();
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get('session_id');
+  const [orderCreated, setOrderCreated] = useState(false);
+  const [creating, setCreating] = useState(false);
 
-  // Clear cart on successful order
+  // Create order from Stripe session
   useEffect(() => {
-    clearCart();
-  }, [clearCart]);
+    async function createOrder() {
+      if (!sessionId || orderCreated || creating) return;
+
+      setCreating(true);
+      try {
+        const response = await fetch('/api/create-order-from-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId }),
+        });
+
+        if (response.ok) {
+          setOrderCreated(true);
+          clearCart();
+        }
+      } catch (error) {
+        console.error('Failed to create order:', error);
+      } finally {
+        setCreating(false);
+      }
+    }
+
+    createOrder();
+  }, [sessionId, orderCreated, creating, clearCart]);
 
   return (
     <div className="py-16 md:py-24">
