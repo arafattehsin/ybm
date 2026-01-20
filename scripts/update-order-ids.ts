@@ -31,7 +31,7 @@ interface Order {
   customer_id?: string;
   createdAt?: string;
   created_at?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 async function updateOrderIds() {
@@ -91,8 +91,8 @@ async function updateOrderIds() {
         
         console.log(`✅ Updated: ${oldOrderId} → ${newOrderNumber} (Created: ${order.createdAt || order.created_at})`);
         successCount++;
-      } catch (error: any) {
-        console.error(`❌ Failed to update order ${oldOrderId}:`, error.message);
+      } catch (error: unknown) {
+        console.error(`❌ Failed to update order ${oldOrderId}:`, error instanceof Error ? error.message : String(error));
         errorCount++;
       }
     }
