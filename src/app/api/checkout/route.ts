@@ -110,14 +110,18 @@ export async function POST(request: NextRequest) {
       metadata: {
         order_items: JSON.stringify(
           items.map((i) => ({
-            name: i.productName,
+            productName: i.productName,
             size: i.size,
-            qty: i.quantity,
+            addons: i.addons,
+            quantity: i.quantity,
+            unitPrice: i.unitPrice,
+            totalPrice: i.unitPrice * i.quantity,
           }))
         ),
         delivery_method: deliveryMethod,
         delivery_postcode: deliveryPostcode || 'pickup',
         delivery_option: deliveryOption,
+        delivery_fee: deliveryFee.toString(),
       },
     });
 

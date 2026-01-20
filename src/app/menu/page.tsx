@@ -176,8 +176,10 @@ export default function MenuPage() {
 function MenuProductCard({ product }: { product: Product }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
+    setIsHovered(true);
     gsap.to(cardRef.current, {
       y: -8,
       boxShadow: '0 25px 50px rgba(233, 30, 99, 0.15)',
@@ -195,6 +197,7 @@ function MenuProductCard({ product }: { product: Product }) {
   };
 
   const handleMouseLeave = () => {
+    setIsHovered(false);
     gsap.to(cardRef.current, {
       y: 0,
       boxShadow: '0 4px 20px rgba(233, 30, 99, 0.08)',
@@ -215,8 +218,16 @@ function MenuProductCard({ product }: { product: Product }) {
     <Link
       ref={cardRef}
       href={`/menu/${product.slug}`}
-      className="block bg-white rounded-2xl overflow-hidden shadow-md border border-pink-50"
-      style={{ boxShadow: '0 4px 20px rgba(233, 30, 99, 0.08)' }}
+      className="block bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300"
+      style={{
+        border: '2px solid transparent',
+        backgroundImage: isHovered 
+          ? 'linear-gradient(white, white), linear-gradient(135deg, #ec4899, #f472b6, #ec4899)'
+          : 'linear-gradient(white, white), linear-gradient(135deg, #fce7f3, #fce7f3)',
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'padding-box, border-box',
+        boxShadow: '0 4px 20px rgba(233, 30, 99, 0.08)'
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

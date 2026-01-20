@@ -8,6 +8,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { ButtonLoader } from '@/components/ui';
 import type { CartItem } from '@/types';
 import { formatAmount } from '@/lib/stripe';
 
@@ -239,13 +240,20 @@ export default function StripeCheckout(props: StripeCheckoutProps) {
         <button
           onClick={handleInitiateCheckout}
           disabled={loading}
-          className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-colors ${
+          className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-colors flex items-center justify-center gap-2 ${
             loading
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-blue-600 hover:bg-blue-700'
           }`}
         >
-          {loading ? 'Loading...' : 'Proceed to Payment'}
+          {loading ? (
+            <>
+              <ButtonLoader className="w-5 h-5" />
+              Loading...
+            </>
+          ) : (
+            'Proceed to Payment'
+          )}
         </button>
       </div>
     );

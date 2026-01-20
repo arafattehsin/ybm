@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { ordersRepository, customersRepository } from '@/lib/cosmosdb';
+import { randomUUID } from 'crypto';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
 
     // Retrieve the checkout session from Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['payment_intent', 'customer_details', 'shipping_details'],
+      expand: ['payment_intent', 'customer_details'],
     });
 
     if (!session.payment_intent) {
@@ -34,9 +35,10 @@ export async function POST(request: NextRequest) {
 
     // Extract customer details
     const customerEmail = session.customer_details?.email || session.customer_email || '';
-    const customerName = session.customer_details?.name || 'Guest';
+    const customerName = session.customer_details?.name || session.shipping_details?.name || 'Guest';
     const customerPhone = session.customer_details?.phone || '';
-    const shippingAddress = session.shipping_details?.address;
+    // shipping_details is already included in the session, no need to expand
+    const shippingAddress = session.shipping_details?.address || session.customer_details?.address;
 
     // Create or update customer
     let customer = await customersRepository.getByEmail(customerEmail);
@@ -70,23 +72,46 @@ export async function POST(request: NextRequest) {
     const metadata = session.metadata || {};
     const items = JSON.parse(metadata.order_items || '[]');
 
-    // Generate order ID
-    const orderCount = existingOrders.length;
-    const orderNumber = `YBM-${String(1000 + orderCount + 1).padStart(4, '0')}`;
+    // Generate unique order ID with timestamp and random component
+    const timestamp = Date.now();
+    const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD
+    const randomPart = randomUUID().split('-')[0].toUpperCase(); // First part of UUID
+    const orderNumber = `YBM-${dateStr}-${randomPart}`;
 
     // Calculate subtotal (total - delivery fee)
     const deliveryFee = parseInt(metadata.delivery_fee || '0');
     const subtotal = (session.amount_total || 0) - deliveryFee;
 
+    // Generate unique document ID for Cosmos DB
+    const documentId = randomUUID();
+
     // Create order
     const order = await ordersRepository.create({
-      order_id: orderNumber,
-      customer_id: customer.id,
+      id: documentId,
+      orderNumber: orderNumber,
+      order_id: orderNumber, // Keep for backwards compatibility
+      customerId: customer.id,
+      customer_id: customer.id, // Keep for backwards compatibility
+      customerName: customerName,
+      customerEmail: customerEmail,
+      customerPhone: customerPhone,
       items: items,
       status: 'pending',
-      payment_status: 'authorized',
-      payment_intent_id: paymentIntent.id,
-      delivery_method: metadata.delivery_method || 'delivery',
+      paymentStatus: paymentIntent.status === 'succeeded' ? 'paid' : 'pending',
+      payment_status: paymentIntent.status === 'succeeded' ? 'captured' : 'authorized', // Keep for backwards compatibility
+      paymentIntentId: paymentIntent.id,
+      payment_intent_id: paymentIntent.id, // Keep for backwards compatibility
+      deliveryMethod: metadata.delivery_method || 'delivery',
+      delivery_method: metadata.delivery_method || 'delivery', // Keep for backwards compatibility
+      shippingAddress: shippingAddress ? {
+        name: customerName,
+        line1: shippingAddress.line1 || '',
+        line2: shippingAddress.line2 || '',
+        city: shippingAddress.city || '',
+        state: shippingAddress.state || 'NSW',
+        postal_code: shippingAddress.postal_code || '',
+        country: shippingAddress.country || 'AU',
+      } : undefined,
       delivery_address: shippingAddress ? {
         street: shippingAddress.line1 || '',
         apartment: shippingAddress.line2 || '',
@@ -97,12 +122,23 @@ export async function POST(request: NextRequest) {
         name: customerName,
         phone: customerPhone,
       } : undefined,
-      delivery_fee: deliveryFee,
+      deliveryInstructions: metadata.delivery_instructions || '',
+      deliveryFee: deliveryFee,
+      delivery_fee: deliveryFee, // Keep for backwards compatibility
       subtotal: subtotal,
       total: session.amount_total || 0,
       notes: '',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(), // Keep for backwards compatibility
+      updatedAt: new Date().toISOString(),
+      updated_at: new Date().toISOString(), // Keep for backwards compatibility
+      statusHistory: [
+        {
+          status: 'pending',
+          timestamp: new Date().toISOString(),
+          note: 'Order created'
+        }
+      ]
     });
 
     console.log('✅ Order created from session:', order.order_id);

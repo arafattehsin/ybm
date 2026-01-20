@@ -108,10 +108,24 @@ export const ordersRepository = {
     return resource;
   },
 
-  async getById(id: string, customerId: string) {
+  async getById(id: string, customerId?: string) {
     const container = await getContainer(CONTAINERS.ORDERS);
-    const { resource } = await container.item(id, customerId).read();
-    return resource;
+    
+    // If customerId is provided, use direct item access
+    if (customerId) {
+      const { resource } = await container.item(id, customerId).read();
+      return resource;
+    }
+    
+    // Otherwise, query by id (slower but works without partition key)
+    const { resources } = await container.items
+      .query({
+        query: 'SELECT * FROM c WHERE c.id = @id',
+        parameters: [{ name: '@id', value: id }],
+      })
+      .fetchAll();
+    
+    return resources[0] || null;
   },
 
   async getAll(filters?: { status?: string; limit?: number }) {
@@ -136,9 +150,28 @@ export const ordersRepository = {
     return filters?.limit ? resources.slice(0, filters.limit) : resources;
   },
 
-  async update(id: string, customerId: string, updates: any) {
+  async update(id: string, updates: any, customerId?: string) {
     const container = await getContainer(CONTAINERS.ORDERS);
-    const { resource: existing } = await container.item(id, customerId).read();
+    
+    // Get the existing order first
+    let existing;
+    if (customerId) {
+      const result = await container.item(id, customerId).read();
+      existing = result.resource;
+    } else {
+      // Query to find the order
+      const { resources } = await container.items
+        .query({
+          query: 'SELECT * FROM c WHERE c.id = @id',
+          parameters: [{ name: '@id', value: id }],
+        })
+        .fetchAll();
+      existing = resources[0];
+    }
+    
+    if (!existing) {
+      throw new Error('Order not found');
+    }
     
     const updated = {
       ...existing,
@@ -146,7 +179,7 @@ export const ordersRepository = {
       updated_at: new Date().toISOString(),
     };
 
-    const { resource } = await container.item(id, customerId).replace(updated);
+    const { resource } = await container.item(id, existing.customer_id).replace(updated);
     return resource;
   },
 

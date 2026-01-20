@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useCartStore } from '@/stores/cartStore';
 import { formatPrice } from '@/lib/constants';
-import { Loader2, Truck, MapPin, AlertCircle, CheckCircle } from 'lucide-react';
+import { Truck, MapPin, AlertCircle, CheckCircle } from 'lucide-react';
 import { getDeliveryFeeByPostcode, isDeliveryAvailable } from '@/lib/postcodes';
+import { ButtonLoader } from '@/components/ui';
 
 export function CartSummary() {
   const { items, getTotalPrice } = useCartStore();
@@ -411,7 +412,7 @@ export function CartSummary() {
       >
         {isLoading ? (
           <>
-            <Loader2 size={24} className="animate-spin" />
+            <ButtonLoader className="w-6 h-6" />
             Processing...
           </>
         ) : (

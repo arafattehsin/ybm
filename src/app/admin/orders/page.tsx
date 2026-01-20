@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Eye, Package, Truck, CheckCircle, XCircle } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui';
 
 interface Order {
   id: string;
@@ -94,7 +95,7 @@ export default function OrdersPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <LoadingSpinner size="md" text="Loading orders..." />
       </div>
     );
   }
@@ -157,6 +158,9 @@ export default function OrdersPage() {
                   Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Time
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Items
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -189,6 +193,16 @@ export default function OrdersPage() {
                         day: 'numeric',
                         year: 'numeric',
                       })}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 font-mono">
+                      {new Date(order.created_at).toLocaleTimeString('en-AU', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                      })}
+                      <span className="text-xs text-gray-500 ml-1">AEDT</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

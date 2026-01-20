@@ -26,7 +26,7 @@ export async function GET(
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ order });
+    return NextResponse.json(order);
   } catch (error) {
     console.error('Get order error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
@@ -47,10 +47,25 @@ export async function PATCH(
     const { id } = await params;
     const data = await request.json();
 
-    const updatedOrder = await ordersRepository.update(id, data);
-    const order = orderDb.getById(id);
+    // If status is being updated, add to status history
+    if (data.status) {
+      const currentOrder = await ordersRepository.getById(id);
+      if (currentOrder) {
+        const statusHistory = currentOrder.statusHistory || [];
+        statusHistory.push({
+          status: data.status,
+          timestamp: new Date().toISOString(),
+          note: data.statusNote
+        });
+        data.statusHistory = statusHistory;
+        delete data.statusNote; // Remove statusNote from the main order data
+      }
+    }
 
-    return NextResponse.json({ order });
+    data.updatedAt = new Date().toISOString();
+    const updatedOrder = await ordersRepository.update(id, data);
+
+    return NextResponse.json(updatedOrder);
   } catch (error) {
     console.error('Update order error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
