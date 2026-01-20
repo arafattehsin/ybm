@@ -31,6 +31,9 @@ jobs:
               run: npm run build
               env:
                   NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+                  COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
+                  COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
+                  COSMOS_DB_DATABASE_NAME: ${{ secrets.COSMOS_DB_DATABASE_NAME }}
 
             - name: Prepare deployment package
               run: |
