@@ -498,12 +498,14 @@ export default function OrderDetailPage() {
                   </p>
                 </div>
                 
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Email</p>
-                  <a href={`mailto:${order.customerEmail}`} className="text-gray-900 hover:text-blue-600">
-                    {order.customerEmail}
-                  </a>
-                </div>
+                {(order.customerEmail || customer?.email) && (
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Email</p>
+                    <a href={`mailto:${order.customerEmail || customer?.email}`} className="text-gray-900 hover:text-blue-600">
+                      {order.customerEmail || customer?.email}
+                    </a>
+                  </div>
+                )}
                 
                 {(order.customerPhone || customer?.phone) && (
                   <div>
