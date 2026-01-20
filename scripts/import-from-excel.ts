@@ -82,7 +82,7 @@ async function importFromExcel() {
     // Group rows by Order Number (Excel has one row per item)
     const ordersMap = new Map<string, any[]>();
     for (const row of data) {
-      const orderNumber = row['Order Number'] || row['Order ID'] || '';
+      const orderNumber = (row as any)['Order Number'] || (row as any)['Order ID'] || '';
       if (!ordersMap.has(orderNumber)) {
         ordersMap.set(orderNumber, []);
       }
