@@ -242,30 +242,35 @@ export default function OrderDetailPage() {
 
   const getItemPrice = (item: OrderItem): number => {
     // All prices are in cents from Stripe
-    if (item.totalPrice !== undefined && !isNaN(item.totalPrice)) {
+    if (item.totalPrice !== undefined && !isNaN(item.totalPrice) && item.totalPrice > 0) {
       return item.totalPrice / 100;
     }
-    if (item.unitPrice !== undefined && !isNaN(item.unitPrice)) {
+    if (item.unitPrice !== undefined && !isNaN(item.unitPrice) && item.unitPrice > 0) {
       return (item.unitPrice * item.quantity) / 100;
     }
-    if (item.price !== undefined && !isNaN(item.price)) {
+    if (item.price !== undefined && !isNaN(item.price) && item.price > 0) {
       return item.price / 100;
+    }
+    // Fallback for old orders: calculate from order subtotal if available
+    if (order && order.subtotal && order.items.length > 0) {
+      return (order.subtotal / 100) / order.items.length;
     }
     return 0;
   };
 
   const getUnitPrice = (item: OrderItem): number => {
     // All prices are in cents from Stripe
-    if (item.unitPrice !== undefined && !isNaN(item.unitPrice)) {
+    if (item.unitPrice !== undefined && !isNaN(item.unitPrice) && item.unitPrice > 0) {
       return item.unitPrice / 100;
     }
-    if (item.totalPrice !== undefined && !isNaN(item.totalPrice) && item.quantity > 0) {
+    if (item.totalPrice !== undefined && !isNaN(item.totalPrice) && item.quantity > 0 && item.totalPrice > 0) {
       return (item.totalPrice / item.quantity) / 100;
     }
-    if (item.price !== undefined && !isNaN(item.price) && item.quantity > 0) {
+    if (item.price !== undefined && !isNaN(item.price) && item.quantity > 0 && item.price > 0) {
       return (item.price / item.quantity) / 100;
     }
-    return 0;
+    // Fallback for old orders: use total item price divided by quantity
+    return getItemPrice(item) / (item.quantity || 1);
   };
 
   if (loading) {
@@ -577,7 +582,7 @@ export default function OrderDetailPage() {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Amount</span>
-                <span className="font-semibold text-gray-900">${order.total.toFixed(2)}</span>
+                <span className="font-semibold text-gray-900">${((order.total || 0) / 100).toFixed(2)}</span>
               </div>
               {order.paymentIntentId && (
                 <div className="pt-3 border-t border-gray-200">
