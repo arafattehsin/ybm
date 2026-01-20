@@ -5,7 +5,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { ordersRepository } from '@/lib/cosmosdb';
+import { ordersRepository, customersRepository } from '@/lib/cosmosdb';
 import { verifyToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     const payment_status = searchParams.get('payment_status');
 
-    // Get all orders (Cosmos DB query filtering will be added later)
+    // Get all orders
     let orders = await ordersRepository.getAll();
     
     // Filter by status if provided
@@ -31,7 +31,19 @@ export async function GET(request: NextRequest) {
       orders = orders.filter(order => order.payment_status === payment_status);
     }
 
-    return NextResponse.json({ orders });
+    // Fetch customer data for each order
+    const ordersWithCustomers = await Promise.all(
+      orders.map(async (order) => {
+        const customer = await customersRepository.getById(order.customer_id);
+        return {
+          ...order,
+          customer_name: customer?.name || 'Unknown Customer',
+          customer_email: customer?.email || '',
+        };
+      })
+    );
+
+    return NextResponse.json({ orders: ordersWithCustomers });
   } catch (error) {
     console.error('Get orders error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

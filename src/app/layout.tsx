@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Baloo_2, Quicksand, Dancing_Script } from 'next/font/google';
+import Script from 'next/script';
 import { Header, Footer, AnnouncementBar, CookieBanner } from '@/components/layout';
 import './globals.css';
 
@@ -71,6 +72,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${baloo.variable} ${quicksand.variable} ${dancingScript.variable}`}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-418CY2STYC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-418CY2STYC');
+          `}
+        </Script>
+      </head>
       <body className="font-body antialiased bg-white text-gray-900">
         <AnnouncementBar />
         <Header />

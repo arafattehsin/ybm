@@ -9,6 +9,8 @@ interface Order {
   id: string;
   order_id: string;
   customer_id: string;
+  customer_name: string;
+  customer_email: string;
   items: { productName: string; quantity: number; totalPrice: number }[];
   status: string;
   payment_status: string;
@@ -171,8 +173,8 @@ export default function OrdersPage() {
                 <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wide">
                   Time
                 </th>
-                <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                  Items
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                  Customer Name
                 </th>
                 <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wide">
                   Total
@@ -218,11 +220,9 @@ export default function OrdersPage() {
                       <span className="text-xs text-pink-600 ml-1 font-semibold">AEDT</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <div className="inline-flex items-center gap-1 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200">
-                      <Package className="w-3.5 h-3.5 text-blue-600" />
-                      <span className="text-sm font-semibold text-blue-700">{order.items.length}</span>
-                    </div>
+                  <td className="px-6 py-4 text-left">
+                    <div className="text-sm font-semibold text-gray-900">{order.customer_name}</div>
+                    <div className="text-xs text-gray-500 mt-0.5">{order.customer_email}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     <div className="text-base font-bold text-gray-900">{formatCurrency(order.total)}</div>
