@@ -1,0 +1,47 @@
+name: Deploy to Azure App Service
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+env:
+    AZURE_WEBAPP_NAME: ybm-production
+    NODE_VERSION: "20.x"
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build Next.js application
+              run: npm run build
+              env:
+                  NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+
+            - name: Prepare deployment package
+              run: |
+                  cp package.json .next/standalone/
+                  cp package-lock.json .next/standalone/
+                  cp -r .next/static .next/standalone/.next/
+                  cp -r public .next/standalone/
+
+            - name: Deploy to Azure Web App
+              uses: azure/webapps-deploy@v2
+              with:
+                  app-name: ${{ env.AZURE_WEBAPP_NAME }}
+                  publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+                  package: .next/standalone

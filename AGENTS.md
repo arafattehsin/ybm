@@ -7,7 +7,7 @@ This file provides essential context and instructions for AI agents working on t
 **Project Name:** YUM by Maryam  
 **Type:** E-commerce bakery website  
 **Tech Stack:** Next.js 16.1.1, TypeScript, React 19, Tailwind CSS, Zustand  
-**Deployment:** Azure Static Web Apps  
+**Deployment:** Azure App Service (Basic B1)  
 **Business:** Custom cake and dessert bakery based in Carlingford, Sydney (NSW 2118)
 
 ## Azure Infrastructure Details
@@ -26,8 +26,9 @@ Cosmos DB Key: [Stored in .env.local - see environment variables section]
 ### Azure Resources
 
 - **Cosmos DB:** NoSQL (Core SQL API), Serverless mode, Australia East region
-- **Static Web Apps:** Hosting for Next.js application
+- **App Service:** Basic B1 plan, Node.js 20 LTS, Australia East region
 - **Location:** Australia East (Sydney) for lowest latency
+- **Production URL:** https://ybm-production.azurewebsites.net
 
 ## Project Structure
 
@@ -152,10 +153,9 @@ ybm-website/
 ### 5. Payment Processing
 
 **Provider:** Stripe  
-**Mode:** Test Mode (for development)  
+**Mode:** Live Mode (production)  
 **Strategy:** Manual capture (authorize on checkout, charge after order confirmation)
-
-**Test Card:** 4242 4242 4242 4242 (any future expiry, any CVC)
+**Key Type:** Restricted key (enhanced security)
 
 ## Database Schema
 
@@ -241,8 +241,9 @@ INSTAGRAM_APP_ID=1410491010429610
 INSTAGRAM_USER_ID=17841439510792089
 INSTAGRAM_ACCESS_TOKEN=[60-day long-lived token]
 
-# Stripe
-STRIPE_SECRET_KEY=sk_test_[your_test_key]
+# Stripe (Live Mode)
+STRIPE_SECRET_KEY=rk_live_[restricted_key]
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_[publishable_key]
 
 # App Configuration
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -378,11 +379,11 @@ Uses Zustand for state management:
 
 ### When Working with Payments
 
-1. **Test with Stripe test cards** only
-2. **Never use real credit cards** in test mode
-3. **Verify webhook signature** always
-4. **Handle failed payments** gracefully
-5. **Support refunds** for cancelled orders
+1. **Use restricted Stripe keys** for enhanced security
+2. **Verify webhook signature** always (critical for production)
+3. **Handle failed payments** gracefully
+4. **Support refunds** for cancelled orders
+5. **Monitor Stripe Dashboard** for payment issues
 
 ### Code Style
 
@@ -458,28 +459,32 @@ Uses Zustand for state management:
 - [ ] View customers
 - [ ] Check analytics
 
-**API Testing:**
+**Production Testing:**
 
-- Use test card: 4242 4242 4242 4242
+- Use real payment cards in production
 - Test postcode: 2118 (free), 2114 ($15), 2000 ($30)
-- Test declined card: 4000 0000 0000 0002
+- Monitor Stripe Dashboard for transactions
+- Test order flow end-to-end before announcing
 
 ## Deployment
 
 ### Current Setup
 
-- **Hosting:** Azure Static Web Apps
-- **Branch:** feat/changes → main
+- **Hosting:** Azure App Service (Basic B1)
+- **Branch:** main (direct production deployment)
 - **Build Command:** `npm run build`
-- **Output Directory:** `.next`
+- **Output Directory:** `.next/standalone`
+- **Deployment:** GitHub Actions automated pipeline
 
 ### Environment Variables (Production)
 
-Set in Azure Static Web Apps:
+Set in Azure App Service Configuration:
 
 - All variables from `.env.local`
-- Use production Stripe keys (sk*live*...)
-- Use production Cosmos DB connection string
+- Use production Stripe keys (rk*live*... restricted key)
+- Production Cosmos DB connection string
+- JWT secret for admin authentication
+- Configure via Azure Portal or Azure CLI
 
 ## Common Issues & Solutions
 
