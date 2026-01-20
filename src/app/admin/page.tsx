@@ -178,19 +178,17 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Banner with Glassmorphism */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-primary via-pink-500 to-accent rounded-3xl p-8 text-white shadow-2xl">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2" />
-        <div className="relative z-10">
+      {/* Welcome Banner with Pink Gradient */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-pink-500 via-pink-600 to-pink-700 rounded-2xl shadow-2xl p-8">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        <div className="relative">
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
-              <Sparkles className="w-6 h-6" />
+            <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg border border-white/30 inline-block">
+              <p className="text-pink-100 text-sm font-medium">Dashboard Overview</p>
             </div>
-            <span className="text-white/80 text-sm font-medium">Dashboard Overview</span>
           </div>
-          <h1 className="text-4xl font-bold mb-2">Welcome back! 👋</h1>
-          <p className="text-white/80 text-lg">Here&apos;s what&apos;s happening with your bakery today.</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">Welcome back! 👋</h1>
+          <p className="text-pink-100 text-base">Here&apos;s what&apos;s happening with your bakery today.</p>
         </div>
       </div>
 
@@ -209,11 +207,11 @@ export default function AdminDashboardPage() {
                 <span>+12%</span>
               </div>
             </div>
-            <p className="text-gray-500 text-sm font-medium mb-1">Total Revenue</p>
-            <p className="text-3xl font-bold text-gray-900">{formatCurrency(stats?.totalRevenue || 0)}</p>
+            <p className="text-gray-500 text-base font-semibold mb-1">Total Revenue</p>
+            <p className="text-4xl font-bold text-gray-900">{formatCurrency(stats?.totalRevenue || 0)}</p>
             <div className="mt-4 pt-4 border-t border-gray-100">
               <MiniBarChart data={weeklyRevenue} color="bg-emerald-400" />
-              <p className="text-xs text-gray-400 mt-2 text-center">Last 7 days</p>
+              <p className="text-sm text-gray-500 mt-2 text-center font-medium">Last 7 days</p>
             </div>
           </div>
         </div>
@@ -230,11 +228,11 @@ export default function AdminDashboardPage() {
                 {stats?.ordersThisMonth || 0} new
               </span>
             </div>
-            <p className="text-gray-500 text-sm font-medium mb-1">Total Orders</p>
-            <p className="text-3xl font-bold text-gray-900">{stats?.totalOrders || 0}</p>
+            <p className="text-gray-500 text-base font-semibold mb-1">Total Orders</p>
+            <p className="text-4xl font-bold text-gray-900">{stats?.totalOrders || 0}</p>
             <div className="mt-4 pt-4 border-t border-gray-100">
               <MiniBarChart data={weeklyOrders} color="bg-blue-400" />
-              <p className="text-xs text-gray-400 mt-2 text-center">Last 7 days</p>
+              <p className="text-sm text-gray-500 mt-2 text-center font-medium">Last 7 days</p>
             </div>
           </div>
         </div>
@@ -248,12 +246,12 @@ export default function AdminDashboardPage() {
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
             </div>
-            <p className="text-gray-500 text-sm font-medium mb-1">Avg Order Value</p>
-            <p className="text-3xl font-bold text-gray-900">{formatCurrency(stats?.averageOrderValue || 0)}</p>
+            <p className="text-gray-500 text-base font-semibold mb-1">Avg Order Value</p>
+            <p className="text-4xl font-bold text-gray-900">{formatCurrency(stats?.averageOrderValue || 0)}</p>
             <div className="mt-4 pt-4 border-t border-gray-100">
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-500">Performance</span>
-                <span className="text-xs font-medium text-purple-600">Good</span>
+                <span className="text-sm text-gray-500 font-medium">Performance</span>
+                <span className="text-sm font-bold text-purple-600">Good</span>
               </div>
               <div className="mt-2 h-2 bg-gray-100 rounded-full overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full w-3/4 transition-all duration-1000" />
@@ -277,11 +275,11 @@ export default function AdminDashboardPage() {
                 </span>
               )}
             </div>
-            <p className="text-gray-500 text-sm font-medium mb-1">Pending Orders</p>
-            <p className="text-3xl font-bold text-gray-900">{stats?.pendingOrders || 0}</p>
+            <p className="text-gray-500 text-base font-semibold mb-1">Pending Orders</p>
+            <p className="text-4xl font-bold text-gray-900">{stats?.pendingOrders || 0}</p>
             <div className="mt-4 pt-4 border-t border-gray-100">
-              <p className="text-xs text-amber-600 font-medium flex items-center gap-1">
-                <Timer className="w-3.5 h-3.5" />
+              <p className="text-sm text-amber-600 font-bold flex items-center gap-1">
+                <Timer className="w-4 h-4" />
                 {(stats?.pendingOrders || 0) > 0 ? 'Requires attention' : 'All caught up! 🎉'}
               </p>
             </div>
@@ -295,14 +293,14 @@ export default function AdminDashboardPage() {
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-gray-100 shadow-lg shadow-gray-100/50">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Order Status</h2>
-              <p className="text-sm text-gray-500 mt-1">Real-time order tracking</p>
+              <h2 className="text-2xl font-bold text-gray-900">Order Status</h2>
+              <p className="text-base text-gray-500 mt-1">Real-time order tracking</p>
             </div>
             <Link 
               href="/admin/orders" 
-              className="flex items-center gap-1 text-sm text-primary hover:text-accent transition-colors font-medium"
+              className="flex items-center gap-1 text-base text-pink-600 hover:text-pink-700 transition-colors font-bold"
             >
-              View All <ArrowRight className="w-4 h-4" />
+              View All <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
           
@@ -313,10 +311,10 @@ export default function AdminDashboardPage() {
                 className={`p-4 rounded-xl border ${statusColors[status] || 'bg-gray-50 text-gray-600 border-gray-200'} hover:scale-105 transition-transform duration-200 cursor-pointer`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  {statusIcons[status] || <Package className="w-4 h-4" />}
-                  <p className="text-sm font-medium capitalize">{status.replace(/_/g, ' ')}</p>
+                  {statusIcons[status] || <Package className="w-5 h-5" />}
+                  <p className="text-base font-bold capitalize">{status.replace(/_/g, ' ')}</p>
                 </div>
-                <p className="text-3xl font-bold">{count}</p>
+                <p className="text-4xl font-bold">{count}</p>
               </div>
             ))}
           </div>
@@ -324,17 +322,17 @@ export default function AdminDashboardPage() {
 
         {/* Donut Chart */}
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg shadow-gray-100/50">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Distribution</h2>
-          <p className="text-sm text-gray-500 mb-6">Order breakdown</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Distribution</h2>
+          <p className="text-base text-gray-500 mb-6">Order breakdown</p>
           <DonutChart data={donutData} colors={donutColors} />
           <div className="mt-6 space-y-2">
             {donutData.slice(0, 3).map((item, index) => (
-              <div key={item.label} className="flex items-center justify-between text-sm">
+              <div key={item.label} className="flex items-center justify-between text-base">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: donutColors[index] }} />
-                  <span className="text-gray-600 capitalize">{item.label.replace(/_/g, ' ')}</span>
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: donutColors[index] }} />
+                  <span className="text-gray-600 font-medium capitalize">{item.label.replace(/_/g, ' ')}</span>
                 </div>
-                <span className="font-medium text-gray-900">{item.value}</span>
+                <span className="font-bold text-gray-900">{item.value}</span>
               </div>
             ))}
           </div>
@@ -352,11 +350,11 @@ export default function AdminDashboardPage() {
             <div className="p-4 bg-gradient-to-br from-primary to-accent rounded-2xl w-fit mb-4 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
               <ShoppingCart className="w-7 h-7 text-white" />
             </div>
-            <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-primary transition-colors">View Orders</h3>
-            <p className="text-sm text-gray-500 mb-4">Manage all customer orders</p>
-            <div className="flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all">
+            <h3 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-primary transition-colors">View Orders</h3>
+            <p className="text-base text-gray-500 mb-4">Manage all customer orders</p>
+            <div className="flex items-center gap-1 text-primary font-bold text-base group-hover:gap-2 transition-all">
               <span>Open</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-5 h-5" />
             </div>
           </div>
         </Link>
@@ -370,11 +368,11 @@ export default function AdminDashboardPage() {
             <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl w-fit mb-4 shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform duration-300">
               <Users className="w-7 h-7 text-white" />
             </div>
-            <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-blue-600 transition-colors">View Customers</h3>
-            <p className="text-sm text-gray-500 mb-4">Manage customer information</p>
-            <div className="flex items-center gap-1 text-blue-600 font-medium text-sm group-hover:gap-2 transition-all">
+            <h3 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-blue-600 transition-colors">View Customers</h3>
+            <p className="text-base text-gray-500 mb-4">Manage customer information</p>
+            <div className="flex items-center gap-1 text-blue-600 font-bold text-base group-hover:gap-2 transition-all">
               <span>Open</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-5 h-5" />
             </div>
           </div>
         </Link>
@@ -388,11 +386,11 @@ export default function AdminDashboardPage() {
             <div className="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl w-fit mb-4 shadow-lg shadow-purple-200 group-hover:scale-110 transition-transform duration-300">
               <BarChart3 className="w-7 h-7 text-white" />
             </div>
-            <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-purple-600 transition-colors">View Analytics</h3>
-            <p className="text-sm text-gray-500 mb-4">Detailed reports and insights</p>
-            <div className="flex items-center gap-1 text-purple-600 font-medium text-sm group-hover:gap-2 transition-all">
+            <h3 className="font-bold text-gray-900 text-xl mb-2 group-hover:text-purple-600 transition-colors">View Analytics</h3>
+            <p className="text-base text-gray-500 mb-4">Detailed reports and insights</p>
+            <div className="flex items-center gap-1 text-purple-600 font-bold text-base group-hover:gap-2 transition-all">
               <span>Open</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-5 h-5" />
             </div>
           </div>
         </Link>
@@ -402,17 +400,17 @@ export default function AdminDashboardPage() {
       <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg shadow-gray-100/50">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">This Month Performance</h2>
-            <p className="text-sm text-gray-500 mt-1">Revenue and orders overview</p>
+            <h2 className="text-2xl font-bold text-gray-900">This Month Performance</h2>
+            <p className="text-base text-gray-500 mt-1">Revenue and orders overview</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-accent" />
-              <span className="text-sm text-gray-600">Revenue</span>
+              <div className="w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-pink-600" />
+              <span className="text-base text-gray-600 font-medium">Revenue</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-blue-500" />
-              <span className="text-sm text-gray-600">Orders</span>
+              <div className="w-4 h-4 rounded-full bg-blue-500" />
+              <span className="text-base text-gray-600 font-medium">Orders</span>
             </div>
           </div>
         </div>
@@ -513,8 +511,8 @@ export default function AdminDashboardPage() {
                 <Wallet className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Revenue this month</p>
-                <p className="text-2xl font-bold text-gray-900">{formatCurrency(stats?.revenueThisMonth || 0)}</p>
+                <p className="text-base text-gray-500 font-medium">Revenue this month</p>
+                <p className="text-3xl font-bold text-gray-900">{formatCurrency(stats?.revenueThisMonth || 0)}</p>
               </div>
             </div>
           </div>
@@ -524,8 +522,8 @@ export default function AdminDashboardPage() {
                 <ShoppingCart className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Orders this month</p>
-                <p className="text-2xl font-bold text-gray-900">{stats?.ordersThisMonth || 0} orders</p>
+                <p className="text-base text-gray-500 font-medium">Orders this month</p>
+                <p className="text-3xl font-bold text-gray-900">{stats?.ordersThisMonth || 0} orders</p>
               </div>
             </div>
           </div>
