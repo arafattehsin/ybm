@@ -1,21 +1,27 @@
-import { HeroSection, FeaturedProducts, SeasonalCTA, Testimonials } from '@/components/home';
+import { HeroSection, FeaturedProducts, SeasonalCTA, Testimonials, InstagramSection } from '@/components/home';
+import { PageTransition } from '@/components/layout';
 import productsData from '@/data/products.json';
 import testimonialsData from '@/data/testimonials.json';
 import type { Product, Testimonial } from '@/types';
+import { getInstagramMedia } from '@/lib/instagram';
 
 const products = productsData.products as Product[];
 const testimonials = testimonialsData.testimonials as Testimonial[];
 
-// Get featured products (limit to 5)
-const featuredProducts = products.filter((p) => p.featured).slice(0, 5);
+// Get featured products (limit to 8 for slider)
+const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch Instagram posts
+  const instagramPosts = await getInstagramMedia(6);
+
   return (
-    <>
+    <PageTransition>
       <HeroSection />
       <FeaturedProducts products={featuredProducts} />
       <SeasonalCTA />
       <Testimonials testimonials={testimonials} />
-    </>
+      <InstagramSection posts={instagramPosts} />
+    </PageTransition>
   );
 }

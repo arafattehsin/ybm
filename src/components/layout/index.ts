@@ -2,3 +2,4 @@ export { AnnouncementBar } from './AnnouncementBar';
 export { Header } from './Header';
 export { Footer } from './Footer';
 export { CookieBanner } from './CookieBanner';
+export { PageTransition } from './PageTransition';

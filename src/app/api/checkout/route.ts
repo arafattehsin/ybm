@@ -101,8 +101,8 @@ export async function POST(request: NextRequest) {
           delivery_fee: deliveryFee.toString(),
         },
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cart`,
       shipping_address_collection: deliveryMethod === 'delivery' ? {
         allowed_countries: ['AU'],
       } : undefined,
@@ -110,14 +110,18 @@ export async function POST(request: NextRequest) {
       metadata: {
         order_items: JSON.stringify(
           items.map((i) => ({
-            name: i.productName,
+            productName: i.productName,
             size: i.size,
-            qty: i.quantity,
+            addons: i.addons,
+            quantity: i.quantity,
+            unitPrice: i.unitPrice,
+            totalPrice: i.unitPrice * i.quantity,
           }))
         ),
         delivery_method: deliveryMethod,
         delivery_postcode: deliveryPostcode || 'pickup',
         delivery_option: deliveryOption,
+        delivery_fee: deliveryFee.toString(),
       },
     });
 

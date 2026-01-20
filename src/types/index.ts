@@ -55,3 +55,48 @@ export interface Testimonial {
   author: string;
   location: string;
 }
+
+// Payment Types
+export interface PaymentIntentResponse {
+  clientSecret: string;
+  paymentIntentId: string;
+}
+
+export interface CheckoutData {
+  items: CartItem[];
+  subtotal: number; // in cents
+  delivery: number; // in cents
+  total: number; // in cents
+  customerEmail?: string;
+  customerName?: string;
+  deliveryAddress?: DeliveryAddress;
+}
+
+export interface DeliveryAddress {
+  line1: string;
+  line2?: string;
+  city: string;
+  postcode: string;
+  country: string;
+}
+
+export interface PaymentStatus {
+  status: 'pending' | 'processing' | 'succeeded' | 'failed' | 'canceled';
+  paymentIntentId?: string;
+  amount?: number;
+  currency?: string;
+  error?: string;
+}
+
+export interface OrderData {
+  id: string;
+  paymentIntentId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  items: CartItem[];
+  customerEmail?: string;
+  customerName?: string;
+  deliveryAddress?: DeliveryAddress;
+  createdAt: string;
+}

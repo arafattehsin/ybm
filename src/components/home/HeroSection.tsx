@@ -1,88 +1,404 @@
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui';
-import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import { BUSINESS } from '@/lib/constants';
+import Image from 'next/image';
+import gsap from 'gsap';
 
 export function HeroSection() {
+  const heroRef = useRef<HTMLElement>(null);
+  const leftBlobRef = useRef<HTMLDivElement>(null);
+  const leftBlobBgRef = useRef<HTMLDivElement>(null);
+  const rightBlobRef = useRef<HTMLDivElement>(null);
+  const rightBlobBgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const awardRef = useRef<HTMLDivElement>(null);
+  const shapesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Initial content animation
+      gsap.fromTo(contentRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' }
+      );
+
+      // Award badge animation
+      gsap.fromTo(awardRef.current,
+        { opacity: 0, scale: 0.8, x: 50 },
+        { opacity: 1, scale: 1, x: 0, duration: 0.8, delay: 0.6, ease: 'back.out(1.7)' }
+      );
+
+      // Floating animation for left blob - ENLARGED
+      gsap.to(leftBlobRef.current, {
+        x: 20,
+        y: -25,
+        rotation: 5,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      gsap.to(leftBlobBgRef.current, {
+        x: -15,
+        y: 20,
+        rotation: -3,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // Floating animation for right blob with DIFFERENT pattern
+      gsap.to(rightBlobRef.current, {
+        x: -20,
+        y: 20,
+        rotation: -5,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      gsap.to(rightBlobBgRef.current, {
+        x: 15,
+        y: -15,
+        rotation: 4,
+        duration: 6,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // Background shapes animation
+      if (shapesRef.current) {
+        const shapes = shapesRef.current.children;
+        Array.from(shapes).forEach((shape, index) => {
+          gsap.to(shape, {
+            x: `random(-40, 40)`,
+            y: `random(-40, 40)`,
+            rotation: `random(-20, 20)`,
+            duration: 7 + index * 0.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        });
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative bg-gray-100 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px] lg:min-h-[600px]">
-          {/* Image Side */}
-          <div className="relative h-64 lg:h-auto order-1 lg:order-2">
-            <Image
-              src="/images/products/Tres-Leches-Cake.jpg"
-              alt="Tres Leches Cake"
-              fill
-              className="object-cover"
-              priority
+    <section ref={heroRef} className="relative min-h-[95vh] overflow-hidden bg-gradient-hero">
+      {/* Background Decorative Bakery Shapes */}
+      <div ref={shapesRef} className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-pink-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-white/50 rounded-full blur-2xl" />
+        <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-pink-100/40 rounded-full blur-2xl" />
+        {/* Bakery shapes - hidden on mobile */}
+        <div className="absolute top-1/4 right-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-12 h-12 text-pink-300/40" fill="currentColor">
+            <path d="M16 28c0-8 6-14 16-14s16 6 16 14c0 2-1 4-2 5h-28c-1-1-2-3-2-5z" />
+            <path d="M14 35h36c1 0 2 1 2 2l-4 22c0 2-2 3-4 3H20c-2 0-4-1-4-3l-4-22c0-1 1-2 2-2z" />
+          </svg>
+        </div>
+        <div className="absolute bottom-1/3 left-1/3 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-10 h-10 text-pink-400/30" fill="currentColor">
+            <path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 40c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" />
+          </svg>
+        </div>
+        <div className="absolute top-2/3 right-1/5 hidden md:block">
+          <svg viewBox="0 0 64 64" className="w-8 h-8 text-pink-200/50" fill="currentColor">
+            <path d="M8 48l24-40 24 40c0 4-4 8-12 8H20c-8 0-12-4-12-8z" />
+          </svg>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        {/* Mobile Layout - Stack with content between videos */}
+        <div className="flex flex-col lg:hidden items-center overflow-hidden">
+          {/* First Video Blob on Mobile - contained within screen */}
+          <div className="relative w-[90%] max-w-[320px] h-[260px] sm:h-[300px] mb-4 mx-auto">
+            {/* Background blob - pink/white gradient - closer to video */}
+            <div 
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
+                borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
+                transform: 'scale(1.08)'
+              }}
             />
+            {/* Second layer - closer */}
+            <div 
+              className="absolute inset-1 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)',
+                borderRadius: '60% 40% 30% 70% / 55% 30% 70% 45%',
+                transform: 'scale(1.04)'
+              }}
+            />
+            {/* Video container blob */}
+            <div 
+              className="absolute inset-3 overflow-hidden shadow-2xl"
+              style={{ 
+                borderRadius: '55% 45% 35% 65% / 55% 35% 65% 45%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/hero.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
 
-          {/* Content Side */}
-          <div className="flex flex-col justify-center p-8 lg:p-16 order-2 lg:order-1 bg-white">
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 font-serif">
-              TRESLECHES CAKE
-            </h1>
-            <p className="text-gray-600 text-lg mb-8 max-w-md">
-              Tres leches cake aka three milk cake is a Mexican dessert. It is
-              an ultra soft and moist sponge cake topped with cream and fresh
-              fruits.
-            </p>
-            <div className="mb-8">
-              <Link href="/menu/tres-leches-cake">
-                <Button size="lg">ORDER NOW</Button>
-              </Link>
+          {/* Content in the Middle on Mobile */}
+          <div ref={contentRef} className="text-center z-10 py-6 px-4">
+            {/* Award Badge */}
+            <div 
+              ref={awardRef}
+              className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg mb-6 border border-pink-100"
+            >
+              <Image
+                src="/videos/awardpic.jpeg"
+                alt="Local Business Awards 2021"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+              <div className="text-left">
+                <p className="text-xs font-bold text-pink-600 uppercase tracking-wider">Finalist</p>
+                <p className="text-sm font-semibold text-gray-700">Local Business Awards 2021</p>
+              </div>
             </div>
 
-            {/* Social Links */}
-            <div>
-              <p className="text-sm font-medium text-gray-500 mb-3">
-                Follow Us
-              </p>
-              <div className="flex space-x-4">
-                <a
-                  href={BUSINESS.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#C9A86C] transition-colors"
-                  aria-label="Follow on Facebook"
-                >
-                  <Facebook size={20} />
-                </a>
-                <a
-                  href={BUSINESS.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#C9A86C] transition-colors"
-                  aria-label="Follow on Instagram"
-                >
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href={BUSINESS.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#C9A86C] transition-colors"
-                  aria-label="Follow on Twitter"
-                >
-                  <Twitter size={20} />
-                </a>
-                <a
-                  href={BUSINESS.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#C9A86C] transition-colors"
-                  aria-label="Follow on LinkedIn"
-                >
-                  <Linkedin size={20} />
-                </a>
+            {/* Main Heading */}
+            <h1 className="text-4xl sm:text-5xl font-heading mb-6 leading-tight">
+              <span className="gradient-text">YUM</span>
+              <span className="text-gray-800 block my-1 text-xl sm:text-2xl font-body font-medium">by</span>
+              <span className="gradient-text">Maryam</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-sm mx-auto leading-relaxed font-body">
+              An artisan dessert boutique crafting heavenly homemade cakes & sweet treats with love from Sydney.
+            </p>
+
+            {/* CTA Button */}
+            <Link href="/menu">
+              <button className="btn-gradient px-10 py-4 rounded-full font-heading text-base shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group">
+                <span className="flex items-center gap-2">
+                  Explore Menu
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </button>
+            </Link>
+          </div>
+
+          {/* Second Video Blob on Mobile - contained within screen */}
+          <div className="relative w-[90%] max-w-[320px] h-[260px] sm:h-[300px] mt-4 mx-auto">
+            {/* Background blob - white/pink gradient - closer to video */}
+            <div 
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
+                borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
+                transform: 'scale(1.08)'
+              }}
+            />
+            {/* Second layer - closer */}
+            <div 
+              className="absolute inset-1 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%)',
+                borderRadius: '40% 60% 70% 30% / 40% 65% 35% 60%',
+                transform: 'scale(1.04)'
+              }}
+            />
+            {/* Video container blob */}
+            <div 
+              className="absolute inset-3 overflow-hidden shadow-2xl"
+              style={{ 
+                borderRadius: '35% 65% 60% 40% / 40% 55% 45% 60%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout - Larger videos with more spacing */}
+        <div className="hidden lg:grid grid-cols-12 gap-2 items-center min-h-[70vh]">
+          
+          {/* Left Video Blob Section - ENLARGED with more space from center */}
+          <div className="lg:col-span-4 relative h-[550px] -ml-32">
+            {/* Background blob - pink/white gradient */}
+            <div 
+              ref={leftBlobBgRef}
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #E91E63 0%, #FFB6C1 50%, #FFFFFF 100%)',
+                borderRadius: '65% 35% 25% 75% / 55% 25% 75% 45%',
+                transform: 'scale(1.18) translate(10px, 10px)'
+              }}
+            />
+            {/* Second layer circle - white/pink */}
+            <div 
+              className="absolute inset-0 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #FFB6C1 100%)',
+                borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                transform: 'scale(1.10) translate(5px, 5px)'
+              }}
+            />
+            {/* Video container blob */}
+            <div 
+              ref={leftBlobRef}
+              className="absolute inset-2 overflow-hidden shadow-2xl animate-pulse-glow"
+              style={{ 
+                borderRadius: '55% 45% 35% 65% / 55% 35% 65% 45%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/hero.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-pink-500/10 to-transparent" />
+            </div>
+          </div>
+
+          {/* Center Content - Desktop Only */}
+          <div className="lg:col-span-4 text-center z-10">
+            {/* Award Badge */}
+            <div 
+              className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full shadow-lg mb-8 border border-pink-100"
+            >
+              <Image
+                src="/videos/awardpic.jpeg"
+                alt="Local Business Awards 2021"
+                width={45}
+                height={45}
+                className="rounded-full object-cover"
+              />
+              <div className="text-left">
+                <p className="text-xs font-bold text-pink-600 uppercase tracking-wider">Finalist</p>
+                <p className="text-sm font-semibold text-gray-700">Local Business Awards 2021</p>
+                <p className="text-xs text-gray-500">Parramatta</p>
               </div>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="text-5xl lg:text-6xl font-heading mb-8 leading-tight">
+              <span className="gradient-text">YUM</span>
+              <span className="text-gray-800 block my-2 text-2xl lg:text-3xl font-body font-medium">by</span>
+              <span className="gradient-text">Maryam</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-600 text-lg lg:text-xl mb-10 max-w-md mx-auto leading-relaxed font-body">
+              An artisan dessert boutique crafting heavenly homemade cakes, 
+              cupcakes & sweet treats with love from Sydney.
+            </p>
+
+            {/* CTA Button */}
+            <Link href="/menu">
+              <button className="btn-gradient px-12 py-5 rounded-full font-heading text-lg shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 group">
+                <span className="flex items-center gap-3">
+                  Explore Menu
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </button>
+            </Link>
+          </div>
+
+          {/* Right Video Blob Section - LARGER with more space from center */}
+          <div className="lg:col-span-4 relative h-[550px] -mr-32">
+            {/* Background blob - white/pink gradient (reversed) */}
+            <div 
+              ref={rightBlobBgRef}
+              className="absolute inset-0 shadow-2xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC0CB 50%, #E91E63 100%)',
+                borderRadius: '35% 65% 75% 25% / 35% 75% 25% 65%',
+                transform: 'scale(1.18) translate(-10px, 10px)'
+              }}
+            />
+            {/* Second layer - pink/white */}
+            <div 
+              className="absolute inset-0 shadow-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, #FFB6C1 0%, #FFFFFF 50%, #FFC0CB 100%)',
+                borderRadius: '40% 60% 70% 30% / 45% 65% 35% 55%',
+                transform: 'scale(1.10) translate(-5px, 5px)'
+              }}
+            />
+            {/* Video container blob - DIFFERENT SHAPE */}
+            <div 
+              ref={rightBlobRef}
+              className="absolute inset-2 overflow-hidden shadow-2xl"
+              style={{ 
+                borderRadius: '35% 65% 60% 40% / 40% 55% 45% 60%'
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/1.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent" />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Static Wave Divider - No Animation */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg 
+          viewBox="0 0 1440 120" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="w-full"
+          preserveAspectRatio="none"
+        >
+          <path 
+            d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" 
+            fill="#FCE4EC"
+          />
+          <path 
+            d="M0,80 C240,110 480,50 720,80 C960,110 1200,50 1440,80 L1440,120 L0,120 Z" 
+            fill="white"
+          />
+        </svg>
+      </div>
     </section>
   );
 }
+

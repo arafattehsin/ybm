@@ -1,0 +1,95 @@
+{
+  "admins": [
+    {
+      "id": "admin-1",
+      "email": "admin@yumbymaryam.com",
+      "password": "$2a$10$wbFe5N73.JxNoZtt5U0BHu5cNHl/dEiKMIhGNUI6zIJhchHb0rphi",
+      "name": "Admin User",
+      "role": "super_admin",
+      "two_factor_enabled": 0,
+      "last_login": "2026-01-19T10:33:36.154Z",
+      "active": 1,
+      "created_at": "2026-01-18T22:38:20.776Z",
+      "updated_at": "2026-01-19T10:33:36.154Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "cust-1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "0412345678",
+      "addresses": [
+        {
+          "id": "addr-1",
+          "street": "123 Main St",
+          "city": "Sydney",
+          "postcode": "2000",
+          "state": "NSW",
+          "isDefault": true
+        }
+      ],
+      "total_spent": 12500,
+      "total_orders": 2,
+      "last_order_date": "2026-01-18T22:38:20.776Z",
+      "created_at": "2026-01-13T22:38:20.777Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "order-2",
+      "order_id": "#ORD-002",
+      "customer_id": "cust-1",
+      "items": [
+        {
+          "productId": "choco-cake",
+          "productName": "Chocolate Cake",
+          "size": "Large",
+          "addons": [],
+          "quantity": 1,
+          "unitPrice": 6500,
+          "totalPrice": 6500
+        }
+      ],
+      "status": "confirmed",
+      "payment_status": "authorized",
+      "payment_intent_id": "pi_test_002",
+      "delivery_method": "pickup",
+      "delivery_fee": 0,
+      "subtotal": 6500,
+      "total": 6500,
+      "created_at": "2026-01-17T22:38:20.777Z",
+      "updated_at": "2026-01-18T22:41:00.454Z",
+      "assigned_to": "admin-1"
+    },
+    {
+      "id": "order-1",
+      "order_id": "#ORD-001",
+      "customer_id": "cust-1",
+      "items": [
+        {
+          "productId": "tres-leches",
+          "productName": "Tres Leches Cake",
+          "size": "Medium",
+          "addons": [
+            "Extra Cream"
+          ],
+          "quantity": 1,
+          "unitPrice": 4500,
+          "totalPrice": 4500
+        }
+      ],
+      "status": "delivered",
+      "payment_status": "captured",
+      "payment_intent_id": "pi_test_001",
+      "delivery_method": "delivery",
+      "delivery_fee": 900,
+      "subtotal": 4500,
+      "total": 5400,
+      "created_at": "2026-01-13T22:38:20.777Z",
+      "updated_at": "2026-01-15T22:38:20.777Z",
+      "assigned_to": "admin-1"
+    }
+  ],
+  "twoFactorSessions": []
+}
