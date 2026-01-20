@@ -9,15 +9,12 @@ import {
   CreditCard,
   User,
   MapPin,
-  Phone,
-  Mail,
   Clock,
   CheckCircle,
   XCircle,
   AlertTriangle,
   Package,
   Calendar,
-  Banknote,
   FileText
 } from 'lucide-react';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
@@ -172,6 +169,7 @@ export default function OrderDetailPage() {
     if (!order || selectedStatus === order.status) return;
     
     setUpdating(true);
+    setError(null);
     try {
       const response = await fetch(`/api/admin/orders/${params.id}`, {
         method: 'PATCH',
@@ -184,10 +182,29 @@ export default function OrderDetailPage() {
       
       if (!response.ok) throw new Error('Failed to update status');
       
-      const updatedOrder = await response.json();
-      setOrder(updatedOrder);
+      const updatedData = await response.json();
+      
+      // Normalize the updated order data
+      const normalizedOrder = {
+        ...updatedData,
+        orderNumber: updatedData.orderNumber || updatedData.order_id || 'N/A',
+        customerId: updatedData.customerId || updatedData.customer_id,
+        customerName: updatedData.customerName || updatedData.customer_name || '',
+        customerEmail: updatedData.customerEmail || updatedData.customer_email || '',
+        customerPhone: updatedData.customerPhone || updatedData.customer_phone || '',
+        paymentStatus: updatedData.paymentStatus || updatedData.payment_status || 'pending',
+        paymentIntentId: updatedData.paymentIntentId || updatedData.payment_intent_id,
+        deliveryFee: updatedData.deliveryFee ?? updatedData.delivery_fee ?? 0,
+        shippingAddress: updatedData.shippingAddress || updatedData.shipping_address,
+        deliveryInstructions: updatedData.deliveryInstructions || updatedData.delivery_instructions || '',
+        createdAt: updatedData.createdAt || updatedData.created_at,
+        updatedAt: updatedData.updatedAt || updatedData.updated_at,
+        statusHistory: updatedData.statusHistory || updatedData.status_history || []
+      };
+      
+      setOrder(normalizedOrder);
       setStatusNote('');
-      setSelectedStatus(updatedOrder.status);
+      setSelectedStatus(normalizedOrder.status);
     } catch (err) {
       setError('Failed to update order status');
       console.error(err);
@@ -349,15 +366,15 @@ export default function OrderDetailPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">${order.subtotal.toFixed(2)}</span>
+                  <span className="text-gray-900">${((order.subtotal || 0) / 100).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Delivery Fee</span>
-                  <span className="text-gray-900">${order.deliveryFee.toFixed(2)}</span>
+                  <span className="text-gray-900">${((order.deliveryFee || 0) / 100).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-[#2D2D2D]">${order.total.toFixed(2)}</span>
+                  <span className="text-[#2D2D2D]">${((order.total || 0) / 100).toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -466,57 +483,30 @@ export default function OrderDetailPage() {
               </h2>
             </div>
             <div className="p-6 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-[#2D2D2D] rounded-full flex items-center justify-center">
-                  <span className="text-white font-semibold text-lg">
-                    {(order.customerName || order.customerEmail || 'U')[0].toUpperCase()}
-                  </span>
-                </div>
+              <div className="space-y-4">
                 <div>
+                  <p className="text-sm text-gray-500 mb-1">Name</p>
                   <p className="font-medium text-gray-900">
                     {order.customerName || customer?.name || 'Guest Customer'}
                   </p>
-                  {customer?.totalOrders && (
-                    <p className="text-sm text-gray-500">
-                      {customer.totalOrders} orders
-                    </p>
-                  )}
                 </div>
-              </div>
-              
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3 text-sm">
-                  <Mail className="h-4 w-4 text-gray-400" />
-                  <a href={`mailto:${order.customerEmail}`} className="text-blue-600 hover:underline">
+                
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Email</p>
+                  <a href={`mailto:${order.customerEmail}`} className="text-gray-900 hover:text-blue-600">
                     {order.customerEmail}
                   </a>
                 </div>
+                
                 {(order.customerPhone || customer?.phone) && (
-                  <div className="flex items-center gap-3 text-sm">
-                    <Phone className="h-4 w-4 text-gray-400" />
-                    <a href={`tel:${order.customerPhone || customer?.phone}`} className="text-gray-700 hover:text-gray-900">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Phone</p>
+                    <a href={`tel:${order.customerPhone || customer?.phone}`} className="text-gray-900 hover:text-blue-600">
                       {order.customerPhone || customer?.phone}
                     </a>
                   </div>
                 )}
-                {customer?.totalSpent !== undefined && (
-                  <div className="flex items-center gap-3 text-sm">
-                    <Banknote className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-700">
-                      Total spent: ${customer.totalSpent.toFixed(2)}
-                    </span>
-                  </div>
-                )}
               </div>
-              
-              {order.customerId && (
-                <Link
-                  href={`/admin/customers/${order.customerId}`}
-                  className="block w-full text-center px-4 py-2 mt-4 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                  View Customer Profile
-                </Link>
-              )}
             </div>
           </div>
 

@@ -72,12 +72,24 @@ export async function POST(request: NextRequest) {
     const metadata = session.metadata || {};
     const items = JSON.parse(metadata.order_items || '[]');
 
-    // Generate unique order ID with timestamp and random component
-    const timestamp = Date.now();
-    const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD
-    const timeComponent = timestamp.toString().slice(-6); // Last 6 digits of timestamp (microseconds)
-    const randomPart = randomUUID().split('-')[0].toUpperCase(); // First part of UUID
-    const orderNumber = `YBM-${dateStr}-${timeComponent}-${randomPart}`;
+    // Generate simple sequential order ID (YBM-01, YBM-02, etc.)
+    // Find the highest existing order number
+    let maxOrderNum = 0;
+    existingOrders.forEach(order => {
+      const orderId = order.orderNumber || order.order_id || '';
+      // Extract number from format YBM-XX
+      const match = orderId.match(/YBM-(\d+)/);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (num > maxOrderNum) {
+          maxOrderNum = num;
+        }
+      }
+    });
+    
+    // Increment and format with leading zeros
+    const nextOrderNum = maxOrderNum + 1;
+    const orderNumber = `YBM-${String(nextOrderNum).padStart(2, '0')}`;
 
     // Calculate subtotal (total - delivery fee)
     const deliveryFee = parseInt(metadata.delivery_fee || '0');
