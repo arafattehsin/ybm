@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
 
     // Retrieve the checkout session from Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['payment_intent', 'customer_details'],
-    });
+      expand: ['payment_intent', 'customer_details', 'shipping_details'],
+    }) as any;
 
     if (!session.payment_intent) {
       return NextResponse.json({ error: 'No payment intent found' }, { status: 400 });

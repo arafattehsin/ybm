@@ -29,8 +29,8 @@ async function purgeAllData() {
     const { resources: orders } = await ordersContainer.items.readAll().fetchAll();
     console.log(`   Found ${orders.length} orders`);
     
-    for (const order of orders) {
-      await ordersContainer.item(order.id, (order as any).customer_id).delete();
+    for (const order of orders as any[]) {
+      await ordersContainer.item(order.id, order.customer_id).delete();
     }
     console.log(`   ✅ Deleted ${orders.length} orders\n`);
 
@@ -40,7 +40,7 @@ async function purgeAllData() {
     const { resources: customers } = await customersContainer.items.readAll().fetchAll();
     console.log(`   Found ${customers.length} customers`);
     
-    for (const customer of customers) {
+    for (const customer of customers as any[]) {
       await customersContainer.item(customer.id, customer.id).delete();
     }
     console.log(`   ✅ Deleted ${customers.length} customers\n`);

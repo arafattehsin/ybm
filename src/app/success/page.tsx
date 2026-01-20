@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useCartStore } from '@/stores/cartStore';
 import { Button } from '@/components/ui';
 import { CheckCircle, ArrowRight, Loader2, Package, Truck, Clock } from 'lucide-react';
 
-export default function SuccessPage() {
+function SuccessContent() {
   const { clearCart } = useCartStore();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
@@ -151,5 +151,24 @@ export default function SuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-50 py-12 md:py-20 flex items-center justify-center">
+      <div className="text-center">
+        <Loader2 className="w-12 h-12 text-pink-500 animate-spin mx-auto mb-4" />
+        <p className="text-gray-600">Loading your order details...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <SuccessContent />
+    </Suspense>
   );
 }
