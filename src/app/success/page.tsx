@@ -43,7 +43,7 @@ export default function SuccessPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-50 py-12 md:py-20">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         {/* Success Icon with Animation */}
         <div className="text-center mb-8">
           <div className="relative inline-block">
