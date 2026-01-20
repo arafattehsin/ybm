@@ -308,7 +308,7 @@ export default function OrderDetailPage() {
       </button>
 
       {/* Header with Gradient */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-pink-500 via-pink-600 to-purple-600 rounded-2xl shadow-2xl p-8">
+      <div className="relative overflow-hidden bg-gradient-to-br from-pink-500 via-pink-600 to-pink-700 rounded-2xl shadow-2xl p-8">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
         <div className="relative">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
@@ -316,20 +316,20 @@ export default function OrderDetailPage() {
               <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg mb-3 border border-white/30">
                 <p className="text-pink-100 text-sm font-medium">Order Details</p>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
                 {order.orderNumber}
               </h1>
               <div className="flex items-center gap-2 text-pink-100">
                 <Calendar className="h-5 w-5" />
-                <p className="text-lg font-medium">{formatDateTime(order.createdAt)}</p>
+                <p className="text-base font-medium">{formatDateTime(order.createdAt)}</p>
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <div className={`px-6 py-3 rounded-xl text-base font-bold border-2 shadow-lg backdrop-blur-sm ${statusConfig[order.status]?.color} bg-white/90`}>
-                <StatusIcon className="h-5 w-5 inline mr-2" />
+              <div className={`px-5 py-2.5 rounded-xl text-sm font-bold border-2 shadow-lg backdrop-blur-sm ${statusConfig[order.status]?.color} bg-white/90`}>
+                <StatusIcon className="h-4 w-4 inline mr-2" />
                 {statusConfig[order.status]?.label}
               </div>
-              <div className={`px-6 py-3 rounded-xl text-base font-bold shadow-lg backdrop-blur-sm ${paymentStatusConfig[order.paymentStatus]?.color} bg-white/90`}>
+              <div className={`px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg backdrop-blur-sm ${paymentStatusConfig[order.paymentStatus]?.color} bg-white/90`}>
                 {paymentStatusConfig[order.paymentStatus]?.label}
               </div>
             </div>
@@ -342,9 +342,9 @@ export default function OrderDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Order Items */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-pink-50 via-purple-50 to-pink-50">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 flex items-center gap-3">
-                <Package className="h-6 w-6 text-pink-600" />
+            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-pink-50 to-pink-100">
+              <h2 className="text-xl font-bold text-pink-700 flex items-center gap-3">
+                <Package className="h-5 w-5 text-pink-600" />
                 Order Items ({order.items.length})
               </h2>
             </div>
@@ -398,9 +398,9 @@ export default function OrderDetailPage() {
 
           {/* Status Update Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 flex items-center gap-3">
-                <Clock className="h-6 w-6 text-blue-600" />
+            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-100">
+              <h2 className="text-xl font-bold text-blue-700 flex items-center gap-3">
+                <Clock className="h-5 w-5 text-blue-600" />
                 Update Status
               </h2>
             </div>
@@ -446,9 +446,9 @@ export default function OrderDetailPage() {
           {/* Status Timeline */}
           {order.statusHistory && order.statusHistory.length > 0 && (
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-              <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50">
-                <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-600 flex items-center gap-3">
-                  <FileText className="h-6 w-6 text-green-600" />
+              <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-100">
+                <h2 className="text-xl font-bold text-green-700 flex items-center gap-3">
+                  <FileText className="h-5 w-5 text-green-600" />
                   Status Timeline
                 </h2>
               </div>
@@ -492,9 +492,9 @@ export default function OrderDetailPage() {
         <div className="space-y-6">
           {/* Customer Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 flex items-center gap-3">
-                <User className="h-6 w-6 text-orange-600" />
+            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-amber-100">
+              <h2 className="text-xl font-bold text-orange-700 flex items-center gap-3">
+                <User className="h-5 w-5 text-orange-600" />
                 Customer
               </h2>
             </div>
@@ -530,9 +530,9 @@ export default function OrderDetailPage() {
 
           {/* Delivery Address Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-cyan-50 via-sky-50 to-blue-50">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center gap-3">
-                <MapPin className="h-6 w-6 text-cyan-600" />
+            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-cyan-50 to-blue-100">
+              <h2 className="text-xl font-bold text-cyan-700 flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-cyan-600" />
                 Delivery Address
               </h2>
             </div>
@@ -574,9 +574,9 @@ export default function OrderDetailPage() {
 
           {/* Payment Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600 flex items-center gap-3">
-                <CreditCard className="h-6 w-6 text-emerald-600" />
+            <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-green-100">
+              <h2 className="text-xl font-bold text-emerald-700 flex items-center gap-3">
+                <CreditCard className="h-5 w-5 text-emerald-600" />
                 Payment
               </h2>
             </div>
