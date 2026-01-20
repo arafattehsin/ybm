@@ -1,0 +1,163 @@
+2026-01-20T10:42:41.0450754Z Container start method called.
+2026-01-20T10:42:41.1505615Z Establishing network.
+2026-01-20T10:42:41.1512009Z Pulling image: appsvc/node:20-lts_20251016.4.tuxprod.
+2026-01-20T10:42:42.1611738Z Image appsvc/node:20-lts_20251016.4.tuxprod is pulled from registry 10.1.0.4:13209
+2026-01-20T10:42:42.1912937Z Container is starting.
+2026-01-20T10:42:42.2002659Z Establishing user namespace if not established already.
+2026-01-20T10:42:42.2020785Z Establishing network if not established already.
+2026-01-20T10:42:42.2109390Z Mounting volumes.
+2026-01-20T10:42:42.2430772Z Nested mountpoint 
+2026-01-20T10:42:42.3024274Z Nested mountpoint volatile/logs
+2026-01-20T10:42:42.3317155Z Nested mountpoint 
+2026-01-20T10:42:42.5423400Z Nested mountpoint 
+2026-01-20T10:42:42.5829173Z Nested mountpoint 
+2026-01-20T10:42:42.8955637Z Creating container.
+2026-01-20T10:42:42.9040148Z Creating pipes for streaming container io.
+2026-01-20T10:42:42.9058237Z Creating stdout named pipe at /podr/container/pipe/e18ba3734502_ybm-production/stdout_f129b2a28e714ba5a7656a0cf27e6af9.
+2026-01-20T10:42:42.9144656Z Successfully created stdout named pipe at: /podr/container/pipe/e18ba3734502_ybm-production/stdout_f129b2a28e714ba5a7656a0cf27e6af9.
+2026-01-20T10:42:42.9162995Z Opening named pipe /podr/container/pipe/e18ba3734502_ybm-production/stdout_f129b2a28e714ba5a7656a0cf27e6af9 for reading in non-blocking mode.
+2026-01-20T10:42:42.9169239Z Successfully opened named pipe: /podr/container/pipe/e18ba3734502_ybm-production/stdout_f129b2a28e714ba5a7656a0cf27e6af9.
+2026-01-20T10:42:42.9252071Z Successfully removed non-blocking flag from /podr/container/pipe/e18ba3734502_ybm-production/stdout_f129b2a28e714ba5a7656a0cf27e6af9.
+2026-01-20T10:42:42.9262010Z Creating stderr named pipe at /podr/container/pipe/e18ba3734502_ybm-production/stderr_a6b389debce4458caefe5b0f84c77a76.
+2026-01-20T10:42:42.9342560Z Successfully created stderr named pipe at: /podr/container/pipe/e18ba3734502_ybm-production/stderr_a6b389debce4458caefe5b0f84c77a76.
+2026-01-20T10:42:42.9356301Z Opening named pipe /podr/container/pipe/e18ba3734502_ybm-production/stderr_a6b389debce4458caefe5b0f84c77a76 for reading in non-blocking mode.
+2026-01-20T10:42:42.9364511Z Successfully opened named pipe: /podr/container/pipe/e18ba3734502_ybm-production/stderr_a6b389debce4458caefe5b0f84c77a76.
+2026-01-20T10:42:42.9439306Z Successfully removed non-blocking flag from /podr/container/pipe/e18ba3734502_ybm-production/stderr_a6b389debce4458caefe5b0f84c77a76.
+2026-01-20T10:42:42.9460547Z Creating container with image: appsvc/node:20-lts_20251016.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:20-lts_20251016.4.tuxprod
+2026-01-20T10:42:44.4774106Z Starting container: e18ba3734502_ybm-production.
+2026-01-20T10:42:44.7604186Z Starting watchers and probes.
+2026-01-20T10:42:44.8409768Z Starting metrics collection.
+2026-01-20T10:42:44.8997893Z Container is running.
+2026-01-20T10:42:45.6128095Z Container start method finished after 4518 ms.
+2026-01-20T10:43:19.9164548Z Site startup probe succeeded after 34.2141285 seconds.
+2026-01-20T10:43:20.5507765Z Site started.
+2026-01-20T10:43:21.1293849Z Site is running with patch version NODE 20.19.5
+2026-01-20T10:50:13.0397291Z Container start method called.
+2026-01-20T10:50:13.0411147Z Establishing network.
+2026-01-20T10:50:13.0488467Z Pulling image: appsvc/node:20-lts_20251016.4.tuxprod.
+2026-01-20T10:50:13.4732517Z Container is starting.
+2026-01-20T10:50:13.4752505Z Establishing user namespace if not established already.
+2026-01-20T10:50:13.4759964Z Establishing network if not established already.
+2026-01-20T10:50:13.4839014Z Mounting volumes.
+2026-01-20T10:50:13.4849601Z Nested mountpoint 
+2026-01-20T10:50:13.5287942Z Nested mountpoint volatile/logs
+2026-01-20T10:50:13.5485707Z Nested mountpoint 
+2026-01-20T10:50:13.6200079Z Nested mountpoint 
+2026-01-20T10:50:13.6500185Z Nested mountpoint 
+2026-01-20T10:50:14.0319609Z Creating container.
+2026-01-20T10:50:14.0400521Z Creating pipes for streaming container io.
+2026-01-20T10:50:14.0411672Z Creating stdout named pipe at /podr/container/pipe/29e0580f84a8_ybm-production/stdout_39542660ef444157be1fcfc7d828cbb2.
+2026-01-20T10:50:14.0497522Z Successfully created stdout named pipe at: /podr/container/pipe/29e0580f84a8_ybm-production/stdout_39542660ef444157be1fcfc7d828cbb2.
+2026-01-20T10:50:14.0506766Z Opening named pipe /podr/container/pipe/29e0580f84a8_ybm-production/stdout_39542660ef444157be1fcfc7d828cbb2 for reading in non-blocking mode.
+2026-01-20T10:50:14.0515143Z Successfully opened named pipe: /podr/container/pipe/29e0580f84a8_ybm-production/stdout_39542660ef444157be1fcfc7d828cbb2.
+2026-01-20T10:50:14.0600396Z Successfully removed non-blocking flag from /podr/container/pipe/29e0580f84a8_ybm-production/stdout_39542660ef444157be1fcfc7d828cbb2.
+2026-01-20T10:50:14.0609532Z Creating stderr named pipe at /podr/container/pipe/29e0580f84a8_ybm-production/stderr_c2df68e396234507ba3c68280001016f.
+2026-01-20T10:50:14.0613460Z Successfully created stderr named pipe at: /podr/container/pipe/29e0580f84a8_ybm-production/stderr_c2df68e396234507ba3c68280001016f.
+2026-01-20T10:50:14.0617009Z Opening named pipe /podr/container/pipe/29e0580f84a8_ybm-production/stderr_c2df68e396234507ba3c68280001016f for reading in non-blocking mode.
+2026-01-20T10:50:14.0619803Z Successfully opened named pipe: /podr/container/pipe/29e0580f84a8_ybm-production/stderr_c2df68e396234507ba3c68280001016f.
+2026-01-20T10:50:14.0622203Z Successfully removed non-blocking flag from /podr/container/pipe/29e0580f84a8_ybm-production/stderr_c2df68e396234507ba3c68280001016f.
+2026-01-20T10:50:14.0697777Z Creating container with image: appsvc/node:20-lts_20251016.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:20-lts_20251016.4.tuxprod
+2026-01-20T10:50:14.6052980Z Starting container: 29e0580f84a8_ybm-production.
+2026-01-20T10:50:14.6870324Z Starting watchers and probes.
+2026-01-20T10:50:14.7172618Z Starting metrics collection.
+2026-01-20T10:50:14.7175236Z Container is running.
+2026-01-20T10:50:15.0178795Z Container start method finished after 1977 ms.
+2026-01-20T10:50:43.2054345Z Site startup probe succeeded after 28.1753261 seconds.
+2026-01-20T10:50:43.5748156Z Site started.
+2026-01-20T10:50:43.5768490Z Site is running with patch version NODE 20.19.5
+2026-01-20T10:51:03.7674604Z Container is terminating. Grace period: 5 seconds.
+2026-01-20T10:51:03.8077274Z Stop and delete container. Retry count = 0
+2026-01-20T10:51:03.8157857Z Stopping container: e18ba3734502_ybm-production.
+2026-01-20T10:51:09.9148405Z Deleting container: e18ba3734502_ybm-production. Retry count = 0
+2026-01-20T10:51:10.1845839Z Container spec TerminationMessagePolicy  path 
+2026-01-20T10:51:10.1951050Z Container is terminated. Total time elapsed: 6419 ms.
+2026-01-20T10:51:10.2551268Z Site: ybm-production stopped.
+2026-01-20T11:14:44.9988469Z Container start method called.
+2026-01-20T11:14:45.0794398Z Establishing network.
+2026-01-20T11:14:45.0997558Z Pulling image: appsvc/node:20-lts_20251016.4.tuxprod.
+2026-01-20T11:14:45.5330866Z Container is starting.
+2026-01-20T11:14:45.5332551Z Establishing user namespace if not established already.
+2026-01-20T11:14:45.5333302Z Establishing network if not established already.
+2026-01-20T11:14:45.5340107Z Mounting volumes.
+2026-01-20T11:14:45.5346426Z Nested mountpoint 
+2026-01-20T11:14:45.5857920Z Nested mountpoint volatile/logs
+2026-01-20T11:14:45.6045764Z Nested mountpoint 
+2026-01-20T11:14:45.7358249Z Nested mountpoint 
+2026-01-20T11:14:45.7439728Z Nested mountpoint 
+2026-01-20T11:14:46.1046353Z Creating container.
+2026-01-20T11:14:46.1051838Z Creating pipes for streaming container io.
+2026-01-20T11:14:46.1053230Z Creating stdout named pipe at /podr/container/pipe/3d9f54c0af81_ybm-production/stdout_f09d4f5a04a04c8598d9a4ef33b15691.
+2026-01-20T11:14:46.1065849Z Successfully created stdout named pipe at: /podr/container/pipe/3d9f54c0af81_ybm-production/stdout_f09d4f5a04a04c8598d9a4ef33b15691.
+2026-01-20T11:14:46.1066867Z Opening named pipe /podr/container/pipe/3d9f54c0af81_ybm-production/stdout_f09d4f5a04a04c8598d9a4ef33b15691 for reading in non-blocking mode.
+2026-01-20T11:14:46.1068364Z Successfully opened named pipe: /podr/container/pipe/3d9f54c0af81_ybm-production/stdout_f09d4f5a04a04c8598d9a4ef33b15691.
+2026-01-20T11:14:46.1069305Z Successfully removed non-blocking flag from /podr/container/pipe/3d9f54c0af81_ybm-production/stdout_f09d4f5a04a04c8598d9a4ef33b15691.
+2026-01-20T11:14:46.1070221Z Creating stderr named pipe at /podr/container/pipe/3d9f54c0af81_ybm-production/stderr_628644173aca4507950017b6274b8771.
+2026-01-20T11:14:46.1071498Z Successfully created stderr named pipe at: /podr/container/pipe/3d9f54c0af81_ybm-production/stderr_628644173aca4507950017b6274b8771.
+2026-01-20T11:14:46.1072332Z Opening named pipe /podr/container/pipe/3d9f54c0af81_ybm-production/stderr_628644173aca4507950017b6274b8771 for reading in non-blocking mode.
+2026-01-20T11:14:46.1159303Z Successfully opened named pipe: /podr/container/pipe/3d9f54c0af81_ybm-production/stderr_628644173aca4507950017b6274b8771.
+2026-01-20T11:14:46.1163352Z Successfully removed non-blocking flag from /podr/container/pipe/3d9f54c0af81_ybm-production/stderr_628644173aca4507950017b6274b8771.
+2026-01-20T11:14:46.1164624Z Creating container with image: appsvc/node:20-lts_20251016.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:20-lts_20251016.4.tuxprod
+2026-01-20T11:14:47.2689323Z Starting container: 3d9f54c0af81_ybm-production.
+2026-01-20T11:14:47.3819731Z Starting watchers and probes.
+2026-01-20T11:14:47.3915122Z Starting metrics collection.
+2026-01-20T11:14:47.3918757Z Container is running.
+2026-01-20T11:14:47.6434908Z Container start method finished after 2584 ms.
+2026-01-20T11:15:28.8434830Z Container has finished running with exit code: 127.
+2026-01-20T11:15:28.8604383Z Container is terminating. Grace period: 5 seconds.
+2026-01-20T11:15:28.8633474Z Stop and delete container. Retry count = 0
+2026-01-20T11:15:28.8716147Z Stopping container: 3d9f54c0af81_ybm-production.
+2026-01-20T11:15:28.9545447Z Deleting container: 3d9f54c0af81_ybm-production. Retry count = 0
+2026-01-20T11:15:29.3735409Z Container spec TerminationMessagePolicy  path 
+2026-01-20T11:15:29.3756999Z Container is terminated. Total time elapsed: 513 ms.
+2026-01-20T11:15:29.3767931Z Site container: ybm-production terminated during site startup.
+2026-01-20T11:15:29.4535079Z Site startup probe failed after 41.734997 seconds.
+2026-01-20T11:15:29.6948457Z Failed to start site. Revert by stopping site.
+2026-01-20T11:15:29.7048765Z Site: ybm-production stopped.
+2026-01-20T11:15:52.1163309Z Container is terminating. Grace period: 5 seconds.
+2026-01-20T11:15:52.1265979Z Stop and delete container. Retry count = 0
+2026-01-20T11:15:52.1270215Z Stopping container: 29e0580f84a8_ybm-production.
+2026-01-20T11:15:57.2864536Z Deleting container: 29e0580f84a8_ybm-production. Retry count = 0
+2026-01-20T11:15:57.5293136Z Container spec TerminationMessagePolicy  path 
+2026-01-20T11:15:57.5304437Z Container is terminated. Total time elapsed: 5413 ms.
+2026-01-20T11:15:57.5388106Z Site: ybm-production stopped.
+2026-01-20T11:15:59.9724422Z Container start method called.
+2026-01-20T11:15:59.9921451Z Establishing network.
+2026-01-20T11:15:59.9928414Z Pulling image: appsvc/node:20-lts_20251016.4.tuxprod.
+2026-01-20T11:16:00.8846897Z Container is starting.
+2026-01-20T11:16:00.8855342Z Establishing user namespace if not established already.
+2026-01-20T11:16:00.8864478Z Establishing network if not established already.
+2026-01-20T11:16:00.8986079Z Mounting volumes.
+2026-01-20T11:16:00.8997881Z Nested mountpoint 
+2026-01-20T11:16:00.9367058Z Nested mountpoint volatile/logs
+2026-01-20T11:16:00.9568958Z Nested mountpoint 
+2026-01-20T11:16:01.0031957Z Nested mountpoint 
+2026-01-20T11:16:01.0143619Z Nested mountpoint 
+2026-01-20T11:16:01.5747007Z Creating container.
+2026-01-20T11:16:01.5749105Z Creating pipes for streaming container io.
+2026-01-20T11:16:01.5750717Z Creating stdout named pipe at /podr/container/pipe/31fc10c7afa4_ybm-production/stdout_ffd98f11b88346cb8870a19dc019f04b.
+2026-01-20T11:16:01.5766088Z Successfully created stdout named pipe at: /podr/container/pipe/31fc10c7afa4_ybm-production/stdout_ffd98f11b88346cb8870a19dc019f04b.
+2026-01-20T11:16:01.5767396Z Opening named pipe /podr/container/pipe/31fc10c7afa4_ybm-production/stdout_ffd98f11b88346cb8870a19dc019f04b for reading in non-blocking mode.
+2026-01-20T11:16:01.5768831Z Successfully opened named pipe: /podr/container/pipe/31fc10c7afa4_ybm-production/stdout_ffd98f11b88346cb8870a19dc019f04b.
+2026-01-20T11:16:01.5769911Z Successfully removed non-blocking flag from /podr/container/pipe/31fc10c7afa4_ybm-production/stdout_ffd98f11b88346cb8870a19dc019f04b.
+2026-01-20T11:16:01.5771050Z Creating stderr named pipe at /podr/container/pipe/31fc10c7afa4_ybm-production/stderr_40b1038821e04819b201163df57fbfff.
+2026-01-20T11:16:01.5867955Z Successfully created stderr named pipe at: /podr/container/pipe/31fc10c7afa4_ybm-production/stderr_40b1038821e04819b201163df57fbfff.
+2026-01-20T11:16:01.5869607Z Opening named pipe /podr/container/pipe/31fc10c7afa4_ybm-production/stderr_40b1038821e04819b201163df57fbfff for reading in non-blocking mode.
+2026-01-20T11:16:01.6145493Z Successfully opened named pipe: /podr/container/pipe/31fc10c7afa4_ybm-production/stderr_40b1038821e04819b201163df57fbfff.
+2026-01-20T11:16:01.6151332Z Successfully removed non-blocking flag from /podr/container/pipe/31fc10c7afa4_ybm-production/stderr_40b1038821e04819b201163df57fbfff.
+2026-01-20T11:16:01.6156594Z Creating container with image: appsvc/node:20-lts_20251016.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:20-lts_20251016.4.tuxprod
+2026-01-20T11:16:02.7204420Z Starting container: 31fc10c7afa4_ybm-production.
+2026-01-20T11:16:02.9438534Z Starting watchers and probes.
+2026-01-20T11:16:02.9940876Z Starting metrics collection.
+2026-01-20T11:16:02.9943160Z Container is running.
+2026-01-20T11:16:03.6972826Z Container start method finished after 3712 ms.
+2026-01-20T11:16:42.7848270Z Container has finished running with exit code: 127.
+2026-01-20T11:16:42.7931307Z Container is terminating. Grace period: 5 seconds.
+2026-01-20T11:16:42.7951172Z Stop and delete container. Retry count = 0
+2026-01-20T11:16:42.8027097Z Stopping container: 31fc10c7afa4_ybm-production.
+2026-01-20T11:16:42.8644745Z Deleting container: 31fc10c7afa4_ybm-production. Retry count = 0
+2026-01-20T11:16:43.3058868Z Container spec TerminationMessagePolicy  path 
+2026-01-20T11:16:43.3072762Z Container is terminated. Total time elapsed: 513 ms.
+2026-01-20T11:16:43.3156070Z Site container: ybm-production terminated during site startup.
+2026-01-20T11:16:43.3561924Z Site startup probe failed after 39.5061431 seconds.
+2026-01-20T11:16:43.5376991Z Failed to start site. Revert by stopping site.
+2026-01-20T11:16:43.5565434Z Site: ybm-production stopped.

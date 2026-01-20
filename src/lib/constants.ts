@@ -82,3 +82,4 @@ export function formatPriceRange(sizes: { price: number }[]): string {
   if (min === max) return formatPrice(min);
   return `${formatPrice(min)} – ${formatPrice(max)}`;
 }
+

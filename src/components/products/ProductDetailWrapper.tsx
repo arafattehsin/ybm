@@ -391,3 +391,4 @@ export function ProductDetailWrapper({ product, addons, relatedProducts }: Produ
     </section>
   );
 }
+

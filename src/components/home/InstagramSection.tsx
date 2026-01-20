@@ -207,3 +207,4 @@ export function InstagramSection({ posts = [] }: InstagramSectionProps) {
     </section>
   );
 }
+

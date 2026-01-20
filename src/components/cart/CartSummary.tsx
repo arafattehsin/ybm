@@ -427,3 +427,4 @@ export function CartSummary() {
     </div>
   );
 }
+

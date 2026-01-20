@@ -51,3 +51,4 @@ export function calculateOrderTotal(
   const tax = Math.round(beforeTax * taxRate);
   return beforeTax + tax;
 }
+

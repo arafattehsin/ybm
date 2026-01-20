@@ -1,0 +1,9 @@
+<step title="Incoming Request" date="2026-01-20T11:14:16.898" instance="f8476c" url="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2026-01-20_11-13-37Z" method="GET" type="request" pid="833,1,20" Host="ybm-production.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_c5505f5b4dbacee83b81ef651a2b0056b84780c2009cb8b0cfb38c61e7de9dc3" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=f8476c567f932b0e8a8402e2feffce02162d8570a9104cf6e353d29c6817c566;Path=/;HttpOnly;Secure;Domain=ybm-production.scm.azurewebsites.net; ARRAffinitySameSite=f8476c567f932b0e8a8402e2feffce02162d8570a9104cf6e353d29c6817c566;Path=/;HttpOnly;SameSite=None;Secure;Domain=ybm-production.scm.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="fc12d555-2b4d-473d-b8e0-8d952ca6d9f0" CLIENT-IP="64.236.134.18:7168" X-SITE-DEPLOYMENT-ID="ybm-production" WAS-DEFAULT-HOSTNAME="ybm-production.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2026-01-20_11-13-37Z" X-Client-IP="64.236.134.18" X-Client-Port="7168" >
+  <step title="Cleanup Xml Logs" date="2026-01-20T11:14:16.905" /><!-- duration: 11ms -->
+  <step title="DeploymentService.GetResult" date="2026-01-20T11:14:16.952" >
+    <step title="DeploymentService.GetLatestDeployment" date="2026-01-20T11:14:16.992" >
+      <step title="DeploymentManager.GetResults" date="2026-01-20T11:14:16.999" /><!-- duration: 316ms -->
+    </step><!-- duration: 340ms -->
+  </step><!-- duration: 401ms -->
+  <step title="Outgoing response" date="2026-01-20T11:14:17.374" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 22ms -->
+</step><!-- duration: 517ms -->

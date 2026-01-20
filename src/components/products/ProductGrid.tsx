@@ -22,3 +22,4 @@ export function ProductGrid({ products }: ProductGridProps) {
     </div>
   );
 }
+

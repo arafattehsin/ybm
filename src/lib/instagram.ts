@@ -58,3 +58,4 @@ export async function getInstagramMedia(limit = 12): Promise<InstagramMediaItem[
     return [];
   }
 }
+

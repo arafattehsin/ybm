@@ -290,3 +290,4 @@ function MenuProductCard({ product }: { product: Product }) {
     </Link>
   );
 }
+

@@ -267,3 +267,4 @@ export function ProductDetail({ product, addons: propsAddons }: ProductDetailPro
     </div>
   );
 }
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>648b7bcc-5c1b-4766-adee-441a5e960bc0</id>
+  <author>N/A</author>
+  <deployer>GITHUB_ZIP_DEPLOY</deployer>
+  <authorEmail>N/A</authorEmail>
+  <message>{"type":"deployment","sha":"cc18ef8d1c4f902523dc23615bf84286498370e3","repoName":"arafattehsin/ybm","actor":"arafattehsin","slotName":"production","commitMessage":"Add all required env vars to GitHub Actions workflow"}</message>
+  <progress></progress>
+  <status>Success</status>
+  <statusText></statusText>
+  <lastSuccessEndTime>2026-01-20T11:14:37.8007396Z</lastSuccessEndTime>
+  <receivedTime>2026-01-20T11:13:46.0207693Z</receivedTime>
+  <startTime>2026-01-20T11:13:47.5167998Z</startTime>
+  <endTime>2026-01-20T11:14:37.8007396Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>

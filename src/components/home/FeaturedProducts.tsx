@@ -294,3 +294,4 @@ function ProductSlideCard({ product }: { product: Product }) {
     </Link>
   );
 }
+

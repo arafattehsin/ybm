@@ -134,3 +134,4 @@ export function getZoneNameByPostcode(postcode: string): string | null {
 export function isDeliveryAvailable(postcode: string): boolean {
   return getDeliveryFeeByPostcode(postcode) !== null;
 }
+

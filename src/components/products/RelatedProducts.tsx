@@ -21,3 +21,4 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
     </section>
   );
 }
+

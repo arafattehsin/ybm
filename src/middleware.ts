@@ -4,13 +4,13 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect all /admin routes except /admin/auth/*
-  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/auth')) {
+  // Protect all /getmein routes except /getmein/auth/*
+  if (pathname.startsWith('/getmein') && !pathname.startsWith('/getmein/auth')) {
     const token = request.cookies.get('admin-token')?.value;
 
     if (!token) {
       // Redirect to login if no token
-      return NextResponse.redirect(new URL('/admin/auth/login', request.url));
+      return NextResponse.redirect(new URL('/getmein/auth/login', request.url));
     }
 
     // Token verification will be done in API routes
@@ -21,5 +21,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: '/getmein/:path*',
 };
+
