@@ -346,8 +346,8 @@ export default function OrderDetailPage() {
           {/* Order Items */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-pink-50 to-pink-100">
-              <h2 className="text-xl font-bold text-pink-700 flex items-center gap-3">
-                <Package className="h-5 w-5 text-pink-600" />
+              <h2 className="text-2xl font-bold text-pink-700 flex items-center gap-3">
+                <Package className="h-6 w-6 text-pink-600" />
                 Order Items ({order.items.length})
               </h2>
             </div>
@@ -356,7 +356,7 @@ export default function OrderDetailPage() {
                 <div key={item.id || index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900">{getItemName(item)}</h3>
+                      <h3 className="font-semibold text-base text-gray-900">{getItemName(item)}</h3>
                       <div className="mt-1 space-y-1">
                         {item.size && (
                           <p className="text-sm text-gray-500">Size: {item.size}</p>
@@ -369,7 +369,7 @@ export default function OrderDetailPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900">
+                      <p className="font-bold text-base text-gray-900">
                         ${getItemPrice(item).toFixed(2)}
                       </p>
                       <p className="text-sm text-gray-500">
@@ -383,15 +383,15 @@ export default function OrderDetailPage() {
             {/* Order Summary */}
             <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
               <div className="space-y-2">
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-base">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">${((order.subtotal || 0) / 100).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium">${((order.subtotal || 0) / 100).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-base">
                   <span className="text-gray-600">Delivery Fee</span>
-                  <span className="text-gray-900">${((order.deliveryFee || 0) / 100).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium">${((order.deliveryFee || 0) / 100).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-lg font-semibold pt-2 border-t border-gray-200">
+                <div className="flex justify-between text-xl font-bold pt-2 border-t border-gray-200">
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#2D2D2D]">${((order.total || 0) / 100).toFixed(2)}</span>
                 </div>
@@ -402,14 +402,14 @@ export default function OrderDetailPage() {
           {/* Status Update Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-100">
-              <h2 className="text-xl font-bold text-blue-700 flex items-center gap-3">
-                <Clock className="h-5 w-5 text-blue-600" />
+              <h2 className="text-2xl font-bold text-blue-700 flex items-center gap-3">
+                <Clock className="h-6 w-6 text-blue-600" />
                 Update Status
               </h2>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base font-bold text-gray-700 mb-2">
                   New Status
                 </label>
                 <select
@@ -425,7 +425,7 @@ export default function OrderDetailPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base font-bold text-gray-700 mb-2">
                   Note (optional)
                 </label>
                 <textarea
@@ -433,7 +433,7 @@ export default function OrderDetailPage() {
                   onChange={(e) => setStatusNote(e.target.value)}
                   placeholder="Add a note for this status change..."
                   rows={2}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2D2D2D] focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2D2D2D] focus:border-transparent resize-none text-base"
                 />
               </div>
               <button
@@ -450,8 +450,8 @@ export default function OrderDetailPage() {
           {order.statusHistory && order.statusHistory.length > 0 && (
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
               <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-100">
-                <h2 className="text-xl font-bold text-green-700 flex items-center gap-3">
-                  <FileText className="h-5 w-5 text-green-600" />
+                <h2 className="text-2xl font-bold text-green-700 flex items-center gap-3">
+                  <FileText className="h-6 w-6 text-green-600" />
                   Status Timeline
                 </h2>
               </div>
@@ -471,7 +471,7 @@ export default function OrderDetailPage() {
                             <TimelineIcon className="h-4 w-4" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-gray-900">{config.label}</p>
+                            <p className="font-bold text-base text-gray-900">{config.label}</p>
                             <p className="text-sm text-gray-500">
                               {formatDateTime(change.timestamp)}
                             </p>
@@ -496,8 +496,8 @@ export default function OrderDetailPage() {
           {/* Customer Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-amber-100">
-              <h2 className="text-xl font-bold text-orange-700 flex items-center gap-3">
-                <User className="h-5 w-5 text-orange-600" />
+              <h2 className="text-2xl font-bold text-orange-700 flex items-center gap-3">
+                <User className="h-6 w-6 text-orange-600" />
                 Customer
               </h2>
             </div>
@@ -505,7 +505,7 @@ export default function OrderDetailPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Name</p>
-                  <p className="font-medium text-gray-900">
+                  <p className="font-bold text-base text-gray-900">
                     {order.customerName || customer?.name || 'Guest Customer'}
                   </p>
                 </div>
@@ -513,7 +513,7 @@ export default function OrderDetailPage() {
                 {(order.customerEmail || customer?.email) && (
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Email</p>
-                    <a href={`mailto:${order.customerEmail || customer?.email}`} className="text-gray-900 hover:text-blue-600">
+                    <a href={`mailto:${order.customerEmail || customer?.email}`} className="text-gray-900 font-bold text-base hover:text-blue-600">
                       {order.customerEmail || customer?.email}
                     </a>
                   </div>
@@ -522,7 +522,7 @@ export default function OrderDetailPage() {
                 {(order.customerPhone || customer?.phone) && (
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Phone</p>
-                    <a href={`tel:${order.customerPhone || customer?.phone}`} className="text-gray-900 hover:text-blue-600">
+                    <a href={`tel:${order.customerPhone || customer?.phone}`} className="text-gray-900 text-base font-medium hover:text-blue-600">
                       {order.customerPhone || customer?.phone}
                     </a>
                   </div>
@@ -534,8 +534,8 @@ export default function OrderDetailPage() {
           {/* Delivery Address Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-cyan-50 to-blue-100">
-              <h2 className="text-xl font-bold text-cyan-700 flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-cyan-600" />
+              <h2 className="text-2xl font-bold text-cyan-700 flex items-center gap-3">
+                <MapPin className="h-6 w-6 text-cyan-600" />
                 Delivery Address
               </h2>
             </div>
@@ -543,13 +543,13 @@ export default function OrderDetailPage() {
               {order.shippingAddress ? (
                 <div className="space-y-2">
                   {order.shippingAddress.name && (
-                    <p className="font-medium text-gray-900">{order.shippingAddress.name}</p>
+                    <p className="font-semibold text-base text-gray-900">{order.shippingAddress.name}</p>
                   )}
-                  <p className="text-gray-700">{order.shippingAddress.line1}</p>
+                  <p className="text-base text-gray-700">{order.shippingAddress.line1}</p>
                   {order.shippingAddress.line2 && (
-                    <p className="text-gray-700">{order.shippingAddress.line2}</p>
+                    <p className="text-base text-gray-700">{order.shippingAddress.line2}</p>
                   )}
-                  <p className="text-gray-700">
+                  <p className="text-base text-gray-700">
                     {[
                       order.shippingAddress.city,
                       order.shippingAddress.state,
@@ -557,7 +557,7 @@ export default function OrderDetailPage() {
                     ].filter(Boolean).join(', ')}
                   </p>
                   {order.shippingAddress.country && (
-                    <p className="text-gray-500">{order.shippingAddress.country}</p>
+                    <p className="text-base text-gray-500">{order.shippingAddress.country}</p>
                   )}
                 </div>
               ) : (
@@ -578,25 +578,25 @@ export default function OrderDetailPage() {
           {/* Payment Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-green-100">
-              <h2 className="text-xl font-bold text-emerald-700 flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-emerald-600" />
+              <h2 className="text-2xl font-bold text-emerald-700 flex items-center gap-3">
+                <CreditCard className="h-6 w-6 text-emerald-600" />
                 Payment
               </h2>
             </div>
             <div className="p-6 space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Status</span>
-                <span className={`px-2 py-1 rounded text-xs font-medium ${paymentStatusConfig[order.paymentStatus]?.color}`}>
+                <span className="text-base text-gray-600">Status</span>
+                <span className={`px-3 py-1.5 rounded text-sm font-bold ${paymentStatusConfig[order.paymentStatus]?.color}`}>
                   {paymentStatusConfig[order.paymentStatus]?.label}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Method</span>
-                <span className="text-gray-900">Stripe</span>
+                <span className="text-base text-gray-600">Method</span>
+                <span className="text-base text-gray-900">Stripe</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Amount</span>
-                <span className="font-semibold text-gray-900">${((order.total || 0) / 100).toFixed(2)}</span>
+                <span className="text-base text-gray-600">Amount</span>
+                <span className="font-bold text-base text-gray-900">${((order.total || 0) / 100).toFixed(2)}</span>
               </div>
               {order.paymentIntentId && (
                 <div className="pt-3 border-t border-gray-200">
