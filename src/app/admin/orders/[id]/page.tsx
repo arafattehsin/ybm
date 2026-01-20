@@ -114,13 +114,40 @@ export default function OrderDetailPage() {
       const response = await fetch(`/api/admin/orders/${params.id}`);
       if (!response.ok) throw new Error('Failed to fetch order');
       const data = await response.json();
-      setOrder(data);
-      setSelectedStatus(data.status);
+      
+      // Normalize field names to handle both camelCase and snake_case
+      const normalizedOrder = {
+        ...data,
+        orderNumber: data.orderNumber || data.order_id || 'N/A',
+        customerId: data.customerId || data.customer_id,
+        customerName: data.customerName || data.customer_name || '',
+        customerEmail: data.customerEmail || data.customer_email || '',
+        customerPhone: data.customerPhone || data.customer_phone || '',
+        paymentStatus: data.paymentStatus || data.payment_status || 'pending',
+        paymentIntentId: data.paymentIntentId || data.payment_intent_id,
+        deliveryFee: data.deliveryFee ?? data.delivery_fee ?? 0,
+        shippingAddress: data.shippingAddress || data.shipping_address || (data.delivery_address ? {
+          name: data.delivery_address.name,
+          line1: data.delivery_address.street || data.delivery_address.line1,
+          line2: data.delivery_address.apartment || data.delivery_address.line2,
+          city: data.delivery_address.city,
+          state: data.delivery_address.state,
+          postal_code: data.delivery_address.postcode || data.delivery_address.postal_code,
+          country: data.delivery_address.country
+        } : undefined),
+        deliveryInstructions: data.deliveryInstructions || data.delivery_instructions || '',
+        createdAt: data.createdAt || data.created_at,
+        updatedAt: data.updatedAt || data.updated_at,
+        statusHistory: data.statusHistory || data.status_history || []
+      };
+      
+      setOrder(normalizedOrder);
+      setSelectedStatus(normalizedOrder.status);
       
       // Fetch customer details if customerId exists
-      if (data.customerId) {
+      if (normalizedOrder.customerId) {
         try {
-          const customerRes = await fetch(`/api/admin/customers/${data.customerId}`);
+          const customerRes = await fetch(`/api/admin/customers/${normalizedOrder.customerId}`);
           if (customerRes.ok) {
             const customerData = await customerRes.json();
             setCustomer(customerData);

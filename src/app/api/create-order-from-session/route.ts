@@ -75,8 +75,9 @@ export async function POST(request: NextRequest) {
     // Generate unique order ID with timestamp and random component
     const timestamp = Date.now();
     const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD
+    const timeComponent = timestamp.toString().slice(-6); // Last 6 digits of timestamp (microseconds)
     const randomPart = randomUUID().split('-')[0].toUpperCase(); // First part of UUID
-    const orderNumber = `YBM-${dateStr}-${randomPart}`;
+    const orderNumber = `YBM-${dateStr}-${timeComponent}-${randomPart}`;
 
     // Calculate subtotal (total - delivery fee)
     const deliveryFee = parseInt(metadata.delivery_fee || '0');

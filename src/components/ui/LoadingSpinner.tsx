@@ -12,7 +12,6 @@ interface LoadingSpinnerProps {
 
 export function LoadingSpinner({ size = 'md', fullScreen = false, text }: LoadingSpinnerProps) {
   const logoRef = useRef<HTMLDivElement>(null);
-  const circleRef = useRef<SVGCircleElement>(null);
   const dotsRef = useRef<HTMLDivElement>(null);
 
   const containerSizes = {
