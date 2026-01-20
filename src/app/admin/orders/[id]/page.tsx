@@ -241,27 +241,29 @@ export default function OrderDetailPage() {
   };
 
   const getItemPrice = (item: OrderItem): number => {
+    // All prices are in cents from Stripe
     if (item.totalPrice !== undefined && !isNaN(item.totalPrice)) {
-      return item.totalPrice;
+      return item.totalPrice / 100;
     }
     if (item.unitPrice !== undefined && !isNaN(item.unitPrice)) {
-      return item.unitPrice * item.quantity;
+      return (item.unitPrice * item.quantity) / 100;
     }
     if (item.price !== undefined && !isNaN(item.price)) {
-      return item.price;
+      return item.price / 100;
     }
     return 0;
   };
 
   const getUnitPrice = (item: OrderItem): number => {
+    // All prices are in cents from Stripe
     if (item.unitPrice !== undefined && !isNaN(item.unitPrice)) {
-      return item.unitPrice;
+      return item.unitPrice / 100;
     }
     if (item.totalPrice !== undefined && !isNaN(item.totalPrice) && item.quantity > 0) {
-      return item.totalPrice / item.quantity;
+      return (item.totalPrice / item.quantity) / 100;
     }
     if (item.price !== undefined && !isNaN(item.price) && item.quantity > 0) {
-      return item.price / item.quantity;
+      return (item.price / item.quantity) / 100;
     }
     return 0;
   };

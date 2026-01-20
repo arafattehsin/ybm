@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^8.6.1",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "gsap": "^3.14.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.562.0",
