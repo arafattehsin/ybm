@@ -327,9 +327,12 @@ export default function OrderDetailPage() {
             <div className="flex flex-col gap-3">
               <div className={`px-5 py-2.5 rounded-xl text-sm font-bold border-2 shadow-lg backdrop-blur-sm ${statusConfig[order.status]?.color} bg-white/90`}>
                 <StatusIcon className="h-4 w-4 inline mr-2" />
+                <span className="text-xs font-semibold opacity-75 mr-1">ORDER:</span>
                 {statusConfig[order.status]?.label}
               </div>
               <div className={`px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg backdrop-blur-sm ${paymentStatusConfig[order.paymentStatus]?.color} bg-white/90`}>
+                <CreditCard className="h-4 w-4 inline mr-2" />
+                <span className="text-xs font-semibold opacity-75 mr-1">PAYMENT:</span>
                 {paymentStatusConfig[order.paymentStatus]?.label}
               </div>
             </div>
