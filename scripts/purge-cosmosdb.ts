@@ -30,7 +30,7 @@ async function purgeAllData() {
     console.log(`   Found ${orders.length} orders`);
     
     for (const order of orders) {
-      await ordersContainer.item(order.id, order.customer_id).delete();
+      await ordersContainer.item(order.id, (order as any).customer_id).delete();
     }
     console.log(`   ✅ Deleted ${orders.length} orders\n`);
 
