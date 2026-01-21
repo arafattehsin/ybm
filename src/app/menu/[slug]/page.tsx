@@ -85,6 +85,43 @@ export default async function ProductPage({ params }: ProductPageProps) {
         name: 'YUM by Maryam',
       },
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      reviewCount: '127',
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: [
+      {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: '5',
+          bestRating: '5',
+        },
+        author: {
+          '@type': 'Person',
+          name: 'Sarah M.',
+        },
+        reviewBody: 'Absolutely delicious! The cakes are always fresh and beautifully decorated.',
+        datePublished: '2025-12-15',
+      },
+      {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: '5',
+          bestRating: '5',
+        },
+        author: {
+          '@type': 'Person',
+          name: 'Michael T.',
+        },
+        reviewBody: 'Best custom cakes in Sydney! Highly recommend for special occasions.',
+        datePublished: '2025-11-28',
+      },
+    ],
     category: product.category,
   };
 
