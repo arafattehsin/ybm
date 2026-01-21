@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { ProductDetailWrapper } from '@/components/products/ProductDetailWrapper';
 import productsData from '@/data/products.json';
 import addonsData from '@/data/addons.json';
@@ -60,11 +61,74 @@ export default async function ProductPage({ params }: ProductPageProps) {
     product.addons.includes(addon.id)
   );
 
+  // Product JSON-LD structured data
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: `https://yumbymaryam.com.au${product.images[0]}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'YUM by Maryam',
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      lowPrice: Math.min(...product.sizes.map(s => s.price)) / 100,
+      highPrice: Math.max(...product.sizes.map(s => s.price)) / 100,
+      priceCurrency: 'AUD',
+      availability: product.inStock 
+        ? 'https://schema.org/InStock' 
+        : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'YUM by Maryam',
+      },
+    },
+    category: product.category,
+  };
+
+  // BreadcrumbList JSON-LD
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://yumbymaryam.com.au',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Menu',
+        item: 'https://yumbymaryam.com.au/menu',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: `https://yumbymaryam.com.au/menu/${product.slug}`,
+      },
+    ],
+  };
+
   return (
-    <ProductDetailWrapper 
-      product={product} 
-      addons={productAddons} 
-      relatedProducts={relatedProducts}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <ProductDetailWrapper 
+        product={product} 
+        addons={productAddons} 
+        relatedProducts={relatedProducts}
+      />
+    </>
   );
 }
