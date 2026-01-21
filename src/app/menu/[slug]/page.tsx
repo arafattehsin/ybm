@@ -34,6 +34,9 @@ export async function generateMetadata({
   return {
     title: `${product.name} | YUM by Maryam`,
     description: product.description,
+    alternates: {
+      canonical: `https://yumbymaryam.com.au/menu/${product.slug}`,
+    },
     openGraph: {
       title: product.name,
       description: product.description,
